@@ -6,6 +6,25 @@ def get_db_connection():
                            password='ch4ng3meplz', dbname='brexit')
    return conn
 
+def executee(conn, query):
+    cursor = conn.cursor() 
+    try:
+        cursor.execute(query) 
+        results = cursor.fetchall()
+        return results 
+    except psycopg2.Error as e:
+        print(e.pgerror)
+        conn.rollback()
+        return e 
+def get_retweet_edge_list(conn, number_of_edges):
+    cursor = conn.cursor() 
+    cursor.execute("SELECT retweet.tid, tweet.tid, tweet.uid, t2.uid FROM retweet, tweet, (SELECT * FROM tweet) t2 WHERE retweet.tid = tweet.tid AND retweet.retweet_tid = t2.tid LIMIT 10")
+    results = cursor.fetchall()
+
+    return results 
+
+
+
 if __name__ == "__main__":
     print("creating connection")
     conn = get_db_connection()
