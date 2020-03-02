@@ -2,6 +2,8 @@ import networkx as nx
 import pandas as pd
 import numpy as np
 
+def create_network(edgelist_file)
+
 def create_network(edgelist_file, write = True, sep = ',', filename = None, node_types = False, content_file = None):
     G = nx.DiGraph()
     edgelist = pd.read_csv(edgelist_file, sep = sep, header = None)
