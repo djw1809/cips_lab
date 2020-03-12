@@ -1,16 +1,20 @@
 import numpy as np
-import pandas as pd
+#import pandas as pd
 import networkx as nx
-import pickle
+#import pickle
 import heapq
-from networkx.algorithms.operators.binary import disjoint_union, union
+#from networkx.algorithms.operators.binary import disjoint_union, union
 from sklearn.cluster import KMeans
 from itertools import count
 import matplotlib.pyplot as plt
-import heapq
-from mpl_toolkits.mplot3d import Axes3D
-
-
+#import heapq
+#from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.patches as mpatches
+import matplotlib
+import ast
+from node2vec import Node2Vec 
+from nltk.tokenize import sent_tokenize, word_tokenize 
+from nltk.util import ngrams 
 
 #####Graph Generators ########
 
@@ -157,7 +161,7 @@ def n_cut_classification(G, matrix_choice = 0, num_v_start = 1, num_v_stop = 2, 
 
     return G, w, v, latent_rep, labels
 
-def recursive_automatic_ncut(G, steps, matrix_choice, num_v_start = 1, num_v_stop = 2, vlist = None, plot_graph = True, draw = False):
+def recursive_automatic_ncut(G, steps, matrix_choice, num_v_start = 1, num_v_stop = 2, manual_keep = False, automatic_keep = False, keep_threshhold = 0, vlist = None, plot_graph = True, draw = False):
 
     total_ncut = 0
     clusterings = []
@@ -166,94 +170,208 @@ def recursive_automatic_ncut(G, steps, matrix_choice, num_v_start = 1, num_v_sto
     for i in range(len(G)):
         G.nodes[list(G.nodes)[i]]['label'] = 0
 
-    clusterings.append(G)
+    clusterings.append(G.copy())
 
 
 
     for i in range(steps):
-        G_step = G.copy()
+        #G_step = G.copy()
         n_cut_step = 0
-        clusters = list(set(nx.get_node_attributes(clusterings[i], 'label').values()))
-        for j in clusters:
-            G_cluster = clusterings[i].subgraph([node for node in clusterings[i].nodes if clusterings[i].nodes[node]['label'] == j]).copy()
+        clusters = list(set(nx.get_node_attributes(G, 'label').values()))
+        keep_clusters = [] 
+        if manual_keep and i != 0:
+            keep_clusters = ast.literal_eval(input("enter a list of clusters you'd like to keep"))
+            run_clusters = [i for i in clusters if i not in keep_clusters ]
+
+        elif automatic_keep:
+            keep_clusters = []
+            for j in clusters:
+                cluster = [node for node in G.nodes if clusterings[i].nodes[node]['label'] == j]
+                if len(cluster) <= keep_threshhold:
+                    keep_clusters.append(j)
+
+
+            run_clusters = [i for i in clusters if i not in keep_clusters]
+            
+        else:
+            run_clusters = clusters
+
+        for j in run_clusters:
+            G_cluster = G.subgraph([node for node in G.nodes if G.nodes[node]['label'] == j]).copy()
             #if len(G_cluster) == 1:
                 #print('there is a 1 cluster likely failure')
             clustered_G = n_cut_classification(G_cluster, matrix_choice = 1)[0]
             label_0 = [node for node in clustered_G.nodes if clustered_G.nodes[node]['label'] == 0]
             label_1 = [node for node in clustered_G.nodes if clustered_G.nodes[node]['label'] == 1]
-            n_cut_step += nx.algorithms.cuts.normalized_cut_size(clustered_G, label_0, label_1)
+            #n_cut_step += nx.algorithms.cuts.normalized_cut_size(G, label_0, label_1)
 
+            assigned_label_1 = max(list(set(nx.get_node_attributes(G, 'label').values()))) +1
+            assigned_label_2 = max(list(set(nx.get_node_attributes(G, 'label').values()))) + 2
             for node in label_0:
-                G_step.nodes[node]['label'] = max(list(set(nx.get_node_attributes(G_step, 'label').values())) + 1     #j*2^(i-1)
+                G.nodes[node]['label'] = assigned_label_1 #(i+1) * j #j*2^(i-1) #max(list(set(nx.get_node_attributes(G_step, 'label').values()))) + 1     #
 
             for node in label_1:
-                G_step.nodes[node]['label'] = max(list(set(nx.get_node_attributes(G_step, 'label').values())) + 1    #j*2^(i-1) + 1
+                G.nodes[node]['label'] = assigned_label_2  #(i+1) * j + 1 #j*2^(i-1) + 1 #max(list(set(nx.get_node_attributes(G_step, 'label').values()))) + 1    #
 
         total_ncut += n_cut_step
-        normalized_n_cut = np.divide(total_ncut, 2**(i+1))
+        normalized_n_cut = np.divide(total_ncut, 2*len(run_clusters) + len(keep_clusters))
         normalized_ncut_values.append(normalized_n_cut)
-        clusterings.append(G_step)
+        clusterings.append(G.copy())
 
         if draw:
-            pos = nx.drawing.layout.spring_layout(G_step)
-            edges = nx.draw_networkx_edges(G_step, pos, alpha = 0.2)
+            pos = nx.drawing.layout.spring_layout(G)
+            edges = nx.draw_networkx_edges(G, pos, alpha = 0.2)
+            norm = matplotlib.colors.Normalize(vmin = 0, vmax = 4*(2**i))
+            cmap = plt.cm.jet
             colors = []
-            node_labels = nx.get_node_attributes(G_step, 'label')
+            patches = []
+            node_labels = nx.get_node_attributes(G, 'label')
             for k in sorted(node_labels):
                 colors.append(node_labels[k])
+
+
+            for k in set(colors):
+                patches.append(mpatches.Patch(color = cmap(norm(k)), label = str(k)))
+
             colors = np.array(colors)
-            nodes = nx.draw_networkx_nodes(G_step, pos, nodelist = G.nodes, node_color = colors, node_size = 50, cmap = plt.cm.jet, with_labels = False)
+            nodes = nx.draw_networkx_nodes(G, pos, nodelist = G.nodes, node_color = colors, node_size = 50, cmap = cmap, with_labels = False, vmin = 0, vmax =4*(2**i))
+            plt.legend(handles = patches)
             plt.show()
+        
+        cluster_dicts = [] 
+        for graph in clusterings: 
+            #%%
+            cluster_dict = {} 
+            node_keys = list(graph.nodes)
+            for key in node_keys: 
+                if graph.nodes[key]['label'] in cluster_dict.keys():
+                    cluster_dict[graph.nodes[key]['label']].append(key) 
+                else: 
+                    cluster_dict[graph.nodes[key]['label']] = [key] 
+#%%            
+            cluster_dicts.append(cluster_dict)
 
 
-    return clusterings, normalized_ncut_values
+    return clusterings, cluster_dicts, normalized_ncut_values
 
 
+def node2vec_classification(G, clusters, dim = 128, walk_length = 80, num_walks = 10, return_ =1, inout = 1):
+    
+    node2vec = Node2Vec(G, dimensions = dim, walk_length = walk_length, num_walks = num_walks, p = return_, q = inout)
+    model = node2vec.fit(window = 10, min_count = 1, batch_words = 4)
+    word_vector_matrix = np.vstack([model.wv[node] for node in list(G)])
+    kmeans = KMeans(n_clusters = clusters, random_state = 0).fit(word_vector_matrix)
+    labels = kmeans.labels_
+    node_labels = zip(list(G), labels)
+    clusters = {} 
+    for pair in node_labels: 
+        
+        if pair[1] in clusters.keys():
+            clusters[pair[1]].append(pair[0])
+        
+        else:
+            clusters[pair[1]] = [pair[0]] 
+    
+    return clusters, word_vector_matrix 
+    
 
 
+### Create phrase cooccurence graph from a phrase list and comment list 
+def split_string_into_clean_sentences(string):
+    '''Splits a string into a list of sentences.  removes special characters from sentences and lowercases everything.''' 
+    sentences = sent_tokenize(string)
+    for i in range(len(sentences)):
+        sentence = sentences[i] 
+        sentence = sentence.lower()
+        sentence = ''.join(s for s in sentence if ord(s)>31 and ord(s)<126)
+        sentence = re.sub(r"([,()*&^%$\n])", r"", sentence) 
+        sentence = sentence.rstrip().lstrip().lower() 
+        sentences[i] = sentence 
+    return sentences 
+        
 
+def check_sentence_phrase(sentence, phrase):
+    '''checks if a phrase is present in a certain sentence - meant to check if a context for a whole comment is present in one of its sentences'''
+    phrase = phrase.lstrip().rstrip() 
+    phrase_words = word_tokenize(phrase)
+    context_length = len(phrase_words)
+    
+    ##compute all grams of length equal to context_length 
+    sentence_words = word_tokenize(sentence)
+    grams = ngrams(sentence_words, context_length)
+    
+    if tuple(phrase_words) in grams:
+        return True 
+    
+    else:
+        return False 
+    
+def check_sentence_phrase_list(sentence, phrase_list, synonyms = []): 
+    '''checks if any phrase from phrase list is present in sentence'''
+    phrase_list_tuples = [tuple(word_tokenize(i)) for i in phrase_list]
+    maximum_phrase_length = max([len(i) for i in phrase_list_tuples])
+    sentence_words = word_tokenize(sentence)
+    sentence_phrases = []
+    for i in range(1, maximum_phrase_length+1): #check for all possible phrase lengths 
+        #for each possible phrase length compute the ngrams 
+        grams = ngrams(sentence_words, i)
+        for gram in grams:
+            #check if each ngram is in the phrase list 
+            if gram in phrase_list_tuples:
+            #if it is make the tuple of the ngram into a string and add it to the sentence phrases optionally adding a synonum from a given dict instead      
+                phrase = gram[0] 
+                for i in range(1, len(gram)):
+                    phrase = phrase + ' ' + gram[i]
+                
+                if len(synonyms) != 0: 
+                    if phrase in synonyms.keys():
+                        sentence_phrases.append(synonyms[phrase])
+                    else: 
+                        sentence_phrases.append(phrase)
+                    
+                else:
+                    sentence_phrases.append(phrase) 
+                
+    return list(set(sentence_phrases)) 
 
+def build_cooccurence_dict(comment_list, phrase_list, synonyms = [], graph = False, write = False, filename = None): 
+    edge_dict = {} 
+    sentence_list = [] 
+    for comment in comment_list: 
+        comment = str(comment) #incase of numpy string 
+        sentences = split_string_into_clean_sentences(comment) #look at comments sentence wise 
+        for sentence in sentences: 
+            sentence_list.append(sentence) #keep track of what were actually iterating over 
+            
+            phrases = check_sentence_phrase_list(sentence, phrase_list, synonyms) #compute phrases that cooccur in the sentence 
+            if len(phrases) > 1: #if there are occuring phrases add the edge to the edge dict, if it already exists update weight
+                for i in range(len(phrases)):
+                    for j in [j for j in range(len(phrases)) if j > i]:
+                        if (phrases[i], phrases[j]) in edge_dict.keys():
+                            edge_dict[(phrases[i], phrases[j])] += 1 
+                        else: 
+                            edge_dict[(phrases[i], phrases[j])] = 1 
+    
+    if graph: #optionally build networkx graph object from edge_dict 
+        
+        ebunches = [(key[0], key[1], {'weight':edge_dict[key]}) for key in edge_dict.keys()]
+        G = nx.Graph() 
+        G.add_edges_from(ebunches) 
+        
+        if write: 
+            with open(filename 'wb') as f: 
+                pickle.dump(edge_dict, f)
+                
+        return sentence_list, edge_dict, G 
 
-#
-#
-# def recursive_ncut(G, k, matrix_choice, num_v_start = 1, num_v_stop = 2, vlist = None, plot_graph = True):
-#     '''recursive n-cut for classification tasks with k labels'''
-#
-#     G = nx.relabel.convert_node_labels_to_integers(G)
-#     G_prune = G.copy()
-#
-#     labels = {}
-#     for i in range(k-1):
-#         lab = n_cut_classification(G_prune, matrix_choice, num_v_start, num_v_stop, vlist, plot_graph = plot_graph)[4]
-#         keep = int(input('recluster red (1) or blue(0)'))
-#         finished_labels = [m for m in range(len(lab)) if lab[m] != keep]
-#         remove_nodes = []
-#
-#         for j in finished_labels:
-#             labels[sorted(G.nodes)[j]] = i
-#             remove_nodes.append(sorted(G.nodes)[j])
-#
-#         if i == k - 2:
-#              other_finished_labels = [m for m in range(len(lab)) if lab[m] == keep]
-#              for j in other_finished_labels:
-#                  labels[sorted(G.nodes)[j]] = k
-#
-#         G_prune.remove_nodes_from(remove_nodes)
-#
-#
-#
-#     colors = [labels[i] for i in sorted(labels)]
-#
-#     if plot_graph:
-#
-#         pos = nx.drawing.layout.spring_layout(G)
-#         nx.draw_networkx(G, pos = pos, node_color = colors, node_size = 200, cmap = plt.cm.jet)
-#         #edges = nx.draw_networkx_edges(G, pos, alpha = 0.2)
-#         #nodes = nx.draw_networkx_nodes(G, pos, nodelist = G.nodes, node_color = colors, node_size = 200, cmap = plt.cm.jet)
-#
-#         plt.show()
-#
-#     return G, colors, labels
+    else:
+        
+        if write: 
+            with open(filename 'wb') as f: 
+                pickle.dump(edge_dict, f)
+        
+        return sentence_list, edge_dict     
+    
 
 
 
@@ -278,3 +396,4 @@ def almost_disconnected(N, E, components = 2):
         G.add_edges_from(edge_list)
 
     return G
+
