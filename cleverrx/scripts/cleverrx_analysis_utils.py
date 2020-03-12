@@ -12,9 +12,10 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import matplotlib
 import ast
-from node2vec import Node2Vec 
+#from node2vec import Node2Vec 
 from nltk.tokenize import sent_tokenize, word_tokenize 
 from nltk.util import ngrams 
+import re
 
 #####Graph Generators ########
 
@@ -359,7 +360,7 @@ def build_cooccurence_dict(comment_list, phrase_list, synonyms = [], graph = Fal
         G.add_edges_from(ebunches) 
         
         if write: 
-            with open(filename 'wb') as f: 
+            with open(filename ,'wb') as f: 
                 pickle.dump(edge_dict, f)
                 
         return sentence_list, edge_dict, G 
@@ -367,7 +368,7 @@ def build_cooccurence_dict(comment_list, phrase_list, synonyms = [], graph = Fal
     else:
         
         if write: 
-            with open(filename 'wb') as f: 
+            with open(filename ,'wb') as f: 
                 pickle.dump(edge_dict, f)
         
         return sentence_list, edge_dict     
