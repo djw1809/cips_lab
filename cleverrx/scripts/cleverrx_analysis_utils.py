@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import matplotlib
 import ast
-#from node2vec import Node2Vec 
+from node2vec import Node2Vec 
 from nltk.tokenize import sent_tokenize, word_tokenize 
 from nltk.util import ngrams 
 import re
