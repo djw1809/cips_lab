@@ -45,7 +45,8 @@ trained_model, optimizer, scheduler, loss_data = butils.train(dataset, tokenizer
                                                               parameter_dict['learning_rate'],
                                                               parameter_dict['weight_decay'],
                                                               parameter_dict['eps'],
-                                                              parameter_dict['warmup_steps'])
+                                                              parameter_dict['warmup_steps'],
+                                                              model)
 #saving
 tokenized_comments.to_csv(results_path/'training_data.csv')
 model.save_pretrained(model_path/parameter_dict['filename'] + 'model')

@@ -218,7 +218,7 @@ class Comment_dataset(Dataset):
 # %%
 
 
-def train(training_dataset, test_dataset, tokenizer, epochs, num_workers, batch_size, learning_rate, weight_decay,eps,warmup_steps, model):
+def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning_rate, weight_decay,eps,warmup_steps, model):
     '''generic training call for a pytorch model'''
 
 def collate(batch):
