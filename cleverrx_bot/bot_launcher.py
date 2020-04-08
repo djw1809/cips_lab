@@ -3,7 +3,9 @@ import numpy as np
 import torch
 import matplotlib.pyplot as plt
 import bot_utils as butils
+import json
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
+from pathlib import Path
 
 tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
 synonym_dict =
@@ -23,15 +25,44 @@ parameter_dict['learning rate'] =
 parameter_dict['weight_decay'] =
 parameter_dict['eps'] =
 parameter_dict['warmup_steps'] =
+parameter_dict['filenames'] =
 
-model = GPT2LMHeadModel.from_pretrained()
+results_dir =
+model_storage_dir =
 
-output = butils.train(dataset, tokenizer,
-                               parameter_dict['epochs'],
-                               parameter_dict['num_worker'],
-                               parameter_dict['batch_size'],
-                               parameter_dict['learning_rate'],
-                               parameter_dict['weight_decay'],
-                               parameter_dict['eps'],
-                               parameter_dict['warmup_steps'],
-                               model)
+results_path = Path(results_dir/parameter_dict['filenames'])
+model_path = Path(results_dir/parameter_dict['filenames'])
+
+results_path.mkdir(parents = True, exist_ok = True)
+model_path.mkdir(parents = True, exist_ok = True)
+
+model = GPT2LMHeadModel.from_pretrained('gpt2')
+
+trained_model, optimizer, scheduler, loss_data = butils.train(dataset, tokenizer,
+                                                              parameter_dict['epochs'],
+                                                              parameter_dict['num_worker'],
+                                                              parameter_dict['batch_size'],
+                                                              parameter_dict['learning_rate'],
+                                                              parameter_dict['weight_decay'],
+                                                              parameter_dict['eps'],
+                                                              parameter_dict['warmup_steps'])
+#saving
+tokenized_comments.to_csv(results_path/'training_data.csv')
+model.save_pretrained(model_path/parameter_dict['filename'] + 'model')
+torch.save(optimizer.state_dict, model_path/parameter_dict['filename']+'optimizer')
+torch.save(scheduler.state_dict, model_path/parameter_dict['filename']+'scheduler')
+
+with open(results_path/'parameters.json') as jsonFile:
+    json.dump(parameter_dict, jsonFile)
+
+np.savetxt(results_path/'loss_data', loss_data, delimiter = ',')
+
+#plotting
+plt.clf()
+plt.plot(range(parameter_dict['epoch']), loss_data)
+plt.savefig(results_dir + '/' + parameter_dict['filenames'] +'/'+'loss_plot.png')
+
+#plotting
+plt.clf()
+plt.plot(range(epochs), loss_data, 'bo')
+plt.savefig(results_dir+'/'+parameter_dict['filenames']+'/'+'loss_plot.png')

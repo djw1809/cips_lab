@@ -324,7 +324,7 @@ def collate(batch):
 
         print(' Loss: {:.4f} '.format(epoch_loss))
 
-    return model, optimizer, loss_data
+    return model, optimizer, scheduler, loss_data 
 
 # %%
 
