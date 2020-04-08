@@ -30,8 +30,8 @@ parameter_dict['filenames'] ='test'
 results_dir ='../results'
 model_storage_dir ='../saved_models'
 
-results_path = Path(results_dir/parameter_dict['filenames'])
-model_path = Path(results_dir/parameter_dict['filenames'])
+results_path = Path(Path(results_dir)/Path(parameter_dict['filenames']))
+model_path = Path(Path(results_dir)/Path(parameter_dict['filenames']))
 
 results_path.mkdir(parents = True, exist_ok = True)
 model_path.mkdir(parents = True, exist_ok = True)
@@ -49,8 +49,8 @@ trained_model, optimizer, scheduler, loss_data = butils.train(dataset, tokenizer
 #saving
 tokenized_comments.to_csv(results_path/'training_data.csv')
 model.save_pretrained(model_path/parameter_dict['filename'] + 'model')
-torch.save(optimizer.state_dict, model_path/parameter_dict['filename']+'optimizer')
-torch.save(scheduler.state_dict, model_path/parameter_dict['filename']+'scheduler')
+torch.save(optimizer.state_dict, Path(model_path)/Path(parameter_dict['filename']+' optimizer'))
+torch.save(scheduler.state_dict, Path(model_path)/Path(parameter_dict['filename']+' scheduler'))
 
 with open(results_path/'parameters.json') as jsonFile:
     json.dump(parameter_dict, jsonFile)
