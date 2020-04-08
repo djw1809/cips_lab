@@ -228,7 +228,7 @@ def collate(batch):
 
 
     training_loader = DataLoader(training_dataset, shuffle = True, num_workers = num_workers, batch_size = batch_size, collate_fn = collate)
-    test_loader = DataLoader(test_dataset, shuffle = True, num_workers = num_workers, batch_size = batch_size, collate_fn = collate)
+    
 
 #### configure model to use cuda if it is available ####
 
