@@ -9,7 +9,8 @@ from pathlib import Path
 
 tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
 synonym_dict =
-data = pd.read_csv('../../data/tweets_topics.csv')
+data = pd.read_csv('../data/tweets_topics.csv')
+data = data.loc[0:100, :]
 pre_processor = butils.Comment_data_preprocessor(data, 'id', 'text', tokenizer, 'topics')
 tokenized_comments = pre_processor.df_to_tokenized_df(number_of_keywords = 1)
 dataset = Comment_datsaset(tokenized_comments, 'token_ids')
@@ -20,15 +21,15 @@ parameter_dict = {}
 parameter_dict['training_set'] = tokenized_comments
 parameter_dict['epochs'] = 1
 parameter_dict['num_worker'] = 1
-parameter_dict['batch_size'] =
-parameter_dict['learning rate'] =
-parameter_dict['weight_decay'] =
-parameter_dict['eps'] =
-parameter_dict['warmup_steps'] =
-parameter_dict['filenames'] =
+parameter_dict['batch_size'] =1
+parameter_dict['learning rate'] =1e-5
+parameter_dict['weight_decay'] = 0
+parameter_dict['eps'] =1e-8
+parameter_dict['warmup_steps'] =100
+parameter_dict['filenames'] ='test'
 
-results_dir =
-model_storage_dir =
+results_dir ='../results'
+model_storage_dir ='../saved_models'
 
 results_path = Path(results_dir/parameter_dict['filenames'])
 model_path = Path(results_dir/parameter_dict['filenames'])
