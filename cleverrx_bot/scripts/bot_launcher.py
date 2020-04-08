@@ -13,7 +13,6 @@ data = pd.read_csv('../data/tweets_topics.csv')
 data = data.loc[0:100, :]
 pre_processor = butils.Comment_data_preprocessor(data, 'id', 'text', tokenizer, 'topics')
 tokenized_comments = pre_processor.df_to_tokenized_df(number_of_keywords = 1)
-tokenized_comments
 dataset = butils.Comment_dataset(tokenized_comments, 'prepended_token_ids')
 
 

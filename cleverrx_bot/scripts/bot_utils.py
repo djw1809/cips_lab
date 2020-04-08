@@ -223,10 +223,10 @@ class Comment_dataset(Dataset):
 def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning_rate, weight_decay,eps,warmup_steps, model):
     '''generic training call for a pytorch model'''
 
-def collate(batch):
-    if tokenizer._pad_token is None:
-        return pad_sequence(batch, batch_first=True)
-    return pad_sequence(batch, batch_first=True, padding_value=tokenizer.pad_token_id)
+    def collate(batch):
+        if tokenizer._pad_token is None:
+            return pad_sequence(batch, batch_first=True)
+        return pad_sequence(batch, batch_first=True, padding_value=tokenizer.pad_token_id)
 
 
     training_loader = DataLoader(training_dataset, shuffle = True, num_workers = num_workers, batch_size = batch_size, collate_fn = collate)
