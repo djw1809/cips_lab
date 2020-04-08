@@ -50,7 +50,7 @@ trained_model, optimizer, scheduler, loss_data = butils.train(dataset, tokenizer
                                                               model)
 #saving
 tokenized_comments.to_csv(results_path/'training_data.csv')
-model.save_pretrained(model_path/Path(parameter_dict['filename'] + 'model'))
+model.save_pretrained(model_path/'model')
 torch.save(optimizer.state_dict, Path(model_path)/Path(parameter_dict['filename']+' optimizer'))
 torch.save(scheduler.state_dict, Path(model_path)/Path(parameter_dict['filename']+' scheduler'))
 
