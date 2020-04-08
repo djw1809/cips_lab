@@ -295,11 +295,11 @@ def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning
             #optimizer.zero_grad()
 
             #forward
-            loss = model(inputs, labels = labels)[0] 
+            loss = model(inputs, labels = labels)[0]
             loss.backward()
 
             #backwards
-            loss_value.backward()
+            loss.backward()
             optimizer.step()
             scheduler.step()
             model.zero_grad()
