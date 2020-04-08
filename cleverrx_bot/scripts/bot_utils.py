@@ -238,17 +238,12 @@ def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning
 
     if torch.cuda.is_available():
         model.cuda()
-        weight = weight.to(device)
-    loss = CrossEntropyLoss_weight(weight)
+
+
 
 #### initialize containers to store model outputs in ####
 
     loss_data = np.zeros((epochs)) #empty arrays to store data for plotting in
-    accuracy_data = np.zeros((epochs))
-    val_accuracy_data = np.zeros((epochs))
-
-    confusion_matricies_test = {}
-    confusion_matricies_train = {}
 
 ### initialize optimizer
     no_decay = ["bias", "LayerNorm.weight"]
@@ -306,6 +301,8 @@ def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning
             #backwards
             loss_value.backward()
             optimizer.step()
+            scheduler.step()
+            model.zero_grad() 
 
             running_loss += loss_value.item()
             #running_corrects += torch.sum(preds == labels.data).item()
