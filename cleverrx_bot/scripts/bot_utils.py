@@ -296,7 +296,7 @@ def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning
 
             #forward
             loss = model(inputs, labels = labels)[0]
-            loss.backward()
+
 
             #backwards
             loss.backward()
