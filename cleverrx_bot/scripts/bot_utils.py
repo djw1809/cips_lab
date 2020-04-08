@@ -198,12 +198,11 @@ class Comment_data_preprocessor():
 
 
 
-class Comment_dataset(Dataset, Comment_data_preprocessor):
+class Comment_dataset(Dataset):
 
     def __init__(self, raw_data, sample_column):
-        Comment_data_preprocessor.__init__(self, raw_data)
         self.sample_column = sample_column
-        self.data = df
+        self.data = raw_data
 
     def __getitem__(self, index):
         return torch.tensor(self.data.loc[index, self.sample_column], dtype = torch.long)
@@ -324,7 +323,7 @@ def collate(batch):
 
         print(' Loss: {:.4f} '.format(epoch_loss))
 
-    return model, optimizer, scheduler, loss_data 
+    return model, optimizer, scheduler, loss_data
 
 # %%
 
