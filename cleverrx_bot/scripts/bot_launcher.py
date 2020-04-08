@@ -19,7 +19,7 @@ dataset = butils.Comment_dataset(tokenized_comments, 'prepended_token_ids')
 parameter_dict = {}
 
 parameter_dict['training_set'] = tokenized_comments
-parameter_dict['epochs'] = 10
+parameter_dict['epochs'] = 1
 parameter_dict['num_worker'] = 1
 parameter_dict['batch_size'] =1
 parameter_dict['learning_rate'] =1e-5
@@ -32,7 +32,7 @@ results_dir ='../results'
 model_storage_dir ='../saved_models'
 
 results_path = Path(Path(results_dir)/Path(parameter_dict['filename']))
-model_path = Path(Path(results_dir)/Path(parameter_dict['filename']))
+model_path = Path(Path(model_storage_dir)/Path(parameter_dict['filename']))
 
 results_path.mkdir(parents = True, exist_ok = True)
 model_path.mkdir(parents = True, exist_ok = True)
