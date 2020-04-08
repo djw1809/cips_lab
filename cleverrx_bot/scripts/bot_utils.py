@@ -189,6 +189,8 @@ class Comment_data_preprocessor():
             self.tokenized_df.loc[:, 'tokenized_text'] = self.input_df.loc[:, 'text'].apply(self.tokenizer.tokenize)
             self.tokenized_text.loc[:, 'token_ids'] = self.input_df.loc[:, 'text'].apply(self.tokenizer.encode)
 
+        return self.tokenized_df
+
     def collate(self, batch):
         if self.tokenizer._pad_token is None:
             return pad_sequence(batch, batch_first=True)
@@ -228,7 +230,7 @@ def collate(batch):
 
 
     training_loader = DataLoader(training_dataset, shuffle = True, num_workers = num_workers, batch_size = batch_size, collate_fn = collate)
-    
+
 
 #### configure model to use cuda if it is available ####
 
