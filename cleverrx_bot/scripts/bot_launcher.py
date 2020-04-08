@@ -62,10 +62,5 @@ np.savetxt(results_path/'loss_data', loss_data, delimiter = ',')
 
 #plotting
 plt.clf()
-plt.plot(range(parameter_dict['epoch']), loss_data)
+plt.plot(range(parameter_dict['epochs']), loss_data)
 plt.savefig(results_dir + '/' + parameter_dict['filename'] +'/'+'loss_plot.png')
-
-#plotting
-plt.clf()
-plt.plot(range(epochs), loss_data, 'bo')
-plt.savefig(results_dir+'/'+parameter_dict['filename']+'/'+'loss_plot.png')
