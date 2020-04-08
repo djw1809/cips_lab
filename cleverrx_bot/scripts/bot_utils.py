@@ -295,14 +295,14 @@ def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning
             #optimizer.zero_grad()
 
             #forward
-            loss, outputs = model(inputs, labels = labels)
+            loss = model(inputs, labels = labels)[0] 
             loss.backward()
 
             #backwards
             loss_value.backward()
             optimizer.step()
             scheduler.step()
-            model.zero_grad() 
+            model.zero_grad()
 
             running_loss += loss_value.item()
             #running_corrects += torch.sum(preds == labels.data).item()
