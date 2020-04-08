@@ -304,7 +304,7 @@ def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning
             scheduler.step()
             model.zero_grad()
 
-            running_loss += loss_value.item()
+            running_loss += loss.item()
             #running_corrects += torch.sum(preds == labels.data).item()
             #confusion_matrix_train_epoch += confusion_matrix(labels.cpu().numpy(), preds.cpu().numpy(), labels =range(num_labels))
 
