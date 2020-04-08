@@ -54,7 +54,7 @@ model.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
 torch.save(optimizer.state_dict(), Path(model_path)/Path(parameter_dict['filename']+' optimizer'))
 torch.save(scheduler.state_dict(), Path(model_path)/Path(parameter_dict['filename']+' scheduler'))
 
-with open(results_path/'parameters.json') as jsonFile:
+with open(results_path/'parameters.json', 'w') as jsonFile:
     json.dump(parameter_dict, jsonFile)
 
 np.savetxt(results_path/'loss_data', loss_data, delimiter = ',')
