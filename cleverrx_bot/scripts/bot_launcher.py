@@ -19,7 +19,7 @@ dataset = butils.Comment_dataset(tokenized_comments, 'prepended_token_ids')
 parameter_dict = {}
 
 parameter_dict['training_set'] = tokenized_comments
-parameter_dict['epochs'] = 2
+parameter_dict['epochs'] = 10
 parameter_dict['num_worker'] = 1
 parameter_dict['batch_size'] =1
 parameter_dict['learning_rate'] =1e-5
