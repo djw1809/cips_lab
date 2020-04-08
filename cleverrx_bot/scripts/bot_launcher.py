@@ -9,7 +9,8 @@ from pathlib import Path
 # %%
 tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
 #synonym_dict =
-data = pd.read_csv('../data/tweets_topics.csv')
+training_set_path = '../data/tweets_topics.csv'
+data = pd.read_csv(training_set_path)
 data = data.loc[0:100, :]
 pre_processor = butils.Comment_data_preprocessor(data, 'id', 'text', tokenizer, 'topics')
 tokenized_comments = pre_processor.df_to_tokenized_df(number_of_keywords = 1)
@@ -18,7 +19,7 @@ dataset = butils.Comment_dataset(tokenized_comments, 'prepended_token_ids')
 
 parameter_dict = {}
 
-parameter_dict['training_set'] = tokenized_comments
+parameter_dict['training_set_path'] = training_set_path
 parameter_dict['epochs'] = 1
 parameter_dict['num_worker'] = 1
 parameter_dict['batch_size'] =1
