@@ -26,13 +26,13 @@ parameter_dict['learning_rate'] =1e-5
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8
 parameter_dict['warmup_steps'] =100
-parameter_dict['filenames'] ='test'
+parameter_dict['filename'] ='test'
 
 results_dir ='../results'
 model_storage_dir ='../saved_models'
 
-results_path = Path(Path(results_dir)/Path(parameter_dict['filenames']))
-model_path = Path(Path(results_dir)/Path(parameter_dict['filenames']))
+results_path = Path(Path(results_dir)/Path(parameter_dict['filename']))
+model_path = Path(Path(results_dir)/Path(parameter_dict['filename']))
 
 results_path.mkdir(parents = True, exist_ok = True)
 model_path.mkdir(parents = True, exist_ok = True)
@@ -62,9 +62,9 @@ np.savetxt(results_path/'loss_data', loss_data, delimiter = ',')
 #plotting
 plt.clf()
 plt.plot(range(parameter_dict['epoch']), loss_data)
-plt.savefig(results_dir + '/' + parameter_dict['filenames'] +'/'+'loss_plot.png')
+plt.savefig(results_dir + '/' + parameter_dict['filename'] +'/'+'loss_plot.png')
 
 #plotting
 plt.clf()
 plt.plot(range(epochs), loss_data, 'bo')
-plt.savefig(results_dir+'/'+parameter_dict['filenames']+'/'+'loss_plot.png')
+plt.savefig(results_dir+'/'+parameter_dict['filename']+'/'+'loss_plot.png')
