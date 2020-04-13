@@ -11,7 +11,7 @@ tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
 #synonym_dict =
 training_set_path = '../data/tweets_topics.csv'
 data = pd.read_csv(training_set_path)
-data = data.loc[0:100, :]
+#data = data.loc[0:100, :]
 pre_processor = butils.Comment_data_preprocessor(data, 'id', 'text', tokenizer, 'topics')
 tokenized_comments = pre_processor.df_to_tokenized_df(number_of_keywords = 1)
 dataset = butils.Comment_dataset(tokenized_comments, 'prepended_token_ids')
@@ -20,14 +20,14 @@ dataset = butils.Comment_dataset(tokenized_comments, 'prepended_token_ids')
 parameter_dict = {}
 
 parameter_dict['training_set_path'] = training_set_path
-parameter_dict['epochs'] = 1
+parameter_dict['epochs'] = 5
 parameter_dict['num_worker'] = 1
 parameter_dict['batch_size'] =1
-parameter_dict['learning_rate'] =1e-5
+parameter_dict['learning_rate'] =5e-5
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8
-parameter_dict['warmup_steps'] =100
-parameter_dict['filename'] ='test'
+parameter_dict['warmup_steps'] =0
+parameter_dict['filename'] ='gpt2_fulldataset_onekeyword_append_041320'
 
 results_dir ='../results'
 model_storage_dir ='../saved_models'
@@ -52,6 +52,8 @@ trained_model, optimizer, scheduler, loss_data = butils.train(dataset, tokenizer
 #saving
 tokenized_comments.to_csv(results_path/'training_data.csv')
 model.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
+tokenizer.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
+model.config.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
 torch.save(optimizer.state_dict(), Path(model_path)/Path(parameter_dict['filename']+' optimizer'))
 torch.save(scheduler.state_dict(), Path(model_path)/Path(parameter_dict['filename']+' scheduler'))
 
