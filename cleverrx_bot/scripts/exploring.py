@@ -7,23 +7,89 @@ import matplotlib.pyplot as plt
 import transformers
 import bot_utils as butils
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader
+from torch.nn.utils.rnn import pad_sequence
+from torch.nn import CrossEntropyLoss
 
 
-# %%
-a = torch.tensor([1,2,3])
-print(a)
+
+
+#%%
+better_data = pd.read_csv('../data/tweets_topics.csv')
+better_data
+
+
 
 #%%
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 model = GPT2LMHeadModel.from_pretrained('gpt2')
+type(model.config)
+
 text = "lazy people have trouble with"
 
 
-tokenizer.tokenize(text)
-token_ids = tokenizer.encode(text)
-token_ids
-tokenizer.decode(token_ids)
+#%%
+#synonym_dict =
+training_set_path = '../data/tweets_topics.csv'
+data = pd.read_csv(training_set_path)
+data = data.loc[0:100, :]
+pre_processor = butils.Comment_data_preprocessor(data, 'id', 'text', tokenizer, 'topics')
+tokenized_comments = pre_processor.df_to_tokenized_df(number_of_keywords = 1)
+dataset = butils.Comment_dataset(tokenized_comments, 'prepended_token_ids')
+
+
+
+
+
+
+
+def collate(batch):
+    if tokenizer._pad_token is None:
+        return pad_sequence(batch, batch_first=True)
+    return pad_sequence(batch, batch_first=True, padding_value=tokenizer.pad_token_id)
+
+
+training_loader = DataLoader(dataset, shuffle = True, num_workers = 1, batch_size = 2, collate_fn = collate)
+
+
+
+test_batch = next(iter(training_loader))
+test_batch
+tokenizer.decode(test_batch[1])
+
+
+inputs, labels = (test_batch, test_batch)
+output = model(inputs, labels = labels)
+len(output)
+output[0].shape # loss
+loss = output[0]
+output[1].shape # lm_logits
+lm_logits = output[1]
+len(output[2])
+output[2][1].shape # past
+
+shifted_logits = lm_logits[:, :-1, :] #strip off last element in eahc output distribution
+shifted_labels = labels[:, 1:] #strip off first element in rach label
+#shifting in above manner means that
+
+
+
+test_logits = torch.tensor([ [[1,2,1,1],[2,2,2,2],[3,3,3,3]], [[4,4,4,4], [5,5,5,5], [6,6,6,6]]])
+test_logits.shape
+
+test_logits[0,:-1, :].contiguous()
+
+
+
+blah = torch.tensor([1,2,3,4,5])
+blah[:-1]
+
+w = torch.tensor([[1,1,1,1],[2,2,2,2]])
+nd = w.size(-2)
+ns = w.size(-1)
+bias = torch.tril(torch.ones((5, 5), dtype=torch.uint8)).view(1, 1, 5, 5)
+mask = bias[:, :, ns-nd : ns, :ns]
+mask
 #%%
 ###one predeiction
 
