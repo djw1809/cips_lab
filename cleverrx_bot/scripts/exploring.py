@@ -12,7 +12,37 @@ from torch.nn.utils.rnn import pad_sequence
 from torch.nn import CrossEntropyLoss
 
 
+#%%
+prompt = "Donald Trump is the"
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+model = GPT2LMHeadModel.from_pretrained('gpt2')
+tokenizer.encode(prompt, return_tensors="pt")
 
+output = butils.generate_(model, tokenizer, prompt, 50, num_beams = 1, temperature = None, top_k = None, top_p = .9, repetition_penalty = 10, num_return_sequences = 5, print_ = True, stop_token = '.')
+
+
+#%%
+int = 1
+insert_string = 'dicks'
+
+print("I have {} {}.".format(int, insert_string))
+#%%
+text = "a bunch of text with a period here. I dont want any of this"
+text = text[: (text.find('.') + 1)]
+text
+#%%
+blah = torch.tensor([[1,2,3]])
+blah2 = torch.tensor([[1],[2],[3]])
+blah
+blah2
+blah.shape
+blah2.size()
+blah.squeeze()
+blah.squeeze().size()
+blah2.squeeze()
+blah2.squeeze().size()
+
+test = [1,2,3
 
 #%%
 better_data = pd.read_csv('../data/tweets_topics.csv')

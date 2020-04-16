@@ -330,3 +330,34 @@ def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning
 
 #class GPT2_language_modeling_trainset(Dataset):
     #'''byte-pair encoding of input sentences using pretrained tokenizer'''
+
+
+def generate_(model, tokenizer, prompt, max_length, do_sample = True, num_beams = None, temperature = None, top_k = None, top_p = None, repetition_penalty = None, num_return_sequences = 1,   print_ = True, stop_token = None):
+    
+    encoded_prompt = tokenizer.encode(prompt, add_special_tokens = False, return_tensors = "pt")
+    output_sequences = model.generate(input_ids = encoded_prompt,
+                                      max_length = max_length,
+                                      temperature = temperature,
+                                      top_k = top_k,
+                                      top_p = top_p,
+                                      repetition_penalty = repetition_penalty,
+                                      do_sample = True,
+                                      num_return_sequences = num_return_sequences)
+
+    if len(output_sequences.shape) > 2:
+        output_sequences = output_sequences.squeeze()
+
+    generated_sequences = []
+
+    for id, sequence in enumerate(output_sequences):
+        decoded_sequence = tokenizer.decode(sequence.tolist(), clean_up_tokenization_spaces = True)
+        if stop_token != None:
+            decoded_sequence = decoded_sequence[: (decoded_sequence.find(stop_token) + 1)]
+
+        if print_:
+            print("Generated sequence {}: {}".format(id, prompt + ' ' + decoded_sequence))
+
+        generated_sequences.append(prompt + ' ' + decoded_sequence)
+
+
+    return output_sequences
