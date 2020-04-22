@@ -13,7 +13,7 @@ tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
 training_set_path = '../data/tweets_topics.csv'
 data = pd.read_csv(training_set_path)
 preprocessor = butils.Comment_data_preprocessor(data, 'id', 'text', tokenizer, keyword_field = 'topics')
-tokenized_comments = pre_processor.df_to_tokenized_df(number_of_keywords = None)
+tokenized_comments = preprocessor.df_to_tokenized_df(number_of_keywords = None)
 
 
 
