@@ -373,7 +373,7 @@ def train_bag_of_words(training_dataset, epochs, num_workers, batch_size, learni
 
         for batch  in training_loader:
             inputs, labels = (batch, batch[0])
-            device_sequence = [inputs[0][i].to(device) for i in range(len(inputs[0]))]
+            device_sequence = inputs[0].to(device)
             device_keywords = [inputs[1][i].to(device) for i in range(len(inputs[1]))]
             inputs = (device_sequence, device_keywords)
             labels = labels.to(device)
