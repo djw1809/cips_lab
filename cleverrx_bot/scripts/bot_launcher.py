@@ -4,8 +4,10 @@ import torch
 import matplotlib.pyplot as plt
 import bot_utils as butils
 import json
+import bot_models as models
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 from pathlib import Path
+import bot_models as models
 # %%
 
 tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
