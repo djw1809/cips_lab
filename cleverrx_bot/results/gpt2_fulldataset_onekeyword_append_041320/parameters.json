@@ -1,0 +1,1 @@
+{"training_set_path": "../data/tweets_topics.csv", "epochs": 5, "num_worker": 1, "batch_size": 1, "learning_rate": 5e-05, "weight_decay": 0, "eps": 1e-08, "warmup_steps": 0, "filename": "gpt2_fulldataset_onekeyword_append_041320"}

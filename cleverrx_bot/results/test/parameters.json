@@ -1,0 +1,1 @@
+{"dataset_choice": 1, "model_choice": 1, "training_set_path": "../data/tweets_topics.csv", "epochs": 2, "num_worker": 2, "batch_size": 2, "learning_rate": 5e-05, "weight_decay": 0, "eps": 1e-08, "warmup_steps": 0, "filename": "test"}
