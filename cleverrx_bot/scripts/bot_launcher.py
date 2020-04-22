@@ -41,10 +41,10 @@ results_path.mkdir(parents = True, exist_ok = True)
 model_path.mkdir(parents = True, exist_ok = True)
 
 if parameter_dict['dataset_choice'] == 0:
-    dataset = prepend_ctrl_Dataset(preprocessor)
+    dataset = butils.prepend_ctrl_Dataset(preprocessor)
 
 if parameter_dict['dataset_choice'] == 1:
-    dataset = bag_words_ctrl_Dataset(preprocessor)
+    dataset = butils.bag_words_ctrl_Dataset(preprocessor)
 
 if parameter_dict['model_choice'] == 0:
     model = GPT2LMHeadModel.from_pretrained('gpt2')
