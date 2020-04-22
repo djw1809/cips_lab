@@ -9,49 +9,6 @@ from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 
 
-
-# raw_data = pd.read_csv('../../data/new_topics.csv')
-# raw_data
-# with open('../../data/topics_index.pkl', 'rb') as file:
-#     topics_index = pickle.load(file)
-#
-# better_data = pd.DataFrame(columns = ['id', 'text', 'topics'])
-# for i in range(len(list(topics_index.keys()))):
-#     key = list(topics_index.keys())[i]
-#     tweet = topics_index[key]
-#     text = tweet['tweet']
-#     id = key
-#     topics = list(set().union(tweet['cost_list'],
-#                             tweet['card_list'],
-#                             tweet['customers_list'],
-#                             tweet['health_list'],
-#                             tweet['inhaler_list'],
-#                             tweet['insurance_list'],
-#                             tweet['medication_list'],
-#                             tweet['patients_list'],
-#                             tweet['religion_list'],
-#                             tweet['segment_list'],
-#                             tweet['service_list'],
-#                             tweet['transparency_list'],
-#                             ))
-#     row = {'id': id, 'text':text, 'topics':topics}
-#     better_data.loc[i, :] = row
-#
-# better_data.to_csv('tweets_topics.csv')
-#
-# dataset = butils.Data_handler(better_data)
-#
-# print(dataset.raw_text)
-# dataset.raw_df
-
-
-###data processing###
-
-# %%
-
-
-
-
 class Comment_data_preprocessor():
     '''class to do different things quickly with raw_data
         -properties: raw_data, input_df, train_df (the dataframe used for training), test_df(the dataframe used for testing), current_df(either test or train, the df that will be accessed by get_item), tokenizer, corpus
@@ -113,19 +70,36 @@ class Comment_data_preprocessor():
         for i in range(len(self.input_df)):
             self.corpus = self.corpus + ' ' + self.input_df.loc[i, 'text']
 
+    def tokenize_list_of_keywords(self, input_list):
+        output_tokens = []
+        for keyword in input_list:
+            output_tokens = output_tokens + self.tokenizer.tokenize(keyword)
+
+        return output_tokens
+
+    def encode_list_of_keywords(self, input_list):
+        output_ids = []
+        for keyword in input_list:
+            output_ids = output_ids + self.tokenizer.encode(keyword)
+
+        return output_ids
+
 
     def df_to_tokenized_df(self, number_of_keywords = None):
 
         if 'keywords' in self.input_df.columns:
-            self.tokenized_df = pd.DataFrame(columns = ['id', 'text', 'raw_keywords', 'prepended_text', 'prepended_tokenized_text', 'prepended_token_ids'])
+            self.tokenized_df = pd.DataFrame(columns = ['id', 'text', 'raw_keywords', 'tokenized_text', 'tokenized_keywords', 'text_ids', 'keyword_ids'])
             self.tokenized_df.loc[:,'id'] = self.input_df.loc[:,'id']
             self.tokenized_df.loc[:,'text'] = self.input_df.loc[:,'text']
+            self.tokenized_df.loc[:, 'tokenized_text'] = self.tokenized_df.loc[:, 'text'].apply(self.tokenizer.tokenize)
+            self.tokenized_df.loc[:, 'text_ids'] = self.tokenized_df.loc[:, 'text'].apply(self.tokenizer.encode)
             self.tokenized_df.loc[:,'raw_keywords'] = self.input_df.loc[:,'keywords']
             self.tokenized_df.index = self.input_df.index
+            self.tokenized_df.loc[:,'used_keywords'] = np.nan
+            self.tokenized_df.loc[:,'used_keywords'] = self.tokenized_df.loc[:,'used_keywords'].astype('object')
 
             if self.synonym_dict != None:
-                self.tokenized_df.loc[:,'translated_keywords'] = np.nan
-                self.tokenized_df.loc[:,'translated_keywords'] = self.tokenized_df.loc[:,'translated_keywords'].astype('object')
+
                 for row in self.tokenized_df.index:
 
                     keywords = self.input_df.loc[row, 'keywords'].copy()
@@ -147,13 +121,10 @@ class Comment_data_preprocessor():
                                 translated_keywords.append(keyword)
 
                     translated_keywords = list(set(translated_keywords)) #remove duplicates
-                    self.tokenized_df.at[row, 'translated_keywords'] = translated_keywords
+                    self.tokenized_df.at[row, 'used_keywords'] = translated_keywords
 
-                    prepend_string = ''
-                    for keyword in translated_keywords:
-                        prepend_string += keyword + ' '
-                    prepend_string = prepend_string.rstrip()
-                    self.tokenized_df.loc[row, 'prepended_text'] = prepend_string + ' ' +self.tokenized_df.loc[row, 'text']
+
+
 
 
 
@@ -163,23 +134,19 @@ class Comment_data_preprocessor():
                     prepended_keywords = []
                     if number_of_keywords != None:
                         translate_range = number_of_keywords
+                    else:
+                        translate_range = len(keywords)
                         for i in range(translate_range):
                             if len(keywords) == 0:
                                 break
                             else:
                                 keyword = keywords.pop()
                                 prepended_keywords.append(keyword)
-
-                    prepend_string = ''
-                    for keyword in prepended_keywords:
-                        prepend_string  += keyword + ' '
-                    prepend_string = prepend_string.rstrip()
-                    self.tokenized_df.loc[row, 'prepended_text'] = prepend_string + ' ' + self.tokenized_df.loc[row, 'text']
+                                self.tokenized_df.at[row, 'used_keywords'] = prepended_keywords
 
 
-            self.tokenized_df.loc[:, 'prepended_tokenized_text'] = self.tokenized_df.loc[:, 'prepended_text'].apply(self.tokenizer.tokenize)
-            self.tokenized_df.loc[:, 'prepended_token_ids'] = self.tokenized_df.loc[:, 'prepended_text'].apply(self.tokenizer.encode)
-
+            self.tokenized_df.loc[:, 'tokenized_keywords'] = self.tokenized_df.loc[:, 'used_keywords'].apply(self.tokenize_list_of_keywords)
+            self.tokenized_df.loc[:, 'keyword_ids'] = self.tokenized_df.loc[:, 'used_keywords'].apply(self.encode_list_of_keywords)
 
 
         else:
@@ -190,11 +157,6 @@ class Comment_data_preprocessor():
             self.tokenized_text.loc[:, 'token_ids'] = self.input_df.loc[:, 'text'].apply(self.tokenizer.encode)
 
         return self.tokenized_df
-
-    def collate(self, batch):
-        if self.tokenizer._pad_token is None:
-            return pad_sequence(batch, batch_first=True)
-        return pad_sequence(batch, batch_first=True, padding_value=self.tokenizer.pad_token_id)
 
 
 
@@ -212,6 +174,85 @@ class Comment_dataset(Dataset):
     def __len__(self):
         return len(self.data)
 
+class prepend_ctrl_Dataset(Dataset):
+
+    def __init__(self, preprocessor, tokenizer = None):
+        if preprocessor.tokenized_df is None:
+            preprocessor.tokenized_df()
+
+        self.data = preprocessor.tokenized_df
+
+        if tokenizer != None:
+            self.tokenizer = tokenizer
+        else:
+            try:
+                self.tokenizer = preprocessor.tokenizer
+            except:
+                print("no tokenizer found - collate function wont work")
+
+
+    def __getitem__(self, index):
+        text_ids = self.data.loc[index, 'text_ids']
+        keyword_ids = self.data.loc[index,'keyword_ids']
+        prepended_ids = keyword_ids + text_ids
+        return prepended_ids
+
+    def __len__(self):
+        return len(self.data)
+
+
+    def collate(self, batch):
+        tokenizer = self.tokenizer
+        text_ids = [torch.tensor(item) for item in batch]
+
+        if tokenizer._pad_token is None:
+             padded_texts = pad_sequence(text_ids, batch_first = True)
+        else:
+             padded_texts = pad_sequence(text_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
+
+        return padded_texts
+
+
+class bag_words_ctrl_Dataset(Dataset):
+
+    def __init__(self, preprocessor, tokenizer = None):
+        if preprocessor.tokenized_df is None:
+            preprocessor.tokenized_df()
+
+        self.data = preprocessor.tokenized_df
+        if tokenizer != None:
+            self.tokenizer = tokenizer
+        else:
+            try:
+                self.tokenizer = preprocessor.tokenizer
+            except:
+                print("no tokenizer found - collate function wont work")
+
+    def __getitem__(self, index):
+        text_ids = self.data.loc[index, 'text_ids']
+        keyword_ids = self.data.loc[index, 'keyword_ids']
+        return (text_ids, keyword_ids)
+
+    def __len__(self):
+        return len(self.data)
+
+
+    def collate(self, batch):
+        tokenizer = self.tokenizer
+        text_ids = [torch.tensor(item[0]) for item in batch]
+        keyword_ids = [torch.tensor(item[1]) for item in batch]
+
+        if tokenizer._pad_token is None:
+             padded_texts = pad_sequence(text_ids, batch_first = True)
+        else:
+             padded_texts = pad_sequence(text_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
+
+        return padded_texts, keyword_ids
+
+
+
+
+
 
 
 
@@ -220,29 +261,19 @@ class Comment_dataset(Dataset):
 # %%
 
 
-def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning_rate, weight_decay,eps,warmup_steps, model):
+def train(training_dataset, epochs, num_workers, batch_size, learning_rate, weight_decay, eps, warmup_steps, model, collate_fn = None):
     '''generic training call for a pytorch model'''
 
-    def collate(batch):
-        if tokenizer._pad_token is None:
-            return pad_sequence(batch, batch_first=True)
-        return pad_sequence(batch, batch_first=True, padding_value=tokenizer.pad_token_id)
 
-
-    training_loader = DataLoader(training_dataset, shuffle = True, num_workers = num_workers, batch_size = batch_size, collate_fn = collate)
+    training_loader = DataLoader(training_dataset, shuffle = True, num_workers = num_workers, batch_size = batch_size, collate_fn = collate_fn)
 
 
 #### configure model to use cuda if it is available ####
-
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
     if torch.cuda.is_available():
         model.cuda()
 
-
-
 #### initialize containers to store model outputs in ####
-
     loss_data = np.zeros((epochs)) #empty arrays to store data for plotting in
 
 ### initialize optimizer
@@ -260,43 +291,94 @@ def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning
         optimizer, num_warmup_steps=warmup_steps, num_training_steps= len(training_loader)
     )
 
-
 ##### MAIN TRAINING LOOP ######
 
     for epoch in range(epochs):
 
-#### initialize epoch data #####
-
         running_loss = 0
-        #running_corrects = 0
-        #running_val_corrects = 0
-
-# ###### EVALUATION STEP ########
-#         model.eval()
-        #
-        # for inputs, labels  in test_loader:
-        #     inputs = inputs.to(device)
-        #     labels = labels.to(device)
-        #     inputs = inputs.float()
-        #     labels = labels.long()
-        #     outputs = model(inputs)
-        #     _, preds = torch.max(outputs.data, 1)
-        #     running_val_corrects += torch.sum(preds == labels.data).item()
-        #     confusion_matrix_test_epoch += confusion_matrix(labels.cpu().numpy(), preds.cpu().numpy(), labels =range(num_labels))
-
-##### TRAINING STEP ########
         model.train()
 
         for batch  in training_loader:
             inputs, labels = (batch, batch)
             inputs = inputs.to(device)
             labels = labels.to(device)
-
             #optimizer.zero_grad()
 
             #forward
             loss = model(inputs, labels = labels)[0]
 
+            #backwards
+            loss.backward()
+            optimizer.step()
+            scheduler.step()
+            model.zero_grad()
+
+            running_loss += loss.item()
+            #running_corrects += torch.sum(preds == labels.data).item()
+            #confusion_matrix_train_epoch += confusion_matrix(labels.cpu().numpy(), preds.cpu().numpy(), labels =range(num_labels))
+
+##### calculate  epoch data ####
+        epoch_loss = running_loss / len(training_dataset)
+        #epoch_corrects = running_corrects / len(training_dataset)
+        #epoch_val_accuracy = running_val_corrects/len(test_dataset)
+
+###### record epoch data ###########
+        loss_data[epoch] = epoch_loss
+        #accuracy_data[epoch] = epoch_corrects
+        #val_accuracy_data[epoch] = epoch_val_accuracy
+        #confusion_matricies_test[epoch] = confusion_matrix_test_epoch
+        #confusion_matricies_train[epoch] = confusion_matrix_train_epoch
+
+        print(' Loss: {:.4f} '.format(epoch_loss))
+
+    return model, optimizer, scheduler, loss_data
+
+
+def train_bag_of_words(training_dataset, epochs, num_workers, batch_size, learning_rate, weight_decay, eps, warmup_steps, model, collate_fn = None):
+    '''generic training call for a pytorch model'''
+
+
+    training_loader = DataLoader(training_dataset, shuffle = True, num_workers = num_workers, batch_size = batch_size, collate_fn = collate_fn)
+
+
+#### configure model to use cuda if it is available ####
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    if torch.cuda.is_available():
+        model.cuda()
+
+#### initialize containers to store model outputs in ####
+    loss_data = np.zeros((epochs)) #empty arrays to store data for plotting in
+
+### initialize optimizer
+    no_decay = ["bias", "LayerNorm.weight"]
+    optimizer_grouped_parameters = [
+        {
+            "params": [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)],
+            "weight_decay": weight_decay,
+        },
+        {"params": [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], "weight_decay": 0.0},
+    ] #set weight decay to 0 for bias and layernorm weights
+
+    optimizer = AdamW(optimizer_grouped_parameters, lr= learning_rate, eps= eps)
+    scheduler = get_linear_schedule_with_warmup(
+        optimizer, num_warmup_steps=warmup_steps, num_training_steps= len(training_loader)
+    )
+
+##### MAIN TRAINING LOOP ######
+
+    for epoch in range(epochs):
+
+        running_loss = 0
+        model.train()
+
+        for batch  in training_loader:
+            inputs, labels = (batch, batch[0])
+            inputs = inputs.to(device)
+            labels = labels.to(device)
+            #optimizer.zero_grad()
+
+            #forward
+            loss = model(inputs, labels = labels)[0]
 
             #backwards
             loss.backward()
@@ -326,14 +408,9 @@ def train(training_dataset, tokenizer, epochs, num_workers, batch_size, learning
 
 # %%
 
-###Dataset classes - meant to "feed" datasets from pandas dataframes in the right way
-
-#class GPT2_language_modeling_trainset(Dataset):
-    #'''byte-pair encoding of input sentences using pretrained tokenizer'''
-
 
 def generate_(model, tokenizer, prompt, max_length, do_sample = True, num_beams = None, temperature = None, top_k = None, top_p = None, repetition_penalty = None, num_return_sequences = 1,   print_ = True, stop_token = None):
-    
+
     encoded_prompt = tokenizer.encode(prompt, add_special_tokens = False, return_tensors = "pt")
     output_sequences = model.generate(input_ids = encoded_prompt,
                                       max_length = max_length,

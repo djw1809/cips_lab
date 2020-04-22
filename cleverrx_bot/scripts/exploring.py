@@ -6,15 +6,21 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import transformers
 import bot_utils as butils
-from transformers import GPT2Tokenizer, GPT2LMHeadModel
+from transformers import GPT2Tokenizer, GPT2LMHeadModel, GPT2Model
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 from torch.nn import CrossEntropyLoss
 
 
 #%%
+blah = [1,2,3,4,5]
+blah[:-1]
+blah[1:]
+#%%
 prompt = "Donald Trump is the"
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+tokenizer.all_special_tokens
+tokenizer.max_len
 model = GPT2LMHeadModel.from_pretrained('gpt2')
 tokenizer.encode(prompt, return_tensors="pt")
 
