@@ -4,7 +4,6 @@ import numpy as np
 import torch
 from transformers import GPT2Tokenizer, GPT2LMHeadModel, AdamW, get_linear_schedule_with_warmup
 from ast import literal_eval
-import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 
