@@ -21,7 +21,8 @@ class GPT2Model_bagofctrl(GPT2Model):
         self.init_weights()
 
     def forward(self,
-                batch, #(sequence ids - batchsize x seqlen, list of keywords - list of lenth batchsize, each list entry is a tensor of keywords)
+                batch,
+                device, #(sequence ids - batchsize x seqlen, list of keywords - list of lenth batchsize, each list entry is a tensor of keywords)
                 position_ids = None,
                 labels = None):
 
@@ -37,7 +38,7 @@ class GPT2Model_bagofctrl(GPT2Model):
             bag_of_words = torch.mean(keyword_embeddings, 0)
             keyword_embedding[i, :] = bag_of_words
 
-        keyword_embedding = keyword_embedding.unsqueeze(1)
+        keyword_embedding = keyword_embedding.unsqueeze(1).to(device)
         final_embedding = torch.cat((keyword_embedding, input_embedding),1)
 
         #set up posistional embeddings

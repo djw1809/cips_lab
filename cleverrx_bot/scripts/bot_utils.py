@@ -380,7 +380,7 @@ def train_bag_of_words(training_dataset, epochs, num_workers, batch_size, learni
             #optimizer.zero_grad()
 
             #forward
-            loss = model(inputs, labels = labels)[0]
+            loss = model(inputs, device, labels = labels)[0]
 
             #backwards
             loss.backward()
