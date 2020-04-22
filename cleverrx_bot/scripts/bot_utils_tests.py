@@ -51,6 +51,7 @@ df_dataset.corpus
 
 full_data = pd.read_csv('../data/tweets_topics.csv')
 len(full_data)
+full_data
 small_data = full_data.loc[0:100, :]
 small_data
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
