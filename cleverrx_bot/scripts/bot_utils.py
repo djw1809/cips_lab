@@ -373,7 +373,8 @@ def train_bag_of_words(training_dataset, epochs, num_workers, batch_size, learni
 
         for batch  in training_loader:
             inputs, labels = (batch, batch[0])
-            inputs = inputs.to(device)
+            inputs[0] = inputs[0].to(device)
+            inputs[1] = inputs[1].to(device)
             labels = labels.to(device)
             #optimizer.zero_grad()
 
