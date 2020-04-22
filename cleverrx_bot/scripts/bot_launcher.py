@@ -14,6 +14,7 @@ tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
 
 training_set_path = '../data/tweets_topics.csv'
 data = pd.read_csv(training_set_path)
+data = data[:100]
 preprocessor = butils.Comment_data_preprocessor(data, 'id', 'text', tokenizer, keyword_field = 'topics')
 tokenized_comments = preprocessor.df_to_tokenized_df(number_of_keywords = None)
 
@@ -24,14 +25,14 @@ parameter_dict = {}
 parameter_dict['dataset_choice'] = 1
 parameter_dict['model_choice'] = 1
 parameter_dict['training_set_path'] = training_set_path
-parameter_dict['epochs'] = 5
+parameter_dict['epochs'] = 2
 parameter_dict['num_worker'] = 2
 parameter_dict['batch_size'] =2
 parameter_dict['learning_rate'] =5e-5
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8
 parameter_dict['warmup_steps'] =0
-parameter_dict['filename'] ='gpt2_bagofwordskeywords_all_keywords_042220'
+parameter_dict['filename'] ='test'#'gpt2_bagofwordskeywords_all_keywords_042220'
 
 results_dir ='../results'
 model_storage_dir ='../saved_models'
