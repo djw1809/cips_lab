@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import torch
 import matplotlib
-matplotlib.use('Agg') 
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import bot_utils as butils
 import json
@@ -94,5 +94,5 @@ np.savetxt(results_path/'loss_data', loss_data, delimiter = ',')
 
 #plotting
 plt.clf()
-plt.plot(range(parameter_dict['epochs']), loss_data)
+plt.scatter(range(parameter_dict['epochs']), loss_data)
 plt.savefig(results_dir + '/' + parameter_dict['filename'] +'/'+'loss_plot.png')

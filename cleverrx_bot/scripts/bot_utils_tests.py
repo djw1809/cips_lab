@@ -69,8 +69,8 @@ dummy_embedding = torch.nn.Embedding(dataset.tokenizer.vocab_size, 10)
 
 batch = next(iter(loader))
 
-sequences, keyword_ids = batch
-len(keyword_ids)
+inputs, labels = (batch, batch[0])
+torch.cuda.is_available()
 
 #%%  test forward pass
 test = models.GPT2Model_bagofctrl.from_pretrained("gpt2")
