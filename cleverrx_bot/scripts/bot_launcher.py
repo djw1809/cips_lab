@@ -19,8 +19,8 @@ tokenized_comments = pre_processor.df_to_tokenized_df(number_of_keywords = None)
 
 parameter_dict = {}
 #Currently huggingface defaults for training GPT2 (except more epochs)
-parameter_dict['dataset_choice'] =
-parameter_dict['model_choice'] =
+parameter_dict['dataset_choice'] = 1
+parameter_dict['model_choice'] = 1
 parameter_dict['training_set_path'] = training_set_path
 parameter_dict['epochs'] = 5
 parameter_dict['num_worker'] = 2
@@ -29,7 +29,7 @@ parameter_dict['learning_rate'] =5e-5
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8
 parameter_dict['warmup_steps'] =0
-parameter_dict['filename'] ='gpt2_fulldataset_onekeyword_append_041320'
+parameter_dict['filename'] ='gpt2_bagofwordskeywords_all_keywords_042220'
 
 results_dir ='../results'
 model_storage_dir ='../saved_models'
