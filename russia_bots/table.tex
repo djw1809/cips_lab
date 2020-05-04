@@ -1,0 +1,132 @@
+%TODO:
+% - Make an "Exercise/solution" environment - restructure everything in terms of that
+% - Maybe add all my expanded proofs of the lemmas from my notes.
+
+
+
+\documentclass[a4paper, titlepage]{article}
+
+
+
+%packages
+\usepackage[english]{babel}
+%\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{dsfont}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{braket,mleftright}
+\usepackage{subcaption}
+%\usepackage{ upgreek }
+\usepackage{tikz}
+\usepackage[labelfont=bf]{caption}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usepackage{amssymb}
+%\usepackage{amsthm}
+\usepackage{etoolbox}
+\AtBeginEnvironment{quote}{\singlespacing\small}
+
+\usepackage{enumitem}  %%good lists
+
+
+%%macros
+%%To make a better disjoint union symbol
+\makeatletter
+\def\moverlay{\mathpalette\mov@rlay}
+\def\mov@rlay#1#2{\leavevmode\vtop{%
+   \baselineskip\z@skip \lineskiplimit-\maxdimen
+   \ialign{\hfil$\m@th#1##$\hfil\cr#2\crcr}}}
+\newcommand{\charfusion}[3][\mathord]{
+    #1{\ifx#1\mathop\vphantom{#2}\fi
+        \mathpalette\mov@rlay{#2\cr#3}
+      }
+    \ifx#1\mathop\expandafter\displaylimits\fi}
+\makeatother
+%%spaces
+\newcommand{\Rn}{\mathds{R}^{n}}
+\newcommand{\Rd}{\mathds{R}^{d}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\Q}{\mathds{Q}}
+\newcommand{\C}{\mathds{C}}
+\newcommand{\W}[1]{\mathbf{W}^{1,#1}}
+\newcommand{\Lp}{L^{p}(U)}
+\newcommand{\Lq}[1]{L^{#1}(U)}
+
+%%integrals
+\newcommand{\pcint}[2]{\text{p.c.}\int_{#1}^{#2}} %piecewise constant integral
+\newcommand{\ldbint}[2]{\underline{\int_{#1}^{#2}}} %lower darboux integral
+\newcommand{\udbint}[2]{\overline{\int_{#1}^{#2}}}
+
+%measure theory
+\newcommand{\upmeas}[1]{m^{*}(#1)}
+\newcommand{\meas}[1]{m(#1)}
+\newcommand{\indi}[1]{\mathds{1}_{#1}}
+
+%%misc
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\cupdot}{\charfusion[\mathbin]{\cup}{\cdot}}
+\newcommand{\bigcupdot}{\charfusion[\mathop]{\bigcup}{\cdot}}
+
+
+%%graph drawing environment
+\oddsidemargin 0in \evensidemargin 0in \textwidth 6.5in \topmargin
+0in \headheight 0in \headsep 0in \textheight 9in
+
+\newcommand{\graphnode}[1]{\draw[fill] #1 circle [radius=.1]}
+
+\newcommand{\edge}[2]{\draw[postaction={decorate}] #1 -- #2;}
+
+\newenvironment{graphz}{\begin{scope}[very thick,decoration={
+    markings,
+    mark=at position 0.6 with {\arrow[black]{stealth}}}
+    ]}{\end{scope}}
+
+\newcommand{\leftedge}[2]{\draw[postaction ={decorate}, bend left] #1 to #2;}
+
+\newcommand{\rightedge}[2]{\draw[postaction ={decorate}, bend right] #1 to #2;}
+
+
+
+
+%%theorems
+\usepackage[thmmarks,  thref, amsmath]{ntheorem}
+
+%%Standard environments
+\theoremstyle{plain}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{thm}{Theorem}
+
+%%Case environments/problem part environments - only to be used inside of a proof/solution environment
+\theoremheaderfont{\itshape}
+\theorembodyfont{\upshape}
+\newtheorem{case}{Case}
+
+\theoremstyle{break}
+\theoremheaderfont{\scshape\bfseries}
+\theorembodyfont{\upshape}
+\theoremsymbol{}
+\newtheorem{ppart}{Part}
+
+%%proof environments
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\scshape\bfseries}
+\theorembodyfont{\upshape}
+\theoremsymbol{\rule{0.7em}{0.7em}}%
+\theorempostwork{\setcounter{case}{0}\setcounter{ppart}{0}}
+\newtheorem{soln}{Solution}
+\newtheorem{Proof}{Proof}
+
+
+%%notes/remakrs/examples environments
+\theoremstyle{nonumberplain}
+\theoremheaderfont{\itshape\bfseries}
+\theorembodyfont{\upshape}
+\theoremsymbol{}
+\newtheorem{note}{Note}
+\newtheorem{claim}{Claim}
+\newtheorem{cust}{}

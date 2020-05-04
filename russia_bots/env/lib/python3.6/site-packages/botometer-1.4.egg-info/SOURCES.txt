@@ -1,0 +1,9 @@
+README.md
+setup.cfg
+setup.py
+botometer/__init__.py
+botometer.egg-info/PKG-INFO
+botometer.egg-info/SOURCES.txt
+botometer.egg-info/dependency_links.txt
+botometer.egg-info/requires.txt
+botometer.egg-info/top_level.txt
