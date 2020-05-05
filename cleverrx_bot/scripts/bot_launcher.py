@@ -16,7 +16,6 @@ tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
 
 training_set_path = '../data/tweets_topics.csv'
 data = pd.read_csv(training_set_path)
-#data = data[:100]
 preprocessor = butils.Comment_data_preprocessor(data, 'id', 'text', tokenizer, keyword_field = 'topics')
 tokenized_comments = preprocessor.df_to_tokenized_df(number_of_keywords = None)
 
@@ -79,17 +78,22 @@ if parameter_dict['model_choice'] == 1:
                                                                   parameter_dict['warmup_steps'],
                                                                   model,
                                                                   collate_fn = dataset.collate)
-#saving
+
+#saving transformers stuff - this can all be loaded again using (transformer_object).from_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
 tokenized_comments.to_csv(results_path/'training_data.csv')
 model.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
 tokenizer.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
 model.config.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
+
+#saving torch stuff - see torch docs for proper loading
 torch.save(optimizer.state_dict(), Path(model_path)/Path(parameter_dict['filename']+' optimizer'))
 torch.save(scheduler.state_dict(), Path(model_path)/Path(parameter_dict['filename']+' scheduler'))
 
+#saving parameter dict
 with open(results_path/'parameters.json', 'w') as jsonFile:
     json.dump(parameter_dict, jsonFile)
 
+#saving loss_data
 np.savetxt(results_path/'loss_data', loss_data, delimiter = ',')
 
 #plotting

@@ -221,5 +221,19 @@ dataset.raw_df
 #%%%
 test_tweet = better_data.loc[0]
 
+#%% inherting class methods 
 
-#%%
+class A:
+
+    @classmethod
+    def blah(cls, string):
+        return "This is {}".format(string)
+
+class B(A):
+
+    @classmethod
+    def blah_(cls, string):
+        output = super().blah(string)
+        return output
+
+B.blah_('test')

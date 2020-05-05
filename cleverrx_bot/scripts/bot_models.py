@@ -53,7 +53,7 @@ class GPT2Model_bagofctrl(GPT2Model):
         output_shape = hidden_states.shape
 
         #compute output hidden state (output of attention layers)
-        for i, block in enumerate(self.h):
+        for i, block in enumerate(self.h): #
             hidden_states = block(hidden_states)[0]
 
         hidden_states = self.ln_f(hidden_states)
@@ -72,3 +72,7 @@ class GPT2Model_bagofctrl(GPT2Model):
             outputs = (loss,) + outputs
 
         return outputs
+
+    @classmethod #so that I can load a bag of ctrl model with loaded_model = GPT2Model_bagofctrl.load('place where I saved everything')
+    def load(cls, path_to_results_folder):
+        model = super().from_pretrained(path_to_results_folder)
