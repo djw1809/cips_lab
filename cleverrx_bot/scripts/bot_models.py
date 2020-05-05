@@ -76,3 +76,4 @@ class GPT2Model_bagofctrl(GPT2Model):
     @classmethod #so that I can load a bag of ctrl model with loaded_model = GPT2Model_bagofctrl.load('place where I saved everything')
     def load(cls, path_to_results_folder):
         model = super().from_pretrained(path_to_results_folder)
+        return model 
