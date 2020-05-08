@@ -2,10 +2,12 @@
 import pandas as pd
 import numpy as np
 import torch
-from transformers import GPT2Tokenizer, GPT2LMHeadModel, AdamW, get_linear_schedule_with_warmup
-from ast import literal_eval
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
+import torch.nn.functional as F
+from transformers import GPT2Tokenizer, GPT2LMHeadModel, AdamW, get_linear_schedule_with_warmup
+from ast import literal_eval
+
 
 
 class Comment_data_preprocessor():
@@ -103,7 +105,7 @@ class Comment_data_preprocessor():
 
                     keywords = self.input_df.loc[row, 'keywords'].copy()
                     translated_keywords = []
-
+#
                     if number_of_keywords != None:
                         translate_range = number_of_keywords
                     else: #if no number is given translate all of them
@@ -411,7 +413,7 @@ def train_bag_of_words(training_dataset, epochs, num_workers, batch_size, learni
 
 
 def generate_(model, tokenizer, prompt, max_length, do_sample = True, num_beams = None, temperature = None, top_k = None, top_p = None, repetition_penalty = None, num_return_sequences = 1,   print_ = True, stop_token = None):
-
+    '''generate with transformer models'''
     encoded_prompt = tokenizer.encode(prompt, add_special_tokens = False, return_tensors = "pt")
     output_sequences = model.generate(input_ids = encoded_prompt,
                                       max_length = max_length,
@@ -439,3 +441,65 @@ def generate_(model, tokenizer, prompt, max_length, do_sample = True, num_beams 
 
 
     return output_sequences
+
+
+def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature = None, top_k = None, top_p = None, num_return_sequences = 1, print_ = True, min_keep = 1, filter_value = -float("Inf")):
+    '''generation with bag of words ctrl.  prompt should be of the form (list of keywords, start of generated sentence)'''
+    #setup device
+    device = "cpu" #torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    #if torch.cuda.is_available():
+        #model.cuda()
+    model.eval()
+
+    #encode prompt
+    keywords, bos = prompt
+    keyword_tokens = []
+    for keyword in keywords:
+        keyword_tokens = keyword_tokens + tokenizer.encode(keywords)
+
+    bos_tokens = tokenizer.encode(bos)
+
+    returned_sequences = []
+
+    for i in range(returned_sequences):
+        sequence_tokens = bos_tokens
+        for j in range(max_length):
+            #obtain logits
+            logits = model((sequence_tokens, keyword_tokens, device))[0][:, -1, :]
+
+        #perform top_k sampling
+            if top_k > 0:
+                indices_to_remove = logits < torch.topk(logits, top_k)[-1] #return the indicies
+                logits[indicies_to_remove] = filter_value  #mask the bad ones
+
+            if top_p > 0:
+                sorted_logits, sorted_indices = torch.sort(logits, descending = True)
+                cum_probs = torch.cumsum(F.softmax(sorted_logits, dim = -1 ), dim = -1)
+                sorted_indices_to_remove = cum_probs > top_p
+                if min_keep > 1:
+                    sorted_indices_to_remove[:, :min_keep] = 0
+
+                sorted_indices_to_remove[:, 1:] = sorted_indices_to_remove[:, :-1].clone() #shift everything to right - will always pick first token above threshhold as well now
+                sorted_indices_to_remove[:, 0] = 0  #always keep at least most probable
+
+                #put everything in the right place
+                indices_to_remove = sorted_indices_to_remove.scatter(0, sorted_indices, sorted_indices_to_remove)
+
+                logits[indices_to_remove = filter_value
+
+            if top_k > 0 or top_p > 0:
+                next_token_index = torch.multinomial(F.softmax(logits), 1)
+            else:
+                next_token_index = torch.argmax(logits)
+
+            sequence_tokens = sequence_tokens + next_token_index
+
+        returned_sequences.append(sequence_tokens)
+
+    returned_sentences = []
+
+    for sequence in returned_sequences:
+        decoded_sequence = tokenizer.decode(sequence.tolist(), clean_up_tokenization_spaces = True)
+        returned_sentences.append(deconded_sequence)
+
+    return returned_sentences, returned_sequences 
