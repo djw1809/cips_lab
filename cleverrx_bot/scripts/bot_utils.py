@@ -485,7 +485,7 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
                 #put everything in the right place
                 indices_to_remove = sorted_indices_to_remove.scatter(0, sorted_indices, sorted_indices_to_remove)
 
-                logits[indices_to_remove = filter_value
+                logits[indices_to_remove] = filter_value
 
             if top_k > 0 or top_p > 0:
                 next_token_index = torch.multinomial(F.softmax(logits), 1)
@@ -502,4 +502,4 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
         decoded_sequence = tokenizer.decode(sequence.tolist(), clean_up_tokenization_spaces = True)
         returned_sentences.append(deconded_sequence)
 
-    return returned_sentences, returned_sequences 
+    return returned_sentences, returned_sequences
