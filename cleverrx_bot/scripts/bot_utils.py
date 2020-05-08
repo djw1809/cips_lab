@@ -465,7 +465,7 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
         sequence_tokens = bos_tokens
         for j in range(max_length):
             #obtain logits
-            logits = model((sequence_tokens, keyword_tokens, device))[0][:, -1, :]
+            logits = model((sequence_tokens, keyword_tokens), device)[0][:, -1, :]
 
         #perform top_k sampling
             if top_k > 0:
