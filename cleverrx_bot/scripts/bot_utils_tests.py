@@ -82,3 +82,21 @@ labels = batch[0].shape
 test(batch, labels = batch[0])[0]
 
 #%%
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+prompt = (['diabetes', 'insurance'], 'diabetes is')
+keyword_tokens = []
+keywords, bos = prompt
+for keyword in keywords:
+    keyword_tokens = keyword_tokens + tokenizer.encode(keyword)
+
+keyword_tokens
+keyword_tokens = [torch.tensor(keyword_tokens)]
+bos_tokens = torch.tensor(tokenizer.encode(bos)).unsqueeze(0)
+bos_tokens
+
+
+test((bos_tokens, keyword_tokens), device)[0][:, -1, :].size()
+
+batch = (bos_tokens, [keyword_tokens])
+
+i

@@ -457,18 +457,17 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
     for keyword in keywords:
         keyword_tokens = keyword_tokens + tokenizer.encode(keywords)
 
-    bos_tokens = tokenizer.encode(bos)
+    keyword_tokens = [torch.tensor(keyword_tokens)] #put things in right shape for forward pass
+    bos_tokens = tokenizer.encode(bos_tokens)
 
-    keyword_tokens = torch.tensor(keyword_tokens)
-    bos_tokens = torch.tensor(bos_tokens)
-    
     returned_sequences = []
 
     for i in range(num_return_sequences):
         sequence_tokens = bos_tokens
         for j in range(max_length):
             #obtain logits
-            logits = model((sequence_tokens, keyword_tokens), device)[0][:, -1, :]
+            input_ids = torch.tensor(sequence_tokens).unsqueeze(0)
+            logits = model((input_ids, keyword_tokens), device)[0][:, -1, :]
 
         #perform top_k sampling
             if top_k > 0:
@@ -491,9 +490,9 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
                 logits[indices_to_remove] = filter_value
 
             if top_k > 0 or top_p > 0:
-                next_token_index = torch.multinomial(F.softmax(logits), 1)
+                next_token_index = int(torch.multinomial(F.softmax(logits), 1))
             else:
-                next_token_index = torch.argmax(logits)
+                next_token_index = int(torch.argmax(logits))
 
             sequence_tokens = sequence_tokens + next_token_index
 
