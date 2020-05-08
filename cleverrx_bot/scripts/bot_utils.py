@@ -461,7 +461,7 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
 
     returned_sequences = []
 
-    for i in range(returned_sequences):
+    for i in range(num_returned_sequences):
         sequence_tokens = bos_tokens
         for j in range(max_length):
             #obtain logits
