@@ -502,6 +502,6 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
 
     for sequence in returned_sequences:
         decoded_sequence = tokenizer.decode(sequence, clean_up_tokenization_spaces = True)
-        returned_sentences.append(deconded_sequence)
+        returned_sentences.append(decoded_sequence)
 
     return returned_sentences, returned_sequences
