@@ -95,8 +95,8 @@ bos_tokens = torch.tensor(tokenizer.encode(bos)).unsqueeze(0)
 bos_tokens
 
 
-test((bos_tokens, keyword_tokens), device)[0][:, -1, :].size()
+logits = test((bos_tokens, keyword_tokens), device)[0][:, -1, :]
 
-batch = (bos_tokens, [keyword_tokens])
+torch.topk(logits, 20)[0][:, -1, None]
 
 i
