@@ -458,7 +458,7 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
         keyword_tokens = keyword_tokens + tokenizer.encode(keywords)
 
     keyword_tokens = [torch.tensor(keyword_tokens)] #put things in right shape for forward pass
-    bos_tokens = tokenizer.encode(bos_tokens)
+    bos_tokens = tokenizer.encode(bos)
 
     returned_sequences = []
 
