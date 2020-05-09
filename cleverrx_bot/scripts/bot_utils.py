@@ -472,7 +472,7 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
         #perform top_k sampling
             if top_k > 0:
                 indices_to_remove = logits < torch.topk(logits, top_k)[0][:,-1, None] #return the indicies
-                logits[indicies_to_remove] = filter_value  #mask the bad ones
+                logits[indices_to_remove] = filter_value  #mask the bad ones
 
             if top_p > 0:
                 sorted_logits, sorted_indices = torch.sort(logits, descending = True)
