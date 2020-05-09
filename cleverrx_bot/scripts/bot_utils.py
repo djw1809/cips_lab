@@ -490,9 +490,9 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
                 logits[indices_to_remove] = filter_value
 
             if top_k > 0 or top_p > 0:
-                next_token_index = int(torch.multinomial(F.softmax(logits), 1))
+                next_token_index = [int(torch.multinomial(F.softmax(logits), 1))]
             else:
-                next_token_index = int(torch.argmax(logits))
+                next_token_index = [int(torch.argmax(logits))]
 
             sequence_tokens = sequence_tokens + next_token_index
 
