@@ -106,8 +106,10 @@ class Comment_data_preprocessor(Dataset):
 
             output_data.loc[output_data.index.max()] = {'id': id, 'text':text, 'keywords':keywords}
 
-        output_data.index = range(len(output_data))
+
+
         output_data = self.df_to_tokenized_df(output_data)
+        output_data.index = range(len(output_data))
 
         if key == None:
             key = len(self.prepared_datasets + 1)
@@ -120,15 +122,15 @@ class Comment_data_preprocessor(Dataset):
     def df_to_tokenized_df(self, input_data, number_of_keywords = None):
 
         if 'keywords' in input_data.columns:
-            tokenized_df = pd.DataFrame(columns = ['id', 'text', 'raw_keywords', 'tokenized_text', 'tokenized_keywords', 'text_ids', 'keyword_ids'])
+            tokenized_df = pd.DataFrame(columns = ['id', 'text', 'keywords', 'used_keywords', 'tokenized_text', 'tokenized_keywords', 'text_ids', 'keyword_ids'])
             tokenized_df.loc[:,'id'] = input_data.loc[:,'id']
             tokenized_df.loc[:,'text'] = input_data.loc[:,'text']
             tokenized_df.loc[:, 'tokenized_text'] = tokenized_df.loc[:, 'text'].apply(self.tokenizer.tokenize)
             tokenized_df.loc[:, 'text_ids'] = tokenized_df.loc[:, 'text'].apply(self.tokenizer.encode)
             tokenized_df.loc[:,'keywords'] = input_data.loc[:,'keywords']
             tokenized_df.index = input_data.index
-            tokenized_df.loc[:,'used_keywords'] = np.nan
-            tokenized_df.loc[:,'used_keywords'] = tokenized_df.loc[:,'used_keywords'].astype('object')
+            tokenized_df.loc[:,'used_keywords'] = [[] for i in tokenized_df.index]
+            tokenized_df['used_keywords'] = tokenized_df.loc[:,'used_keywords'].astype('object')
 
             if self.synonym_dict != None:
 
@@ -177,6 +179,7 @@ class Comment_data_preprocessor(Dataset):
                                 tokenized_df.at[row, 'used_keywords'] = prepended_keywords
 
 
+
             tokenized_df.loc[:, 'tokenized_keywords'] = tokenized_df.loc[:, 'used_keywords'].apply(self.tokenize_list_of_keywords)
             tokenized_df.loc[:, 'keyword_ids'] = tokenized_df.loc[:, 'used_keywords'].apply(self.encode_list_of_keywords)
 
@@ -220,7 +223,7 @@ class Comment_data_preprocessor(Dataset):
             self.collate_fn = self.collate_keyword
 
         if type.startswith('prepend'):
-            self.collate_fn = self.collate_prepend  
+            self.collate_fn = self.collate_prepend
 
 
     def __getitem__(self, index):
@@ -581,18 +584,29 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
     model.eval()
 
     #encode prompt
-    keywords, bos = prompt
-    keyword_tokens = []
-    for keyword in keywords:
-        keyword_tokens = keyword_tokens + tokenizer.encode(keywords)
+    if len(prompt) == 1:
+        keywords,  = prompt
 
-    keyword_tokens = [torch.tensor(keyword_tokens)] #put things in right shape for forward pass
-    bos_tokens = tokenizer.encode(bos)
+    else:
+        keywords, bos = prompt
+        bos_tokens = tokenizer.encode(bos)
+
+    keyword_tokens = []
+    if len(keywords) > 0:
+        for keyword in keywords:
+            keyword_tokens = keyword_tokens + tokenizer.encode(keywords)
+
+        keyword_tokens = [torch.tensor(keyword_tokens)] #put things in right shape for forward pass
+    else:
+        keyword_tokens = [[]]
 
     returned_sequences = []
 
     for i in range(num_return_sequences):
-        sequence_tokens = bos_tokens
+        if len(prompt) > 1:
+            sequence_tokens = bos_tokens
+        else:
+            sequence_tokens = []
         for j in range(max_length):
             #obtain logits
             input_ids = torch.tensor(sequence_tokens).unsqueeze(0)

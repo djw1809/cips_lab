@@ -240,7 +240,7 @@ class C():
     def __init__(self):
         self.list = [1,2,3]
 
-    def function(self, default = len(self.list)): 
+    def function(self, default = len(self.list)):
         print(default + 1)
 
 B.blah_('test')
@@ -259,3 +259,6 @@ with open('../data/topics_index_old.pkl', 'rb') as file:
 
 old_example = old_data[list(old_data.keys())[0]]
 old_example.keys()
+
+
+#%%

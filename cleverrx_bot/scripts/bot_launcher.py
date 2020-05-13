@@ -81,9 +81,9 @@ if parameter_dict['model_choice'] == 1:
 
 #saving transformers stuff - this can all be loaded again using (transformer_object).from_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
 tokenized_comments.to_csv(results_path/'training_data.csv')
-model.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
+trained_model.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
 tokenizer.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
-model.config.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
+trained_model.config.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
 
 #saving torch stuff - see torch docs for proper loading
 torch.save(optimizer.state_dict(), Path(model_path)/Path(parameter_dict['filename']+' optimizer'))

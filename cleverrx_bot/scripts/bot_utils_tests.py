@@ -16,7 +16,12 @@ with open('../data/topics_index_bots_new_042820.pkl', 'rb') as file:
 
 short_raw_data_list = [raw_data[i] for i in list(raw_data.keys())[0:6]]
 short_raw_data_dict = {i:raw_data[i] for i in list(raw_data.keys())[0:6]}
+example = short_raw_data_dict[list(short_raw_data_dict.keys())[0]]
+list(example.keys())
+
+short_raw_data_dict[69] = {'tweet': 'I love dicks', 'topic_links': [], }
 short_raw_data_df = pd.DataFrame.from_dict(short_raw_data_dict, orient = 'index')
+
 
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 #testing __init__
@@ -28,11 +33,9 @@ list_preprocessor.input_df
 dict_preprocessor.input_df
 df_preprocessor.input_df
 
-
 #testing tokenizing datasets
 keyword_dataset = dict_preprocessor.prepare_keyword_dataset(dict_preprocessor.input_df, 'id', 'text', 'topic_links', key = 'type_no_sentiment_cluster_keywords', cluster = True)
-
-[dict_preprocessor.prepared_datasets.keys()]
+keyword_dataset
 dict_preprocessor.prepared_datasets['type_no_sentiment_cluster_keywords']
 
 #testing __getitem__
@@ -55,17 +58,16 @@ dict_preprocessor.tokenizer.decode(text)
 
 ###loading data
 dict_preprocessor.set_get_type('keyword')
-keyword_loader = DataLoader(dict_preprocessor, batch_size = 2, collate_fn = dict_preprocessor.collate_fn)
-batch = next(iter(keyword_loader))
+keyword_loader = DataLoader(dict_preprocessor, batch_size = 1, collate_fn = dict_preprocessor.collate_fn)
+batches = list(keyword_loader)
+bacth = batches[6]
 texts, keywords = batch
-texts
+
 keywords
 
 dict_preprocessor.set_get_type('prepend_space')
 prepend_loader = DataLoader(dict_preprocessor, batch_size = 2, collate_fn = dict_preprocessor.collate_fn)
-batch = next(iter(prepend_loader))
-batch
-
+batch = next(iter(prepend_loader)
 
 
 
@@ -73,8 +75,9 @@ batch
 inputs, labels = (batch, batch[0])
 torch.cuda.is_available()
 test = models.GPT2Model_bagofctrl.from_pretrained("gpt2")
+device = "cpu"
 test.wpe
-len(test(batch))
+len(test(batch, device))
 outputs = test(batch)[0].shape #logits
 test(batch)[1].shape #hidden states
 labels = batch[0].shape
@@ -98,6 +101,6 @@ logits = test((bos_tokens, keyword_tokens), device)[0][:, -1, :]
 
 torch.topk(logits, 20)[0][:, -1, None]
 
-#%% test type_keyword_function
+
 
 i
