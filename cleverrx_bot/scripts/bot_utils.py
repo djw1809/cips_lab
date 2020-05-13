@@ -10,100 +10,131 @@ from ast import literal_eval
 
 
 
-class Comment_data_preprocessor():
+class Comment_data_preprocessor(Dataset):
     '''class to do different things quickly with raw_data
         -properties: raw_data, input_df, train_df (the dataframe used for training), test_df(the dataframe used for testing), current_df(either test or train, the df that will be accessed by get_item), tokenizer, corpus
-        - always assume input has text and id field (if json or df)
+        - always assume input has text field, id field
         - TODO: assert that if a synonym dict has been provided then so should a keyword_field
         '''
-    def __init__(self, raw_data, id_field, text_field, tokenizer, keyword_field = None, synonym_dict = None):
+    #PREPROCESSING
+    def __init__(self, raw_data, text_field, tokenizer, keyword_field = None, synonym_dict = None):
         #sefl.tokenizer = tokenizer
         self.tokenizer = tokenizer
         self.synonym_dict = synonym_dict
         self.raw_data = raw_data
         self.corpus = None
         self.input_df = None
-        self.tokenized_df = None
-        self.train_df = None
-        self.test_df = None
+        self.prepared_datasets = {}
+        self.active_dataset = None # This is the dataset that will be accessed by __getitem__ and __len__
+        self.get_type = 'keyword'  #keyword: return a tuple of (tokenized keywords, tokenized text), prepend: return tokenized keyword prepended text
+        self.collate_fn = self.collate_keyword
 
         if type(raw_data) == str: #process input data if it is a corpus
             self.corpus = raw_data
             self.input_df = self.text_to_chunked_df(self.raw_text)
 
         elif isinstance(raw_data, pd.DataFrame): #process input data if it is a dataframe
-            intermediate_df = pd.DataFrame(columns = ['id', 'text'])
-            intermediate_df.loc[:, 'id'] = raw_data.loc[:, id_field]
-            intermediate_df.loc[:, 'text'] = raw_data.loc[:, text_field]
-            if keyword_field != None:
-                intermediate_df.loc[:, 'keywords'] = raw_data.loc[:, keyword_field]
-                intermediate_df.loc[:, 'keywords'] = intermediate_df.loc[:, 'keywords'].apply(literal_eval) #make sure keywords are in a list
+            self.input_df = raw_data
+            self.input_df = self.input_df.rename(columns = {text_field: 'text'})
+            # intermediate_df = pd.DataFrame(columns = ['id', 'text'])
+            # intermediate_df.loc[:, 'id'] = raw_data.loc[:, id_field]
+            # intermediate_df.loc[:, 'text'] = raw_data.loc[:, text_field]
+            # if keyword_field != None:
+            #     intermediate_df.loc[:, 'keywords'] = raw_data.loc[:, keyword_field]
+            #     intermediate_df.loc[:, 'keywords'] = intermediate_df.loc[:, 'keywords'].apply(literal_eval) #make sure keywords are in a list
 
 
-        elif isinstance(raw_data, list):  #process input data if it is json should be a list of dicts, each dict representing a comment
-            intermediate_df = pd.DataFrame(raw_data)
-            if keyword_field != None:
-                drop_columns = [column for column in intermediate_df.columns if column not in [id_field, text_field, keyword_field]]
-            else:
-                drop_columns = [column for column in intermediate_df.columns if column not in [id_field, text_field]]
+        elif isinstance(raw_data, list):  #process input data if it is json list of dicts, each dict representing a comment
+            self.input_df = pd.DataFrame(raw_data)
+            self.input_df = self.input_df.rename(columns = {text_field: 'text'})
 
-            intermediate_df = intermediate_df.drop(columns = drop_columns)
+            # if keyword_field != None:
+            #     drop_columns = [column for column in intermediate_df.columns if column not in [id_field, text_field, keyword_field]]
+            # else:
+            #     drop_columns = [column for column in intermediate_df.columns if column not in [id_field, text_field]]
+            #
+            # intermediate_df = intermediate_df.drop(columns = drop_columns)
+            #
+            # if keyword_field != None:
+            #     intermediate_df = intermediate_df.rename(columns = {id_field: 'id', text_field: 'text', keyword_field: 'keywords'})
+            #     intermediate_df.loc[:, 'keywords'] = intermediate_df.loc[:, 'keywords'].apply(literal_eval) #make sure keywords are in a list
+            # else:
+            #     intermediate_df = intermediate_df.rename(columns = {id_field: 'id', text_field: 'text'})
 
-            if keyword_field != None:
-                intermediate_df = intermediate_df.rename(columns = {id_field: 'id', text_field: 'text', keyword_field: 'keywords'})
-                intermediate_df.loc[:, 'keywords'] = intermediate_df.loc[:, 'keywords'].apply(literal_eval) #make sure keywords are in a list
-            else:
-                intermediate_df = intermediate_df.rename(columns = {id_field: 'id', text_field: 'text'})
-
+        elif isinstance(raw_data, dict): #process input data if it is json dict of dicts, each dict representing a comment with ids as keys
+            self.input_df = pd.DataFrame.from_dict(raw_data, orient = 'index')
+            self.input_df['id'] = self.input_df.index
+            self.input_df = self.input_df.rename(columns = {text_field: 'text'})
 
 
         else:
             pass
 
-        intermediate_df = intermediate_df.dropna(subset = ['text']) #drop rows where there is no text
-        intermediate_df.index = range(len(intermediate_df))
-        self.input_df = intermediate_df
+        self.input_df = self.input_df.dropna(subset = ['text']) #drop rows where there is no text
+        self.input_df.index = range(len(self.input_df))
+
+    def prepare_keyword_dataset(self, input_data, id_field, text_field, topic_link_field, key = None, sentiment = False, cluster = False):
+        '''prepares dataframe with different ways of handling keywords.
+           input: a dataframe with a field for text_ids, texts, and a topic link field. A topic link is a list of tuples of the form (cluster, phrase, phrase_synonym, disease, type).  Each text has a topic link for each phrase present in text. Keywords for a text always at least include the type.
+           sentiment: include sentiment symbol in type keywords
+           cluster: include cluster names in keywords
+           output:
+           if prepend: a dataframe with id, and prepend_text fields.  prepend_text is original text with keywords prepended.
+           otherwise: a dataframe with id, text and keyword fields'''
+
+        output_data = pd.DataFrame(columns = ['id', 'text', 'keywords'])
+
+        for entry in input_data.index:
+            output_data.loc[len(output_data) + 1] = np.nan
+            id = input_data.loc[entry, id_field]
+            text = input_data.loc[entry, text_field]
+            topic_links = input_data.loc[entry, 'topic_links']
+
+            if sentiment:
+                type_keywords = [j[4] for j in topic_links if len(j[4]) > 0]
+            else:
+                type_keywords = [j[4].rstrip('+-') for j in topic_links if len(j[4]) > 0]
+
+            if cluster:
+                cluster_keywords = [j[0] for j in topic_links if len(j[0]) > 0]
+                type_keywords = list(set(type_keywords))
+                cluster_keywords = list(set(cluster_keywords))
+                keywords = type_keywords + cluster_keywords
+            else:
+                type_keywords = list(set(type_keywords))
+                keywords = type_keywords
+
+            output_data.loc[output_data.index.max()] = {'id': id, 'text':text, 'keywords':keywords}
+
+        output_data.index = range(len(output_data))
+        output_data = self.df_to_tokenized_df(output_data)
+
+        if key == None:
+            key = len(self.prepared_datasets + 1)
+
+        self.prepared_datasets[key] = output_data
 
 
+        return output_data
 
-    def df_to_corpus(self):
-        self.corpus = ''
-        for i in range(len(self.input_df)):
-            self.corpus = self.corpus + ' ' + self.input_df.loc[i, 'text']
+    def df_to_tokenized_df(self, input_data, number_of_keywords = None):
 
-    def tokenize_list_of_keywords(self, input_list):
-        output_tokens = []
-        for keyword in input_list:
-            output_tokens = output_tokens + self.tokenizer.tokenize(keyword)
-
-        return output_tokens
-
-    def encode_list_of_keywords(self, input_list):
-        output_ids = []
-        for keyword in input_list:
-            output_ids = output_ids + self.tokenizer.encode(keyword)
-
-        return output_ids
-
-
-    def df_to_tokenized_df(self, number_of_keywords = None):
-
-        if 'keywords' in self.input_df.columns:
-            self.tokenized_df = pd.DataFrame(columns = ['id', 'text', 'raw_keywords', 'tokenized_text', 'tokenized_keywords', 'text_ids', 'keyword_ids'])
-            self.tokenized_df.loc[:,'id'] = self.input_df.loc[:,'id']
-            self.tokenized_df.loc[:,'text'] = self.input_df.loc[:,'text']
-            self.tokenized_df.loc[:, 'tokenized_text'] = self.tokenized_df.loc[:, 'text'].apply(self.tokenizer.tokenize)
-            self.tokenized_df.loc[:, 'text_ids'] = self.tokenized_df.loc[:, 'text'].apply(self.tokenizer.encode)
-            self.tokenized_df.loc[:,'raw_keywords'] = self.input_df.loc[:,'keywords']
-            self.tokenized_df.index = self.input_df.index
-            self.tokenized_df.loc[:,'used_keywords'] = np.nan
-            self.tokenized_df.loc[:,'used_keywords'] = self.tokenized_df.loc[:,'used_keywords'].astype('object')
+        if 'keywords' in input_data.columns:
+            tokenized_df = pd.DataFrame(columns = ['id', 'text', 'raw_keywords', 'tokenized_text', 'tokenized_keywords', 'text_ids', 'keyword_ids'])
+            tokenized_df.loc[:,'id'] = input_data.loc[:,'id']
+            tokenized_df.loc[:,'text'] = input_data.loc[:,'text']
+            tokenized_df.loc[:, 'tokenized_text'] = tokenized_df.loc[:, 'text'].apply(self.tokenizer.tokenize)
+            tokenized_df.loc[:, 'text_ids'] = tokenized_df.loc[:, 'text'].apply(self.tokenizer.encode)
+            tokenized_df.loc[:,'keywords'] = input_data.loc[:,'keywords']
+            tokenized_df.index = input_data.index
+            tokenized_df.loc[:,'used_keywords'] = np.nan
+            tokenized_df.loc[:,'used_keywords'] = tokenized_df.loc[:,'used_keywords'].astype('object')
 
             if self.synonym_dict != None:
 
-                for row in self.tokenized_df.index:
+                for row in tokenized_df.index:
 
-                    keywords = self.input_df.loc[row, 'keywords'].copy()
+                    keywords = input_data.loc[row, 'keywords'].copy()
                     translated_keywords = []
 #
                     if number_of_keywords != None:
@@ -122,7 +153,7 @@ class Comment_data_preprocessor():
                                 translated_keywords.append(keyword)
 
                     translated_keywords = list(set(translated_keywords)) #remove duplicates
-                    self.tokenized_df.at[row, 'used_keywords'] = translated_keywords
+                    tokenized_df.at[row, 'used_keywords'] = translated_keywords
 
 
 
@@ -130,8 +161,8 @@ class Comment_data_preprocessor():
 
 
             else:
-                for row in self.tokenized_df.index:
-                    keywords = list(self.input_df.loc[row, 'keywords'])
+                for row in tokenized_df.index:
+                    keywords = list(input_data.loc[row, 'keywords'])
                     prepended_keywords = []
                     if number_of_keywords != None:
                         translate_range = number_of_keywords
@@ -143,21 +174,119 @@ class Comment_data_preprocessor():
                             else:
                                 keyword = keywords.pop()
                                 prepended_keywords.append(keyword)
-                                self.tokenized_df.at[row, 'used_keywords'] = prepended_keywords
+                                tokenized_df.at[row, 'used_keywords'] = prepended_keywords
 
 
-            self.tokenized_df.loc[:, 'tokenized_keywords'] = self.tokenized_df.loc[:, 'used_keywords'].apply(self.tokenize_list_of_keywords)
-            self.tokenized_df.loc[:, 'keyword_ids'] = self.tokenized_df.loc[:, 'used_keywords'].apply(self.encode_list_of_keywords)
+            tokenized_df.loc[:, 'tokenized_keywords'] = tokenized_df.loc[:, 'used_keywords'].apply(self.tokenize_list_of_keywords)
+            tokenized_df.loc[:, 'keyword_ids'] = tokenized_df.loc[:, 'used_keywords'].apply(self.encode_list_of_keywords)
 
 
         else:
-            self.tokenized_df = pd.DataFrame(columns = ['id', 'text', 'tokenized_text', 'token_ids'])
-            self.tokenized_df.loc[:,'id'] = self.input_df.loc[:, 'id']
-            self.tokenized_df.loc[:, 'text'] = self.input_df.loc[:, 'text']
-            self.tokenized_df.loc[:, 'tokenized_text'] = self.input_df.loc[:, 'text'].apply(self.tokenizer.tokenize)
-            self.tokenized_text.loc[:, 'token_ids'] = self.input_df.loc[:, 'text'].apply(self.tokenizer.encode)
+            tokenized_df = pd.DataFrame(columns = ['id', 'text', 'tokenized_text', 'token_ids'])
+            tokenized_df.loc[:,'id'] = input_data.loc[:, 'id']
+            tokenized_df.loc[:, 'text'] = input_data.loc[:, 'text']
+            tokenized_df.loc[:, 'tokenized_text'] = input_data.loc[:, 'text'].apply(self.tokenizer.tokenize)
+            tokenized_df.loc[:, 'token_ids'] = input_data.loc[:, 'text'].apply(self.tokenizer.encode)
 
-        return self.tokenized_df
+        return tokenized_df
+
+
+    def input_df_to_corpus(self):
+        self.corpus = ''
+        for i in range(len(self.input_df)):
+            self.corpus = self.corpus + ' ' + self.input_df.loc[i, 'text']
+
+    def tokenize_list_of_keywords(self, input_list):
+        output_tokens = []
+        for keyword in input_list:
+            output_tokens = output_tokens + self.tokenizer.tokenize(keyword)
+
+        return output_tokens
+
+    def encode_list_of_keywords(self, input_list):
+        output_ids = []
+        for keyword in input_list:
+            output_ids = output_ids + self.tokenizer.encode(keyword)
+
+        return output_ids
+
+    ##LOADING
+    def set_active_dataset(self, key):
+        self.active_dataset = self.prepared_datasets[key]
+
+    def set_get_type(self, type):
+        self.get_type = type
+        if type == 'keyword':
+            self.collate_fn = self.collate_keyword
+
+        if type.startswith('prepend'):
+            self.collate_fn = self.collate_prepend  
+
+
+    def __getitem__(self, index):
+        try:
+            if self.active_dataset == None:
+                print("No active dataset")
+                return
+        except ValueError:
+            pass
+
+        if self.get_type == 'prepend_nospace':
+            text_ids = self.active_dataset.loc[index, 'text_ids']
+            keyword_ids = self.active_dataset.loc[index, 'keyword_ids']
+            prepended_ids = keyword_ids + text_ids
+            return prepended_ids
+
+        if self.get_type == 'prepend_space':
+            text = self.active_dataset.loc[index, 'text']
+            keywords = self.active_dataset.loc[index,'keywords']
+            prepended_text = text
+            for keyword in keywords:
+                prepended_text = keyword + ' ' + prepended_text
+            prepended_ids = self.tokenizer.encode(prepended_text)
+            return prepended_ids
+
+        if self.get_type == 'keyword':
+            text_ids = self.active_dataset.loc[index, 'text_ids']
+            keyword_ids = self.active_dataset.loc[index, 'keyword_ids']
+            return (text_ids, keyword_ids)
+
+    def __len__(self):
+        try:
+            if self.active_dataset == None:
+                print("No active dataset")
+                return
+        except ValueError:
+            pass
+
+        return len(self.active_dataset)
+
+    def collate_prepend(self, batch):
+        tokenizer = self.tokenizer
+        text_ids = [torch.tensor(item) for item in batch]
+
+        if tokenizer._pad_token is None:
+             padded_texts = pad_sequence(text_ids, batch_first = True)
+        else:
+             padded_texts = pad_sequence(text_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
+
+        return padded_texts
+
+    def collate_keyword(self, batch):
+        tokenizer = self.tokenizer
+        text_ids = [torch.tensor(item[0]) for item in batch]
+        keyword_ids = [torch.tensor(item[1]) for item in batch]
+
+        if tokenizer._pad_token is None:
+             padded_texts = pad_sequence(text_ids, batch_first = True)
+        else:
+             padded_texts = pad_sequence(text_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
+
+        return padded_texts, keyword_ids
+
+
+
+
 
 
 
@@ -473,7 +602,7 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
             if top_k > 0:
                 indices_to_remove = logits < torch.topk(logits, top_k)[0][:,-1, None] #return the indicies
                 logits[indices_to_remove] = filter_value  #mask the bad ones
-
+        #perform "nucleus" sampling
             if top_p > 0:
                 sorted_logits, sorted_indices = torch.sort(logits, descending = True)
                 cum_probs = torch.cumsum(F.softmax(sorted_logits, dim = -1 ), dim = -1)
