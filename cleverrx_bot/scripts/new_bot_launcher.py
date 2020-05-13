@@ -24,7 +24,7 @@ with open(raw_data_path, 'rb') as file:
 
 short_raw_data = {i:raw_data[i] for i in list(raw_data.keys())[0:7]} #for testing
 
-preprocessor = butils.Comment_data_preprocessor(short_raw_data, raw_data_text_field, tokenizer)
+preprocessor = butils.Comment_data_preprocessor(raw_data, raw_data_text_field, tokenizer)
 dataset1 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'text', 'topic_links', key = 'types_nosentiment_nocluster', sentiment = False, cluster = False)
 dataset2 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'text', 'topic_links', key = 'types_sentiment_nocluster', sentiment = True, cluster = False)
 dataset3 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'text', 'topic_links', key = 'types_nosentiment_cluster', sentiment = False, cluster = True)
@@ -32,17 +32,17 @@ dataset4 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'te
 
 results_dir = '../results'
 model_storage_dir = '../saved_models'
-file_stem = 'test'
+file_stem = 'batch_051220'
 
 parameter_dict = {}
-parameter_dict['epochs'] = 1
+parameter_dict['epochs'] = 8
 parameter_dict['num_worker'] = 2
-parameter_dict['batch_size'] =2
+parameter_dict['batch_size'] = 5
 parameter_dict['learning_rate'] =5e-5
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8
 parameter_dict['warmup_steps'] =0
-parameter_dict['filename'] = 'gpt2_bagofwordskeywords_all_keywords_042220'
+parameter_dict['filename'] = ''
 
 
 
