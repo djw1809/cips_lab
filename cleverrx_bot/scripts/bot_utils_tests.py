@@ -8,71 +8,70 @@ import torch
 from transformers import GPT2Tokenizer, GPT2LMHeadModel, GPT2Model
 from torch.utils.data import DataLoader, Dataset
 from torch.utils.data import Dataset,DataLoader
-
-
-
 # %%
+
 #Data_handler tests
+with open('../data/topics_index_bots_new_042820.pkl', 'rb') as file:
+    raw_data = pickle.load(file)
 
-#testing __init__
-test_str = 'This is a test string. I need to make it longer. So Im typing bullshit. Maybe this is long enough.  We will see'
+short_raw_data_list = [raw_data[i] for i in list(raw_data.keys())[0:6]]
+short_raw_data_dict = {i:raw_data[i] for i in list(raw_data.keys())[0:6]}
+short_raw_data_df = pd.DataFrame.from_dict(short_raw_data_dict, orient = 'index')
 
-test_json = [{'id': 1, 'tweet_text': 'This is the first tweet', 'keywords':'first'},
-            {'id': 2, 'tweet_text': 'this is the second tweet', 'keywords':'second'},
-            {'id': 3, 'tweet_text': np.nan, 'keywords':'third'},
-            {'id': 4, 'tweet_text': 'this is the fourth tweet', 'keywords': [], 'extra_argument': 'a'}]
-
-
-test_df = pd.DataFrame(test_json)
-
-json_dataset = butils.Comment_data_preprocessor(test_json, 'id', 'tweet_text', 'keywords')
-json_dataset.input_df
-
-df_dataset = butils.Comment_data_preprocessor(test_df, 'id', 'tweet_text', 'keywords')
-df_dataset.input_df
-
-#%%
-#testing df_to_corpus
-json_dataset.corpus
-df_dataset.corpus
-
-
-json_dataset.df_to_corpus()
-df_dataset.df_to_corpus()
-
-json_dataset.corpus
-df_dataset.corpus
-
-#%%
-#testing input_df to tokenized_df
-#synonym_df = pd.read_csv('../data/new_topics.csv')
-#synonym_dict = synonym_df.set_index('0').T.to_dict('records')[0]
-
-
-full_data = pd.read_csv('../data/tweets_topics.csv')
-len(full_data)
-full_data
-small_data = full_data.loc[0:100, :]
-small_data
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+#testing __init__
+list_preprocessor = butils.Comment_data_preprocessor(short_raw_data_list, 'tweet', tokenizer)
+dict_preprocessor = butils.Comment_data_preprocessor(short_raw_data_dict, 'tweet', tokenizer)
+df_preprocessor = butils.Comment_data_preprocessor(short_raw_data_df, 'tweet', tokenizer)
 
-small_data_preprocessor = butils.Comment_data_preprocessor(small_data, 'id', 'text', tokenizer, keyword_field ='topics')
-#check if keyword lists are really lists and not strings of lists
-small_data_preprocessor.df_to_tokenized_df(number_of_keywords = None)
+list_preprocessor.input_df
+dict_preprocessor.input_df
+df_preprocessor.input_df
 
-dataset = butils.bag_words_ctrl_Dataset(small_data_preprocessor)
+
+#testing tokenizing datasets
+keyword_dataset = dict_preprocessor.prepare_keyword_dataset(dict_preprocessor.input_df, 'id', 'text', 'topic_links', key = 'type_no_sentiment_cluster_keywords', cluster = True)
+
+[dict_preprocessor.prepared_datasets.keys()]
+dict_preprocessor.prepared_datasets['type_no_sentiment_cluster_keywords']
+
+#testing __getitem__
+sample = dict_preprocessor[0] #should return no active dataset because it has not been set yet
+dict_preprocessor.set_active_dataset('type_no_sentiment_cluster_keywords')
+sample = dict_preprocessor[0]
+data_sample = dict_preprocessor.active_dataset.loc[0]
+
+text, keywords = dict_preprocessor[0]
+dict_preprocessor.tokenizer.decode(keywords)
+dict_preprocessor.tokenizer.decode(text)
+
+dict_preprocessor.set_get_type('prepend_space')
+text = dict_preprocessor[0]
+dict_preprocessor.tokenizer.decode(text)
+
+dict_preprocessor.set_get_type('prepend_nospace')
+text = dict_preprocessor[0]
+dict_preprocessor.tokenizer.decode(text)
 
 ###loading data
-loader = DataLoader(dataset, batch_size = 2, collate_fn = dataset.collate)
+dict_preprocessor.set_get_type('keyword')
+keyword_loader = DataLoader(dict_preprocessor, batch_size = 2, collate_fn = dict_preprocessor.collate_fn)
+batch = next(iter(keyword_loader))
+texts, keywords = batch
+texts
+keywords
 
-dummy_embedding = torch.nn.Embedding(dataset.tokenizer.vocab_size, 10)
+dict_preprocessor.set_get_type('prepend_space')
+prepend_loader = DataLoader(dict_preprocessor, batch_size = 2, collate_fn = dict_preprocessor.collate_fn)
+batch = next(iter(prepend_loader))
+batch
 
-batch = next(iter(loader))
 
-inputs, labels = (batch, batch[0])
-torch.cuda.is_available()
+
 
 #%%  test forward pass
+inputs, labels = (batch, batch[0])
+torch.cuda.is_available()
 test = models.GPT2Model_bagofctrl.from_pretrained("gpt2")
 test.wpe
 len(test(batch))
@@ -81,7 +80,7 @@ test(batch)[1].shape #hidden states
 labels = batch[0].shape
 test(batch, labels = batch[0])[0]
 
-#%%
+#%% generation work
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 prompt = (['diabetes', 'insurance'], 'diabetes is')
 keyword_tokens = []
@@ -98,5 +97,7 @@ bos_tokens
 logits = test((bos_tokens, keyword_tokens), device)[0][:, -1, :]
 
 torch.topk(logits, 20)[0][:, -1, None]
+
+#%% test type_keyword_function
 
 i

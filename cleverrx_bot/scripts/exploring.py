@@ -171,7 +171,7 @@ generated_ = tokenizer.encode(text)
 context = torch.tensor([generated_])
 past = None
 
-for i in range(30):
+for i in range(30s):
     output, past = model(context, past=past)
     token = torch.argmax(output[..., -1, :])
 
@@ -221,7 +221,7 @@ dataset.raw_df
 #%%%
 test_tweet = better_data.loc[0]
 
-#%% inherting class methods 
+#%% inherting class methods
 
 class A:
 
@@ -236,4 +236,26 @@ class B(A):
         output = super().blah(string)
         return output
 
+class C():
+    def __init__(self):
+        self.list = [1,2,3]
+
+    def function(self, default = len(self.list)): 
+        print(default + 1)
+
 B.blah_('test')
+
+
+#%%
+with open('../data/topics_index_bots_new_042820.pkl', 'rb') as file:
+    new_data = pickle.load(file)
+
+new_example = new_data[list(new_data.keys())[1]]
+new_example
+new_example.keys()
+
+with open('../data/topics_index_old.pkl', 'rb') as file:
+    old_data = pickle.load(file)
+
+old_example = old_data[list(old_data.keys())[0]]
+old_example.keys()
