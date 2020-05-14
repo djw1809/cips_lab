@@ -544,7 +544,7 @@ def train_bag_of_words(training_dataset, epochs, num_workers, batch_size, learni
 # %%
 
 
-def generate_(model, tokenizer, prompt, max_length, do_sample = True, num_beams = None, temperature = None, top_k = None, top_p = None, repetition_penalty = None, num_return_sequences = 1,   print_ = True, stop_token = None):
+def generate_(model, tokenizer, prompt, max_length, do_sample = True, num_beams = None, temperature = None, top_k = None, top_p = 0, repetition_penalty = None, num_return_sequences = 1,   print_ = True, stop_token = None):
     '''generate with transformer models'''
     encoded_prompt = tokenizer.encode(prompt, add_special_tokens = False, return_tensors = "pt")
     output_sequences = model.generate(input_ids = encoded_prompt,
