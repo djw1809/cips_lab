@@ -37,7 +37,7 @@ class GPT2Model_bagofctrl(GPT2Model):
         for i in range(len(keyword_ids)):
             keyword_list = keyword_ids[i]
             if len(keyword_list) == 0: #for training/generation with no keywords
-                keyword_embedding[i, :] = torch.rand(self.self.wte.embedding_dim)
+                keyword_embedding[i, :] = torch.rand(self.wte.embedding_dim)
             else:
                 keyword_embeddings = self.wte(keyword_list)
                 bag_of_words = torch.mean(keyword_embeddings, 0)

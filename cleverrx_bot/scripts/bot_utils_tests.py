@@ -19,7 +19,7 @@ short_raw_data_dict = {i:raw_data[i] for i in list(raw_data.keys())[0:6]}
 example = short_raw_data_dict[list(short_raw_data_dict.keys())[0]]
 list(example.keys())
 
-short_raw_data_dict[69] = {'tweet': 'I love dicks', 'topic_links': [], }
+short_raw_data[69] = {'tweet': 'I love dicks', 'topic_links': [], }
 short_raw_data_df = pd.DataFrame.from_dict(short_raw_data_dict, orient = 'index')
 
 
