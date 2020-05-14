@@ -13,7 +13,7 @@ from pathlib import Path
 import bot_models as models
 #%%
 
-model_dict = {'prepend': GPT2LMHeadModel.from_pretrained('gpt2'), 'keyword': models.GPT2Model_bagofctrl.from_pretrained('gpt2')}
+model_dict = {'prepend': GPT2LMHeadModel, 'keyword': models.GPT2Model_bagofctrl}
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 
 raw_data_path = '../data/topics_index_bots_new_042820.pkl'
@@ -53,7 +53,7 @@ def train_batch_of_models(preprocessor, parameter_dict, results_dir = results_di
 
     for dataset_name in datasets.keys():
         print("starting to train model on" + dataset_name)
-        model = model_dict[type]
+        model = model_dict[type].from_pretrained('gpt2')
         preprocessor.set_active_dataset(dataset_name)
 
         parameter_dict['filename'] = file_stem + '_' + type + '_' + dataset_name
