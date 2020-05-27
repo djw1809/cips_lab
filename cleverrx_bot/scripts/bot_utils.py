@@ -290,22 +290,30 @@ class Comment_data_preprocessor(Dataset):
 
 
 
-
-
-
-
-
 class Comment_dataset(Dataset):
 
-    def __init__(self, raw_data, sample_column):
+    def __init__(self, raw_data, sample_column, tokenizer):
+        self.tokenizer = tokenizer
         self.sample_column = sample_column
         self.data = raw_data
 
     def __getitem__(self, index):
-        return torch.tensor(self.data.loc[index, self.sample_column], dtype = torch.long)
+        output = torch.tensor(self.data.loc[index, self.sample_column])
+        return output
 
     def __len__(self):
         return len(self.data)
+
+    def collate(self, batch):
+        tokenizer = self.tokenizer
+        text_ids = [torch.tensor(item) for item in batch]
+
+        if tokenizer._pad_token is None:
+             padded_texts = pad_sequence(text_ids, batch_first = True)
+        else:
+             padded_texts = pad_sequence(text_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
+
+        return padded_texts
 
 class prepend_ctrl_Dataset(Dataset):
 
@@ -575,7 +583,7 @@ def generate_(model, tokenizer, prompt, max_length, do_sample = True, num_beams 
     return output_sequences
 
 
-def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature = None, top_k = None, top_p = None, num_return_sequences = 1, print_ = True, min_keep = 1, filter_value = -float("Inf")):
+def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length,  top_k = None, top_p = None, num_return_sequences = 1, min_keep = 1, filter_value = -float("Inf")):
     '''generation with bag of words ctrl.  prompt should be of the form (list of keywords, start of generated sentence)'''
     #setup device
     device = "cpu" #torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -610,7 +618,7 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
         for j in range(max_length):
             #obtain logits
             input_ids = torch.tensor(sequence_tokens).unsqueeze(0)
-            logits = model((input_ids, keyword_tokens), device)[0][:, -1, :]
+            logits = model((input_ids, keyword_tokens), device)[0][:, -1, :] #get logits of the predicted word
 
         #perform top_k sampling
             if top_k > 0:
@@ -628,12 +636,13 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length, temperature =
                 sorted_indices_to_remove[:, 0] = 0  #always keep at least most probable
 
                 #put everything in the right place
-                indices_to_remove = sorted_indices_to_remove.scatter(0, sorted_indices, sorted_indices_to_remove)
+                indices_to_remove = sorted_indices_to_remove.scatter(1, sorted_indices, sorted_indices_to_remove)
 
                 logits[indices_to_remove] = filter_value
 
             if top_k > 0 or top_p > 0:
                 next_token_index = [int(torch.multinomial(F.softmax(logits), 1))]
+                #print('finished token {}'.format(j))
             else:
                 next_token_index = [int(torch.argmax(logits))]
 

@@ -10,7 +10,10 @@ from transformers import GPT2Tokenizer, GPT2LMHeadModel, GPT2Model
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 from torch.nn import CrossEntropyLoss
+#%%
+facebook_groups = pd.read_csv('../data/facebook_data/facebookGroups.csv',  sep = ',')
 
+facebook_pages = pd.read_csv('../data/facebook_data/facebookPages.csv')
 
 #%%
 blah = [1,2,3,4,5]

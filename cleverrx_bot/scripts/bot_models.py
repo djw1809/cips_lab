@@ -16,6 +16,7 @@ class GPT2Model_bagofctrl(GPT2Model):
         super().__init__(config)
         self.n_embed = n_embed
         self.lm_head = nn.Linear(self.n_embed, config.vocab_size, bias = False)
+        self.tokenizer = None
 
         self.init_weights()
 
@@ -81,6 +82,88 @@ class GPT2Model_bagofctrl(GPT2Model):
             outputs = (loss,) + outputs
 
         return outputs
+
+
+    def generate(self, tokenizer, prompt, max_length, top_k = None, top_p = None, num_return_sequences = 1, min_keep = 1, filter_value = -float("Inf")):
+        '''generation with bag of words ctrl.  prompt should be of the form (list of keywords, start of generated sentence)'''
+
+        model = self.model 
+        #setup device
+        device = "cpu" #torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        #if torch.cuda.is_available():
+            #model.cuda()
+        model.eval()
+
+        #encode prompt
+        if len(prompt) == 1:
+            keywords,  = prompt
+
+        else:
+            keywords, bos = prompt
+            bos_tokens = tokenizer.encode(bos)
+
+        keyword_tokens = []
+        if len(keywords) > 0:
+            for keyword in keywords:
+                keyword_tokens = keyword_tokens + tokenizer.encode(keywords)
+
+            keyword_tokens = [torch.tensor(keyword_tokens)] #put things in right shape for forward pass
+        else:
+            keyword_tokens = [[]]
+
+        returned_sequences = []
+
+        for i in range(num_return_sequences):
+            if len(prompt) > 1:
+                sequence_tokens = bos_tokens
+            else:
+                sequence_tokens = []
+            for j in range(max_length):
+                #obtain logits
+                input_ids = torch.tensor(sequence_tokens).unsqueeze(0)
+                logits = model((input_ids, keyword_tokens), device)[0][:, -1, :] #get logits of the predicted word
+
+            #perform top_k sampling
+                if top_k > 0:
+                    indices_to_remove = logits < torch.topk(logits, top_k)[0][:,-1, None] #return the indicies
+                    logits[indices_to_remove] = filter_value  #mask the bad ones
+            #perform "nucleus" sampling
+                if top_p > 0:
+                    sorted_logits, sorted_indices = torch.sort(logits, descending = True)
+                    cum_probs = torch.cumsum(F.softmax(sorted_logits, dim = -1 ), dim = -1)
+                    sorted_indices_to_remove = cum_probs > top_p
+                    if min_keep > 1:
+                        sorted_indices_to_remove[:, :min_keep] = 0
+
+                    sorted_indices_to_remove[:, 1:] = sorted_indices_to_remove[:, :-1].clone() #shift everything to right - will always pick first token above threshhold as well now
+                    sorted_indices_to_remove[:, 0] = 0  #always keep at least most probable
+
+                    #put everything in the right place
+                    indices_to_remove = sorted_indices_to_remove.scatter(1, sorted_indices, sorted_indices_to_remove)
+
+                    logits[indices_to_remove] = filter_value
+
+                if top_k > 0 or top_p > 0:
+                    next_token_index = [int(torch.multinomial(F.softmax(logits), 1))]
+                    #print('finished token {}'.format(j))
+                else:
+                    next_token_index = [int(torch.argmax(logits))]
+
+                sequence_tokens = sequence_tokens + next_token_index
+
+            returned_sequences.append(sequence_tokens)
+
+        returned_sentences = []
+
+        for sequence in returned_sequences:
+            decoded_sequence = tokenizer.decode(sequence, clean_up_tokenization_spaces = True)
+            returned_sentences.append(decoded_sequence)
+
+        return returned_sentences, returned_sequences
+
+    def set_tokenizer(tokenizer):
+        '''if the model was trained using a specific tokenizer we can set it as an attribute of the model class instance'''
+        self.tokenizer = tokenizer
 
     @classmethod #so that I can load a bag of ctrl model with loaded_model = GPT2Model_bagofctrl.load('place where I saved everything')
     def load(cls, path_to_results_folder):
