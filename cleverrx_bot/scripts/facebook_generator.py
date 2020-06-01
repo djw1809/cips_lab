@@ -1,5 +1,13 @@
 import torch
-
+import pickle
+import json
+import pandas as pd
+import numpy as numpy
+import transformers
+from transformers import GPT2Tokenizer
+import bot_utils as butils
+import bot_models as models
+#%%
 
 class FacebookGenerator():
     '''class to easily generate on fly/pass generations to other applications'''
@@ -21,3 +29,22 @@ class FacebookGenerator():
     def process_list_of_comments(self, comment_list):
         output = [self.process_incoming_comment(comment) for comment in comment_list]
         return output
+
+
+#%%
+model_path = '../saved_models/'
+model_name1 = 'batch_051220_keyword_types_sentiment_cluster'
+model_name2 = 'batch_051220_keyword_types_nosentiment_cluster'
+model_name3 = 'batch_051220_keyword_types_sentiment_nocluster'
+
+model1 = models.GPT2Model_bagofctrl.load(model_path + model_name1)
+model2 = models.GPT2Model_bagofctrl.load(model_path + model_name2)
+model3 = models.GPT2Model_bagofctrl.load(model_path + model_name3)
+
+
+facebook_groups = pickle.load(open('../data/facebook_groups/topics_index_bots_fbgroups.pkl','rb'))
+facebook_pages = pickle.load(open('../data/facebook_pages/topics_index_bots_fbpages.pkl', 'rb'))
+
+prompt1 = 
+prompt2 =
+prompt3 =

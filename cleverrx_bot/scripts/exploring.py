@@ -10,6 +10,14 @@ from transformers import GPT2Tokenizer, GPT2LMHeadModel, GPT2Model
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 from torch.nn import CrossEntropyLoss
+
+#%%
+fbgroup1 = pickle.load(open('../data/facebook_groups/topics_index_bots_fbgroups.pkl', 'rb'))
+fbgroup2 = pickle.load(open('../data/only_topic_links/topics_link_bots_fbgroups.pkl', 'rb'))
+
+fbgroup1[list(fbgroup1.keys())[0]]
+
+fbgroup2[list(fbgroup2.keys())[0]]
 #%%
 facebook_groups = pd.read_csv('../data/facebook_data/facebookGroups.csv',  sep = ',')
 

@@ -22,8 +22,8 @@ raw_data_text_field = 'tweet'
 with open(raw_data_path, 'rb') as file:
     raw_data = pickle.load(file)
 
-short_raw_data = {i:raw_data[i] for i in list(raw_data.keys())[0:7]}
-short_raw_data[69] = {'tweet': 'I love dicks', 'topic_links': [], } #for testing
+# short_raw_data = {i:raw_data[i] for i in list(raw_data.keys())[0:7]}
+# short_raw_data[69] = {'tweet': 'I love dicks', 'topic_links': [], } #for testing
 
 preprocessor = butils.Comment_data_preprocessor(raw_data, raw_data_text_field, tokenizer)
 dataset1 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'text', 'topic_links', key = 'types_nosentiment_nocluster', sentiment = False, cluster = False)
@@ -33,7 +33,7 @@ dataset4 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'te
 
 results_dir = '../results'
 model_storage_dir = '../saved_models'
-file_stem = 'batch_051220'
+file_stem = 'batch_060120_gpt2medium'
 
 parameter_dict = {}
 parameter_dict['epochs'] = 8
@@ -53,7 +53,7 @@ def train_batch_of_models(preprocessor, parameter_dict, results_dir = results_di
 
     for dataset_name in datasets.keys():
         print("starting to train model on" + dataset_name)
-        model = model_dict[type].from_pretrained('gpt2')
+        model = model_dict[type].from_pretrained('gpt2-medium')
         preprocessor.set_active_dataset(dataset_name)
 
         parameter_dict['filename'] = file_stem + '_' + type + '_' + dataset_name

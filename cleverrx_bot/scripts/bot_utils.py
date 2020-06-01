@@ -592,12 +592,11 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length,  top_k = None
     model.eval()
 
     #encode prompt
-    if len(prompt) == 1:
-        keywords,  = prompt
 
-    else:
-        keywords, bos = prompt
-        bos_tokens = tokenizer.encode(bos)
+
+
+    keywords, bos = prompt
+    bos_tokens = tokenizer.encode(bos)
 
     keyword_tokens = []
     if len(keywords) > 0:
@@ -611,13 +610,11 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length,  top_k = None
     returned_sequences = []
 
     for i in range(num_return_sequences):
-        if len(prompt) > 1:
-            sequence_tokens = bos_tokens
-        else:
-            sequence_tokens = []
+        sequence_tokens = bos_tokens
+
         for j in range(max_length):
             #obtain logits
-            input_ids = torch.tensor(sequence_tokens).unsqueeze(0)
+            input_ids = torch.tensor(sequence_tokens, dtype = torch.long).unsqueeze(0)
             logits = model((input_ids, keyword_tokens), device)[0][:, -1, :] #get logits of the predicted word
 
         #perform top_k sampling

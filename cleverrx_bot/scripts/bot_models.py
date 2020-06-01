@@ -26,13 +26,12 @@ class GPT2Model_bagofctrl(GPT2Model):
                 position_ids = None,
                 labels = None):
 
-        if len(batch) == 1: ##for generating with just a list of keywords
-            keyword_ids = batch #should only be true if just a list of keywords is passed
-        else:
-            input_ids, keyword_ids = batch
-            batch_size = len(keyword_ids)
-            input_embedding = self.wte(input_ids) # batchsize x seqlen x embed_dim
-            keyword_embedding = torch.zeros(batch_size, self.wte.embedding_dim)
+
+
+        input_ids, keyword_ids = batch
+        batch_size = len(keyword_ids)
+        input_embedding = self.wte(input_ids) # batchsize x seqlen x embed_dim
+        keyword_embedding = torch.zeros(batch_size, self.wte.embedding_dim)
 
         #set up keyword embeddings
         for i in range(len(keyword_ids)):
@@ -45,10 +44,7 @@ class GPT2Model_bagofctrl(GPT2Model):
                 keyword_embedding[i, :] = bag_of_words
 
         keyword_embedding = keyword_embedding.unsqueeze(1).to(device)
-        if len(batch) == 1: ##for generating with just a list of keywords
-            final_embedding = keyword_embedding
-        else:
-            final_embedding = torch.cat((keyword_embedding, input_embedding),1)
+        final_embedding = torch.cat((keyword_embedding, input_embedding),1)
 
         #set up posistional embeddings
         if position_ids is None:
@@ -87,7 +83,7 @@ class GPT2Model_bagofctrl(GPT2Model):
     def generate(self, tokenizer, prompt, max_length, top_k = None, top_p = None, num_return_sequences = 1, min_keep = 1, filter_value = -float("Inf")):
         '''generation with bag of words ctrl.  prompt should be of the form (list of keywords, start of generated sentence)'''
 
-        model = self.model 
+        model = self.model
         #setup device
         device = "cpu" #torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         #if torch.cuda.is_available():
@@ -120,7 +116,7 @@ class GPT2Model_bagofctrl(GPT2Model):
                 sequence_tokens = []
             for j in range(max_length):
                 #obtain logits
-                input_ids = torch.tensor(sequence_tokens).unsqueeze(0)
+                input_ids = torch.tensor(sequence_tokens, dtype = torch.long).unsqueeze(0)
                 logits = model((input_ids, keyword_tokens), device)[0][:, -1, :] #get logits of the predicted word
 
             #perform top_k sampling
