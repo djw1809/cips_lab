@@ -48,12 +48,17 @@ parameter_dict['filename'] = ''
 
 
 
-def train_batch_of_models(preprocessor, parameter_dict, results_dir = results_dir, model_storage_dir = model_storage_dir, type = 'keyword', file_stem = file_stem):
+def train_batch_of_models(preprocessor, parameter_dict, results_dir = results_dir, model_storage_dir = model_storage_dir, type = 'keyword', file_stem = file_stem, medium = False):
     datasets = preprocessor.prepared_datasets
 
     for dataset_name in datasets.keys():
         print("starting to train model on" + dataset_name)
-        model = model_dict[type].from_pretrained('gpt2-medium')
+        if medium: #if we want to use the pretrained gpt2-medium weights (deeper then regular gpt2)
+            model = model_dict[type].from_pretrained('gpt2-medium')
+            model.lm_head = nn.Linear(1024, 50257, bias = False)
+        else:
+            model =  model_dict[type].from_pretrained('gpt2')
+
         preprocessor.set_active_dataset(dataset_name)
 
         parameter_dict['filename'] = file_stem + '_' + type + '_' + dataset_name
