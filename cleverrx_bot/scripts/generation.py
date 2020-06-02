@@ -26,7 +26,7 @@ tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 
 #%%sentiment no cluster
 prompt2 = (['insurance-'],'insurance')
-prompt3 = (['card+'], 'insurance')
+prompt3 = (['card+'], 'diabetes')
 prompt4 = (['insurance+'],'insurance' )
 prompt5 = (['insurance-, card+'], 'insurance')
 
@@ -39,6 +39,7 @@ output2[0]
 output3[0]
 output4[0]
 output5[0]
+
 #%%nosentiment cluster
 prompt6 = (['insurance', 'cancer'], 'cancer')
 prompt7 = (['insurance', 'diabetes'], 'diabetes')

@@ -10,6 +10,10 @@ from transformers import GPT2Tokenizer, GPT2LMHeadModel, GPT2Model
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 from torch.nn import CrossEntropyLoss
+import bot_models as models
+
+#%%
+model = models.GPT2Model_bagofctrl.from_pretrained('gpt2-medium')
 
 #%%
 fbgroup1 = pickle.load(open('../data/facebook_groups/topics_index_bots_fbgroups.pkl', 'rb'))

@@ -11,7 +11,7 @@ import bot_models as models
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 from pathlib import Path
 import bot_models as models
-import torch.nn as nn 
+import torch.nn as nn
 #%%
 
 model_dict = {'prepend': GPT2LMHeadModel, 'keyword': models.GPT2Model_bagofctrl}
@@ -23,9 +23,16 @@ raw_data_text_field = 'tweet'
 with open(raw_data_path, 'rb') as file:
     raw_data = pickle.load(file)
 
-# short_raw_data = {i:raw_data[i] for i in list(raw_data.keys())[0:7]}
-# short_raw_data[69] = {'tweet': 'I love dicks', 'topic_links': [], } #for testing
 
+#for testing#
+short_raw_data = {i:raw_data[i] for i in list(raw_data.keys())[0:7]}
+short_raw_data[69] = {'tweet': 'I love dicks', 'topic_links': [], }
+test_preprocessor = butils.Comment_data_preprocessor(short_raw_data, 'tweet', tokenizer)
+test_dataset = short_preprocessor.prepare_keyword_dataset(short_preprocessor.input_df, 'id', 'text', 'topic_links', key = 'test', sentiment = True, cluster = True)
+test_preprocessor.prepared_datasets
+
+
+#
 preprocessor = butils.Comment_data_preprocessor(raw_data, raw_data_text_field, tokenizer)
 dataset1 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'text', 'topic_links', key = 'types_nosentiment_nocluster', sentiment = False, cluster = False)
 dataset2 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'text', 'topic_links', key = 'types_sentiment_nocluster', sentiment = True, cluster = False)
@@ -49,7 +56,7 @@ parameter_dict['filename'] = ''
 
 
 
-def train_batch_of_models(preprocessor, parameter_dict, results_dir = results_dir, model_storage_dir = model_storage_dir, type = 'keyword', file_stem = file_stem, medium = False):
+def train_batch_of_models(preprocessor, parameter_dict, results_dir = results_dir, model_storage_dir = model_storage_dir, type = 'keyword', file_stem = file_stem, medium = True):
     datasets = preprocessor.prepared_datasets
 
     for dataset_name in datasets.keys():
@@ -116,4 +123,4 @@ def train_batch_of_models(preprocessor, parameter_dict, results_dir = results_di
 
 
 if __name__ == '__main__':
-    train_batch_of_models(preprocessor, parameter_dict, type = 'keyword')
+    train_batch_of_models(test_preprocessor, parameter_dict, type = 'keyword')
