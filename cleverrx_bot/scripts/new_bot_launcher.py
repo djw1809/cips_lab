@@ -33,7 +33,7 @@ dataset4 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'te
 
 results_dir = '../results'
 model_storage_dir = '../saved_models'
-file_stem = 'batch_060120_gpt2medium'
+file_stem = 'batch_060120_gpt2medium_prepend'
 
 parameter_dict = {}
 parameter_dict['epochs'] = 8
@@ -48,7 +48,7 @@ parameter_dict['filename'] = ''
 
 
 
-def train_batch_of_models(preprocessor, parameter_dict, results_dir = results_dir, model_storage_dir = model_storage_dir, type = 'keyword', file_stem = file_stem, medium = False):
+def train_batch_of_models(preprocessor, parameter_dict, results_dir = results_dir, model_storage_dir = model_storage_dir, type = 'prepend', file_stem = file_stem, medium = True):
     datasets = preprocessor.prepared_datasets
 
     for dataset_name in datasets.keys():
