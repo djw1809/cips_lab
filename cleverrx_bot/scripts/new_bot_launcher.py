@@ -41,7 +41,7 @@ dataset4 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'te
 
 results_dir = '../results'
 model_storage_dir = '../saved_models'
-file_stem = 'batch_060120_gpt2medium'
+file_stem = 'batch_060120_gpt2medium_prepend'
 
 parameter_dict = {}
 parameter_dict['epochs'] = 8
