@@ -11,6 +11,7 @@ import bot_models as models
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 from pathlib import Path
 import bot_models as models
+import torch.nn as nn 
 #%%
 
 model_dict = {'prepend': GPT2LMHeadModel, 'keyword': models.GPT2Model_bagofctrl}
