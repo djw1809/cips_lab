@@ -9,6 +9,8 @@ from topic_link_creation import TopicLinkCreation
 import bot_utils as butils
 import bot_models as models
 
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 model_path = '../saved_models/'
 
 model_name1 = 'batch_051220_keyword_types_sentiment_cluster'
@@ -29,4 +31,4 @@ prompt2 = ['card+', 'Use']
 
 
 for key in model_dict.keys():
-    output = butils.parameter_sweep(model_dict[key], length, k_list, p_list, prompt1, prompt2, key)
+    output = butils.parameter_sweep(model_dict[key], tokenizer, length, k_list, p_list, prompt1, prompt2, key)
