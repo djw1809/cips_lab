@@ -665,8 +665,8 @@ def parameter_sweep(model, length, k_list, p_list, prompt1, prompt2, model_name)
     outputs = {}
     for k in k_list:
         for p in p_list:
-            first_sentences = generate_ctrl_bagofwords(model3, tokenizer, prompt1, 50, top_k = k, top_p = p, num_return_sequences = 10)
-            second_sentences = generate_ctrl_bagofwords(model3, tokenizer, prompt2, 50, top_k = k, top_p = p, num_return_sequences = 10)
+            first_sentences = generate_ctrl_bagofwords(model, tokenizer, prompt1, 50, top_k = k, top_p = p, num_return_sequences = 10)
+            second_sentences = generate_ctrl_bagofwords(model, tokenizer, prompt2, 50, top_k = k, top_p = p, num_return_sequences = 10)
             write_file.write("k = {}  p = {}: \n---------------\n".format(k,p))
             write_file.write("First sentences:\n")
             for sentence in first_sentences[0]:
