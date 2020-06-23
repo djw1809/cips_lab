@@ -659,7 +659,7 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length,  top_k = None
 #%% Post Processing/Analysis
 
 def parameter_sweep(model, length, k_list, p_list, prompt1, prompt2, model_name):
-    filepath = '../generation_results/generation_output_{}.txt'.format(model_name)
+    filepath = '../results/generation_results/generation_output_{}.txt'.format(model_name)
     write_file = open(filepath, 'w')
     write_file.write('prompt1: {}     prompt2: {} \n'.format(prompt1, prompt2))
     outputs = {}
