@@ -27,4 +27,4 @@ prompt2 = ['card+', 'Use']
 
 
 for key in model_dict.keys():
-    output = parameter_sweep(model_dict[key], length, k_list, p_list, prompt1, prompt2, key)
+    output = butils.parameter_sweep(model_dict[key], length, k_list, p_list, prompt1, prompt2, key)
