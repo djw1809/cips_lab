@@ -2,40 +2,24 @@ import psycopg2
 
 def get_db_connection():
    psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
-   conn = psycopg2.connect(host='10.107.24.87', port='5432', user='dylan',
-                           password='ch4ng3meplz', dbname='brexit')
+   conn = psycopg2.connect(host='artislg-dev.cqt472ritvtr.us-east-2.rds.amazonaws.com', port='5432', user='dylan_weber',
+                           password='cvg0bf1DHC&Hvj%X%7!NmSt0WY0XlG')
    return conn
 
 def executee(conn, query):
-    cursor = conn.cursor() 
+    cursor = conn.cursor()
     try:
-        cursor.execute(query) 
+        cursor.execute(query)
         results = cursor.fetchall()
-        return results 
+        return results
     except psycopg2.Error as e:
         print(e.pgerror)
         conn.rollback()
-        return e 
-def get_retweet_edge_list(conn, number_of_edges):
-    cursor = conn.cursor() 
-    query = "SELECT retweet.tid, retweet.retweet_tid, tweet.uid, t2.uid, retweet.screen_name_from, retweet.screen_name_to FROM retweet, tweet, (SELECT * FROM tweet) t2 WHERE retweet.tid = tweet.tid AND retweet.retweet_tid = t2.tid LIMIT %r" % number_of_edges 
-    cursor.execute(query)
-    results = cursor.fetchall()
-
-    return results 
-
+        return e
 
 
 if __name__ == "__main__":
     print("creating connection")
     conn = get_db_connection()
-    print("connection succesful")
     cursor = conn.cursor()
-    print("querying databse")
-    cursor.execute("select screen_name_to, count(*) from retweet group by screen_name_to")
-    results = cursor.fetchall()
-    cursor.execute("select * from tweet limit 10")
-    print("query sucessful printing outputs")
-    for i in cursor.fetchall():
-        print(i)
-    conn.close()
+    print("connection sucessful")

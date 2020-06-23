@@ -8,7 +8,7 @@ import torch.nn.functional as F
 from transformers import GPT2Tokenizer, GPT2LMHeadModel, AdamW, get_linear_schedule_with_warmup
 from ast import literal_eval
 
-
+##Data/Preprocessing
 
 class Comment_data_preprocessor(Dataset):
     '''class to do different things quickly with raw_data
@@ -399,7 +399,7 @@ class bag_words_ctrl_Dataset(Dataset):
 
 
 
-# %%
+# %% Training
 
 
 def train(training_dataset, epochs, num_workers, batch_size, learning_rate, weight_decay, eps, warmup_steps, model, collate_fn = None):
@@ -549,7 +549,7 @@ def train_bag_of_words(training_dataset, epochs, num_workers, batch_size, learni
 
     return model, optimizer, scheduler, loss_data
 
-# %%
+# %% generation
 
 
 def generate_(model, tokenizer, prompt, max_length, do_sample = True, num_beams = None, temperature = None, top_k = None, top_p = 0, repetition_penalty = None, num_return_sequences = 1,   print_ = True, stop_token = None):
@@ -654,3 +654,28 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length,  top_k = None
         returned_sentences.append(decoded_sequence)
 
     return returned_sentences, returned_sequences
+
+
+#%% Post Processing/Analysis
+
+def parameter_sweep(model, length, k_list, p_list, prompt1, prompt2, model, model_name):
+    filepath = '../generation_results/generation_output_{}.txt'.format(model_name)
+    write_file = open(filepath, 'w')
+    write_file.write('prompt1: {}     prompt2: {} \n'.format(prompt1, prompt2))
+    outputs = {}
+    for k in k_list:
+        for p in p_list:
+            first_sentences = butils.generate_ctrl_bagofwords(model3, tokenizer, prompt1, 50, top_k = k, top_p = p, num_return_sequences = 10)
+            second_sentences = butils.generate_ctrl_bagofwords(model3, tokenizer, prompt2, 50, top_k = k, top_p = p, num_return_sequences = 10)
+            write_file.write("k = {}  p = {}: \n---------------\n".format(k,p))
+            write_file.write("First sentences:\n")
+            for sentence in first_sentences[0]:
+                write_file.write(sentence + '\n')
+
+            for sentence in second_sentences[0]:
+                write_file.write(sentence + '\n')
+
+            outputs[(k,p)] = [first_sentences, second_sentences]
+
+    write_file.close()
+    return outputs
