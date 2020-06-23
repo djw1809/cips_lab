@@ -9,6 +9,8 @@ from topic_link_creation import TopicLinkCreation
 import bot_utils as butils
 import bot_models as models
 
+model_path = '../saved_models/'
+
 model_name1 = 'batch_051220_keyword_types_sentiment_cluster'
 model_name2 = 'batch_051220_keyword_types_nosentiment_cluster'
 model_name3 = 'batch_051220_keyword_types_sentiment_nocluster'
