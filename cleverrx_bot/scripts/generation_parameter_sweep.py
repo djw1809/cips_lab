@@ -22,7 +22,7 @@ model3 = models.GPT2Model_bagofctrl.load(model_path + model_name3)
 model_dict = {model_name1:model1, model_name2:model2, model_name3:model3}
 
 k_list = [0,20,40,60,80,100,120,140,160,180,200]
-p_list = [0, .1, .2, .3, .4, .5, .6, .7, .8, .9]
+p_list = [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1]
 length = 30
 prompt1 = ['insurance-', 'insurance is']
 prompt2 = ['card+', 'Use']
