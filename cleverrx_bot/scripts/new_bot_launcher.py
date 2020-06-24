@@ -202,4 +202,4 @@ if __name__ == '__main__':
     if (train_type == 'prepend' or train_type == 'keyword'):
         train_batch_of_models(test_preprocessor, parameter_dict, type = 'keyword')
     elif (train_type == 'encode_decode'):
-        train_batch_of_bert_models(test_preprocessor, parameter)
+        train_batch_of_bert_models(test_preprocessor, parameter_dict, type = 'encode_decode')
