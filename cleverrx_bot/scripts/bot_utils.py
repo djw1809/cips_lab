@@ -225,6 +225,9 @@ class Comment_data_preprocessor(Dataset):
         if type.startswith('prepend'):
             self.collate_fn = self.collate_prepend
 
+        if type == 'encode_decode':
+            self.collate_fn = self.collate_encode_decode
+
 
     def __getitem__(self, index):
         try:
@@ -249,7 +252,7 @@ class Comment_data_preprocessor(Dataset):
             prepended_ids = self.tokenizer.encode(prepended_text)
             return prepended_ids
 
-        if self.get_type == 'keyword':
+        if (self.get_type == 'keyword' or self.get_type == 'encode_decode'):
             text_ids = self.active_dataset.loc[index, 'text_ids']
             keyword_ids = self.active_dataset.loc[index, 'keyword_ids']
             return (text_ids, keyword_ids)

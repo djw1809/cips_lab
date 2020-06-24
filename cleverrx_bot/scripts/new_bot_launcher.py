@@ -165,21 +165,8 @@ def train_batch_of_bert_models(preprocessor, parameter_dict, results_dir = resul
         results_path.mkdir(parents = True, exist_ok = True)
         model_path.mkdir(parents = True, exist_ok = True)
 
-        if type == 'keyword':
-            preprocessor.set_get_type('keyword')
-            trained_model, optimizer, scheduler, loss_data = butils.train_bag_of_words(preprocessor,
-                                                                          parameter_dict['epochs'],
-                                                                          parameter_dict['num_worker'],
-                                                                          parameter_dict['batch_size'],
-                                                                          parameter_dict['learning_rate'],
-                                                                          parameter_dict['weight_decay'],
-                                                                          parameter_dict['eps'],
-                                                                          parameter_dict['warmup_steps'],
-                                                                          model,
-                                                                          collate_fn = preprocessor.collate_fn)
-        if type == 'prepend':
-            preprocessor.set_get_type('prepend_space')
-            trained_model, optimizer, scheduler, loss_data = butils.train(dataset,
+        preprocessor.set_get_type('prepend_space')
+        trained_model, optimizer, scheduler, loss_data = butils.train_hugging_encode_decode(dataset,
                                                                           parameter_dict['epochs'],
                                                                           parameter_dict['num_worker'],
                                                                           parameter_dict['batch_size'],
@@ -212,4 +199,7 @@ def train_batch_of_bert_models(preprocessor, parameter_dict, results_dir = resul
         plt.savefig(results_dir + '/' + parameter_dict['filename'] +'/'+'loss_plot.png')
 
 if __name__ == '__main__':
-    train_batch_of_models(test_preprocessor, parameter_dict, type = 'keyword')
+    if (train_type == 'prepend' or train_type == 'keyword'):
+        train_batch_of_models(test_preprocessor, parameter_dict, type = 'keyword')
+    elif (train_type == 'encode_decode'):
+        train_batch_of_bert_models(test_preprocessor, parameter)
