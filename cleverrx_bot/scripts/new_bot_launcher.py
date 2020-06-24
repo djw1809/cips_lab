@@ -62,7 +62,7 @@ parameter_dict['filename'] = ''
 
 
 
-def train_batch_of_gpt2_models(preprocessor, parameter_dict, results_dir = results_dir, model_storage_dir = model_storage_dir, type = 'keyword', file_stem = file_stem):
+def train_batch_of_models(preprocessor, parameter_dict, results_dir = results_dir, model_storage_dir = model_storage_dir, type = 'keyword', file_stem = file_stem):
     datasets = preprocessor.prepared_datasets
 
     for dataset_name in datasets.keys():
