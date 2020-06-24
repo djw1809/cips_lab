@@ -303,7 +303,7 @@ class Comment_data_preprocessor(Dataset):
             padded_texts = pad_sequence(text_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
             padded_keywords = pad_sequence(keyword_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
 
-        return padded_texts, keyword_ids
+        return padded_texts, padded_keywords
 
 
 
