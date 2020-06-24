@@ -609,6 +609,8 @@ def train_hugging_encode_decode(training_dataset, epochs, num_workers, batch_siz
             texts, keywords = batch
             decoder_input_ids = texts
             input_ids = keywords
+            input_ids = torch.LongTensor(input_ids)
+            decoder_input_ids = torch.LongTensor(decoder_input_ids)
             decoder_input_ids.to(device)
             input_ids.to(device)
             outputs = model(input_ids = input_ids, decoder_input_ids = decoder_input_ids, lm_labels = decoder_input_ids)
