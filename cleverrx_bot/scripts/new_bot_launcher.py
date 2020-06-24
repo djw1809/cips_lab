@@ -151,11 +151,8 @@ def train_batch_of_bert_models(preprocessor, parameter_dict, results_dir = resul
 
     for dataset_name in datasets.keys():
         print("starting to train model on" + dataset_name)
-        if medium: #if we want to use the pretrained gpt2-medium weights (deeper then regular gpt2)
-            model = model_dict[type].from_pretrained('gpt2-medium')
-            model.lm_head = nn.Linear(1024, 50257, bias = False)
-        else:
-            model =  model_dict[type].from_pretrained('gpt2')
+
+        model =  model_dict[type].from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
 
         preprocessor.set_active_dataset(dataset_name)
 
