@@ -97,7 +97,7 @@ def train_batch_of_gpt2_models(preprocessor, parameter_dict, results_dir = resul
         if type == 'prepend':
             model =  model_dict[type].from_pretrained('gpt2')
             preprocessor.set_get_type('prepend_space')
-            trained_model, optimizer, scheduler, loss_data = butils.train(dataset,
+            trained_model, optimizer, scheduler, loss_data = butils.train(preprocessor,
                                                                           parameter_dict['epochs'],
                                                                           parameter_dict['num_worker'],
                                                                           parameter_dict['batch_size'],
@@ -111,7 +111,7 @@ def train_batch_of_gpt2_models(preprocessor, parameter_dict, results_dir = resul
         if type == 'encode_decode':
             model = model_dict[type].from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
             preprocessor.set_get_type('encode_decode')
-            trained_model, optimizer, scheduler, loss_data = butils.train_hugging_encode_decode(dataset,
+            trained_model, optimizer, scheduler, loss_data = butils.train_hugging_encode_decode(preprocessor,
                                                                           parameter_dict['epochs'],
                                                                           parameter_dict['num_worker'],
                                                                           parameter_dict['batch_size'],
