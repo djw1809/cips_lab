@@ -158,10 +158,6 @@ class Comment_data_preprocessor(Dataset):
                     tokenized_df.at[row, 'used_keywords'] = translated_keywords
 
 
-
-
-
-
             else:
                 for row in tokenized_df.index:
                     keywords = list(input_data.loc[row, 'keywords'])
@@ -332,80 +328,80 @@ class Comment_dataset(Dataset):
 
         return padded_texts
 
-class prepend_ctrl_Dataset(Dataset):
-
-    def __init__(self, preprocessor, tokenizer = None):
-        if preprocessor.tokenized_df is None:
-            preprocessor.tokenized_df()
-
-        self.data = preprocessor.tokenized_df
-
-        if tokenizer != None:
-            self.tokenizer = tokenizer
-        else:
-            try:
-                self.tokenizer = preprocessor.tokenizer
-            except:
-                print("no tokenizer found - collate function wont work")
-
-
-    def __getitem__(self, index):
-        text_ids = self.data.loc[index, 'text_ids']
-        keyword_ids = self.data.loc[index,'keyword_ids']
-        prepended_ids = keyword_ids + text_ids
-        return prepended_ids
-
-    def __len__(self):
-        return len(self.data)
-
-
-    def collate(self, batch):
-        tokenizer = self.tokenizer
-        text_ids = [torch.tensor(item) for item in batch]
-
-        if tokenizer._pad_token is None:
-             padded_texts = pad_sequence(text_ids, batch_first = True)
-        else:
-             padded_texts = pad_sequence(text_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
-
-        return padded_texts
-
-
-class bag_words_ctrl_Dataset(Dataset):
-
-    def __init__(self, preprocessor, tokenizer = None):
-        if preprocessor.tokenized_df is None:
-            preprocessor.tokenized_df()
-
-        self.data = preprocessor.tokenized_df
-        if tokenizer != None:
-            self.tokenizer = tokenizer
-        else:
-            try:
-                self.tokenizer = preprocessor.tokenizer
-            except:
-                print("no tokenizer found - collate function wont work")
-
-    def __getitem__(self, index):
-        text_ids = self.data.loc[index, 'text_ids']
-        keyword_ids = self.data.loc[index, 'keyword_ids']
-        return (text_ids, keyword_ids)
-
-    def __len__(self):
-        return len(self.data)
-
-
-    def collate(self, batch):
-        tokenizer = self.tokenizer
-        text_ids = [torch.tensor(item[0]) for item in batch]
-        keyword_ids = [torch.tensor(item[1]) for item in batch]
-
-        if tokenizer._pad_token is None:
-             padded_texts = pad_sequence(text_ids, batch_first = True)
-        else:
-             padded_texts = pad_sequence(text_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
-
-        return padded_texts, keyword_ids
+# class prepend_ctrl_Dataset(Dataset):
+#
+#     def __init__(self, preprocessor, tokenizer = None):
+#         if preprocessor.tokenized_df is None:
+#             preprocessor.tokenized_df()
+#
+#         self.data = preprocessor.tokenized_df
+#
+#         if tokenizer != None:
+#             self.tokenizer = tokenizer
+#         else:
+#             try:
+#                 self.tokenizer = preprocessor.tokenizer
+#             except:
+#                 print("no tokenizer found - collate function wont work")
+#
+#
+#     def __getitem__(self, index):
+#         text_ids = self.data.loc[index, 'text_ids']
+#         keyword_ids = self.data.loc[index,'keyword_ids']
+#         prepended_ids = keyword_ids + text_ids
+#         return prepended_ids
+#
+#     def __len__(self):
+#         return len(self.data)
+#
+#
+#     def collate(self, batch):
+#         tokenizer = self.tokenizer
+#         text_ids = [torch.tensor(item) for item in batch]
+#
+#         if tokenizer._pad_token is None:
+#              padded_texts = pad_sequence(text_ids, batch_first = True)
+#         else:
+#              padded_texts = pad_sequence(text_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
+#
+#         return padded_texts
+#
+#
+# class bag_words_ctrl_Dataset(Dataset):
+#
+#     def __init__(self, preprocessor, tokenizer = None):
+#         if preprocessor.tokenized_df is None:
+#             preprocessor.tokenized_df()
+#
+#         self.data = preprocessor.tokenized_df
+#         if tokenizer != None:
+#             self.tokenizer = tokenizer
+#         else:
+#             try:
+#                 self.tokenizer = preprocessor.tokenizer
+#             except:
+#                 print("no tokenizer found - collate function wont work")
+#
+#     def __getitem__(self, index):
+#         text_ids = self.data.loc[index, 'text_ids']
+#         keyword_ids = self.data.loc[index, 'keyword_ids']
+#         return (text_ids, keyword_ids)
+#
+#     def __len__(self):
+#         return len(self.data)
+#
+#
+#     def collate(self, batch):
+#         tokenizer = self.tokenizer
+#         text_ids = [torch.tensor(item[0]) for item in batch]
+#         keyword_ids = [torch.tensor(item[1]) for item in batch]
+#
+#         if tokenizer._pad_token is None:
+#              padded_texts = pad_sequence(text_ids, batch_first = True)
+#         else:
+#              padded_texts = pad_sequence(text_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
+#
+#         return padded_texts, keyword_ids
 
 
 
@@ -567,7 +563,7 @@ def train_bag_of_words(training_dataset, epochs, num_workers, batch_size, learni
     return model, optimizer, scheduler, loss_data
 
 
-def train_hugging_encode_decode(training_dataset, epochs, num_workers, batch_size, learning_rate, weight_decay, eps, warmup_steps, model, collate_fn = None):
+def train_hugging_encode_decode_keyword(training_dataset, epochs, num_workers, batch_size, learning_rate, weight_decay, eps, warmup_steps, model, collate_fn = None):
     '''generic training call for a pytorch model'''
 
 
@@ -609,6 +605,81 @@ def train_hugging_encode_decode(training_dataset, epochs, num_workers, batch_siz
             texts, keywords = batch
             decoder_input_ids = texts
             input_ids = keywords
+            input_ids = torch.LongTensor(input_ids)
+            decoder_input_ids = torch.LongTensor(decoder_input_ids)
+            decoder_input_ids.to(device)
+            input_ids.to(device)
+            outputs = model(input_ids = input_ids, decoder_input_ids = decoder_input_ids, lm_labels = decoder_input_ids)
+            loss = outputs[0]
+
+            #backwards
+            loss.backward()
+            optimizer.step()
+            scheduler.step()
+            model.zero_grad()
+
+            running_loss += loss.item()
+            #running_corrects += torch.sum(preds == labels.data).item()
+            #confusion_matrix_train_epoch += confusion_matrix(labels.cpu().numpy(), preds.cpu().numpy(), labels =range(num_labels))
+
+##### calculate  epoch data ####
+        epoch_loss = running_loss / len(training_dataset)
+        #epoch_corrects = running_corrects / len(training_dataset)
+        #epoch_val_accuracy = running_val_corrects/len(test_dataset)
+
+###### record epoch data ###########
+        loss_data[epoch] = epoch_loss
+        #accuracy_data[epoch] = epoch_corrects
+        #val_accuracy_data[epoch] = epoch_val_accuracy
+        #confusion_matricies_test[epoch] = confusion_matrix_test_epoch
+        #confusion_matricies_train[epoch] = confusion_matrix_train_epoch
+
+        print(' Loss: {:.4f} '.format(epoch_loss))
+
+    return model, optimizer, scheduler, loss_data
+
+def train_hugging_encode_decode(training_dataset, epochs, num_workers, batch_size, learning_rate, weight_decay, eps, warmup_steps, model, collate_fn = None):
+    '''generic training call for a pytorch model'''
+
+
+    training_loader = DataLoader(training_dataset, shuffle = True, num_workers = num_workers, batch_size = batch_size, collate_fn = collate_fn)
+
+
+#### configure model to use cuda if it is available ####
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    if torch.cuda.is_available():
+        model.cuda()
+
+#### initialize containers to store model outputs in ####
+    loss_data = np.zeros((epochs)) #empty arrays to store data for plotting in
+
+### initialize optimizer
+    no_decay = ["bias", "LayerNorm.weight"]
+    optimizer_grouped_parameters = [
+        {
+            "params": [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)],
+            "weight_decay": weight_decay,
+        },
+        {"params": [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], "weight_decay": 0.0},
+    ] #set weight decay to 0 for bias and layernorm weights
+
+    optimizer = AdamW(optimizer_grouped_parameters, lr= learning_rate, eps= eps)
+    scheduler = get_linear_schedule_with_warmup(
+        optimizer, num_warmup_steps=warmup_steps, num_training_steps= len(training_loader)
+    )
+
+##### MAIN TRAINING LOOP ######
+
+    for epoch in range(epochs):
+
+        running_loss = 0
+        model.train()
+
+        for batch  in training_loader:
+            #forwards
+            texts = batch
+            decoder_input_ids = texts
+            input_ids = texts
             input_ids = torch.LongTensor(input_ids)
             decoder_input_ids = torch.LongTensor(decoder_input_ids)
             decoder_input_ids.to(device)

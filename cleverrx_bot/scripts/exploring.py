@@ -12,9 +12,17 @@ from torch.nn.utils.rnn import pad_sequence
 from torch.nn import CrossEntropyLoss
 import bot_models as models
 from topic_link_creation import TopicLinkCreation
+from bot_utils import Comment_data_preprocessor
 import xlrd
 
+#%%
+raw_data_path = '../data/topics_index_bots_new_042820.pkl'
+with open(raw_data_path, 'rb') as file:
+    raw_data = pickle.load(file)
 
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+preprocessor = Comment_data_preprocessor(raw_data, 'tweet', tokenizer)
+preprocessor.input
 #%%
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
