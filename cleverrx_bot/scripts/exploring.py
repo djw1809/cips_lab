@@ -11,7 +11,31 @@ from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 from torch.nn import CrossEntropyLoss
 import bot_models as models
+from topic_link_creation import TopicLinkCreation
+import xlrd
 
+#%%
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+input_ids = tokenizer.encode("Hello, I have a big dick.")
+tokenizer.decode(input_ids)
+
+
+#%%
+some_strings = ['a string', 'another string', 'a third string with a really big dick']
+a_file = open('test.txt', 'w')
+for string in some_strings:
+    a_file.write(string + '\n')
+a_file.write('duh')
+a_file.close()
+
+#%%
+clusters = pickle.load(open('../data/clusters.pkl', 'rb'))
+clusters
+
+tweet_classifier = TopicLinkCreation()
+test_tweet = 'I have problems with my insurance'
+output = tweet_classifier.build_graph(test_tweet)
+output
 #%%
 model = models.GPT2Model_bagofctrl.from_pretrained('gpt2-medium')
 
