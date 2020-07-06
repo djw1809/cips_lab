@@ -55,11 +55,19 @@ app.get('/facebook/putComment', async (req, res) => {
 
 const http = require('http');
 
+<<<<<<< HEAD
 const hostname = '127.0.0.1';
 
 
 // Start the server
 const PORT = process.env.PORT || 8080;
+=======
+const hostname = '0.0.0.0';
+
+
+// Start the server
+const PORT = process.env.PORT || 8082;
+>>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
 app.listen(PORT,hostname, () => {
   console.log(`App listening on port  ${hostname} ${PORT}`);
   console.log('Press Ctrl+C to quit.');

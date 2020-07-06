@@ -6,15 +6,63 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import transformers
 import bot_utils as butils
-from transformers import GPT2Tokenizer, GPT2LMHeadModel, GPT2Model
+from transformers import GPT2Tokenizer, GPT2LMHeadModel, GPT2Model, EncoderDecoderModel, BertTokenizer
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 from torch.nn import CrossEntropyLoss
 import bot_models as models
 from topic_link_creation import TopicLinkCreation
+<<<<<<< HEAD
 import xlrd
 
 #%%
+=======
+from bot_utils import Comment_data_preprocessor
+import xlrd
+
+#%%
+raw_data_path = '../data/topics_index_bots_new_042820.pkl'
+with open(raw_data_path, 'rb') as file:
+    raw_data = pickle.load(file)
+
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+preprocessor = Comment_data_preprocessor(raw_data, 'tweet', tokenizer)
+preprocessor.input
+#%%
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
+
+with open('../data/topics_index_bots_new_042820.pkl', 'rb') as file:
+    raw_data = pickle.load(file)
+
+short_raw_data_dict = {i:raw_data[i] for i in list(raw_data.keys())[0:6]}
+dict_preprocessor = butils.Comment_data_preprocessor(short_raw_data_dict, 'tweet', tokenizer)
+dict_preprocessor.set_active_dataset('type_no_sentiment_cluster_keywords')
+keyword_dataset = dict_preprocessor.prepare_keyword_dataset(dict_preprocessor.input_df, 'id', 'text', 'topic_links', key = 'type_no_sentiment_cluster_keywords', cluster = True, sentiment = False)
+dict_preprocessor.set_get_type('keyword')
+
+example = dict_preprocessor[0]
+example
+
+#training
+decoder_input_ids = torch.tensor(example[0]).unsqueeze(0) #the sequence
+decoder_input_ids.size()
+input_ids = torch.tensor(example[1]).unsqueeze(0) #keywords to the encoder
+outputs = model(input_ids = input_ids, decoder_input_ids = decoder_input_ids, lm_labels = decoder_input_ids)
+
+outputs[:2][0]
+
+
+input_ids
+#%%
+def func(arg = 'a formatted string {}'.format('dicks')):
+    print(arg)
+
+func()
+
+
+#%%
+>>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 input_ids = tokenizer.encode("Hello, I have a big dick.")
 tokenizer.decode(input_ids)
