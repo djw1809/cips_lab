@@ -67,11 +67,7 @@ async function getArticleDetails(page,pagelink,postid,groupid){
     postobj = {}
     //jj.split("?")[1].split("&")[0]
     console.log(" $$ Just fecthed the HTML content for post and loaded in dom $$ ");
-<<<<<<< HEAD
     try {
-=======
-    try { 
->>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
 
         console.log(" @@ Fetching Post. @@ ")
         postProfileLink=""
@@ -81,11 +77,7 @@ async function getArticleDetails(page,pagelink,postid,groupid){
         postlinks = ""
 
         post = dom.window.document.querySelector("div[class='story_body_container']");
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
         if(post!=null){
             header = post.querySelector('header').querySelectorAll('a');
             if(header!=null){
@@ -119,15 +111,9 @@ async function getArticleDetails(page,pagelink,postid,groupid){
         postshares=""
         shareobj = dom.window.document.querySelector("span[data-sigil='feed-ufi-sharers']")
         if(shareobj!=null){
-<<<<<<< HEAD
             postshares = dom.window.document.querySelector("span[data-sigil='feed-ufi-sharers']").textContent;
         }
 
-=======
-            postshares = dom.window.document.querySelector("span[data-sigil='feed-ufi-sharers']").textContent;  
-        }
-        
->>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
         postobj["profile_link"] = postProfileLink;
         postobj["datetime"] = postDateTime;
         postobj["content"] = postContent;
@@ -137,11 +123,7 @@ async function getArticleDetails(page,pagelink,postid,groupid){
         postobj["shares"] = postshares;
         postobj["postid"] = postid;
 
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
     }catch (e) {
         console.error(e);
     }
@@ -162,11 +144,7 @@ async function getAllLatestPosts(page, groupId,url) {
         const hftml = await page.content();
         const dodm = new JSDOM(hftml);
         var about = dodm.window.document.querySelectorAll("span[data-sigil='expose']");
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
         //while (true) {
 
             var flag = 0;
@@ -237,13 +215,8 @@ async function goToGroup(page, groupId) {
 	catch(e)
 	{
 		console.log("Exception" + e);
-<<<<<<< HEAD
 	}
 
-=======
-	}	
-	
->>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
 }
 
 
@@ -265,36 +238,22 @@ async function logIn(page) {
 exports.getAllGroup = async function()
 {
     (async() => {
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
         const browser = await puppeteer.launch({headless: isHeadless, userDataDir: './myUserDataDir'})
         const page = await browser.newPage()
 	    const context = browser.defaultBrowserContext();
 	    context.overridePermissions("https://news.google.com", ["geolocation", "notifications"]);
 
         await page.setViewport({width: 1280, height: 800});
-<<<<<<< HEAD
 
-      //  await logIn(page);
-    	groups = ["218845138622682","716380275128285", "814848708638342", "1257074254459704", "984698274924505", "2249357341987919", "1804742759838181", "1227435557400085", "470394413362405", "353881365032121", "259395740774523", "225462791346177", "146855225930656"]
-=======
-        
-        //await logIn(page);
+        await logIn(page);
     	groups = ["218845138622682","716380275128285", "814848708638342"]
->>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
         groupPost = {}
         for(var t = 0;t<groups.length;t++){
             var getPost = await goToGroup(page,groups[t]);
             groupPost[t] = getPost;
         }
-<<<<<<< HEAD
 
-=======
-    	
->>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
         //console.log(groupPost);
 
         allPostsData = [];
@@ -323,8 +282,4 @@ function delay(time) {
     return new Promise(function(resolve) {
         setTimeout(resolve, time)
     });
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
