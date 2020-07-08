@@ -30,15 +30,15 @@ with open(raw_data_path, 'rb') as file:
 
 
 #for testing#
-short_raw_data = {i:raw_data[i] for i in list(raw_data.keys())[0:7]}
-short_raw_data[69] = {'tweet': 'I love dicks', 'topic_links': [], }
-test_preprocessor = butils.Comment_data_preprocessor(short_raw_data, 'tweet', tokenizer)
-test_dataset = test_preprocessor.prepare_keyword_dataset(test_preprocessor.input_df, 'id', 'text', 'topic_links', key = 'test', sentiment = True, cluster = True)
-test_preprocessor.prepared_datasets
+# short_raw_data = {i:raw_data[i] for i in list(raw_data.keys())[0:7]}
+# short_raw_data[69] = {'tweet': 'I love dicks', 'topic_links': [], }
+# test_preprocessor = butils.Comment_data_preprocessor(short_raw_data, 'tweet', tokenizer)
+# test_dataset = test_preprocessor.prepare_keyword_dataset(test_preprocessor.input_df, 'id', 'text', 'topic_links', key = 'test', sentiment = True, cluster = True)
+# test_preprocessor.prepared_datasets
 
 
 #
-preprocessor = butils.Comment_data_preprocessor(short_raw_data, raw_data_text_field, tokenizer)
+preprocessor = butils.Comment_data_preprocessor(raw_data, raw_data_text_field, tokenizer)
 dataset1 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'text', 'topic_links', key = 'types_nosentiment_nocluster', sentiment = False, cluster = False)
 dataset2 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'text', 'topic_links', key = 'types_sentiment_nocluster', sentiment = True, cluster = False)
 dataset3 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'text', 'topic_links', key = 'types_nosentiment_cluster', sentiment = False, cluster = True)
@@ -46,12 +46,12 @@ dataset4 = preprocessor.prepare_keyword_dataset(preprocessor.input_df, 'id', 'te
 
 results_dir = '../results'
 model_storage_dir = '../saved_models'
-file_stem = 'test' #'batch_060120_gpt2medium_prepend'
+file_stem = 'batch_070820_bert2bert' #'batch_060120_gpt2medium_prepend'
 
 parameter_dict = {}
-parameter_dict['epochs'] = 2
+parameter_dict['epochs'] = 5
 parameter_dict['num_worker'] = 2
-parameter_dict['batch_size'] = 5
+parameter_dict['batch_size'] = 20
 parameter_dict['learning_rate'] =5e-5
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8

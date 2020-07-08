@@ -12,11 +12,9 @@ from torch.nn.utils.rnn import pad_sequence
 from torch.nn import CrossEntropyLoss
 import bot_models as models
 from topic_link_creation import TopicLinkCreation
-<<<<<<< HEAD
 import xlrd
 
 #%%
-=======
 from bot_utils import Comment_data_preprocessor
 import xlrd
 
@@ -62,7 +60,6 @@ func()
 
 
 #%%
->>>>>>> a7fe129c6febf324028b42b8ef77ab29d805645d
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 input_ids = tokenizer.encode("Hello, I have a big dick.")
 tokenizer.decode(input_ids)
