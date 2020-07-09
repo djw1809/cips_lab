@@ -148,4 +148,4 @@ def train_batch_of_models(preprocessor, parameter_dict, results_dir = results_di
 
 
 if __name__ == '__main__':
-    train_batch_of_models(test_preprocessor, parameter_dict, type = 'encode_decode')
+    train_batch_of_models(preprocessor, parameter_dict, type = 'encode_decode')
