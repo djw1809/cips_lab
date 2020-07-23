@@ -11,7 +11,9 @@ import json
 # #%%
 #
 # example =groups_raw.loc[0, 'content']
+#
 # output = CMUTweetTagger.runtagger_parse([example])
+# output
 # ent = output[0][1]
 # ent
 # #%%
@@ -38,7 +40,7 @@ def produce_entity_list(data):
                     pos = ent[1]
                     output_dict[enty] = {'pos': pos, 'count': 1}
 
-    output_df = pd.DataFrame.from_dict(short_dict, orient = 'index')
+    output_df = pd.DataFrame.from_dict(output_dict, orient = 'index')
     output_df['entity'] =df.index
     output_df.index = range(len(df))
     return output_df, output_dict
@@ -48,6 +50,7 @@ if __name__ == '__main__':
     groups_raw = pd.read_json('../data/facebookgroups.json')
     pages_raw = pd.read_json('../data/facebookpages.json')
     raw = groups_raw.append(pages_raw)
+    raw = raw[0:10]
     raw.index = range(len(raw))
     output = produce_entity_list(raw)
-    output[0].to_csv('diabetes_dataframe.csv')
+    output[0].to_csv('diabetes_dataframe_test.csv')
