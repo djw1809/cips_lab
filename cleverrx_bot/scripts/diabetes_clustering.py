@@ -44,9 +44,10 @@ def produce_entity_list(data):
     return output_df, output_dict
 
 #%%
-if __name__ = '__main__':
+if __name__ == '__main__':
     groups_raw = pd.read_json('../data/facebookgroups.json')
     pages_raw = pd.read_json('../data/facebookpages.json')
     raw = groups_raw.append(pages_raw)
     raw.index = range(len(raw))
     output = produce_entity_list(raw)
+    output[0].to_csv('diabetes_dataframe.csv')
