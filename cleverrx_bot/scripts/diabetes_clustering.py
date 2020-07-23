@@ -50,7 +50,7 @@ if __name__ == '__main__':
     groups_raw = pd.read_json('../data/facebookgroups.json')
     pages_raw = pd.read_json('../data/facebookpages.json')
     raw = groups_raw.append(pages_raw)
-    raw = raw[0:10]
     raw.index = range(len(raw))
+    raw = raw[0:3000]
     output = produce_entity_list(raw)
-    output[0].to_csv('diabetes_dataframe_test.csv')
+    output[0].to_csv('diabetes_dataframe_short.csv')
