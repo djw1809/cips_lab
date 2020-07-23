@@ -4,22 +4,22 @@ import CMUTweetTagger
 import json
 
 #%%
-groups_raw = pd.read_json('../data/facebookgroups.json')
-groups_topic_index = pd.read_json('../data/facebook_groups/topics_index_bots_fbgroups.json', orient = 'index')
-pages_raw = pd.read_json('../data/facebookpages.json')
-pages_topic_index = pd.read_json('../data/facebook_pages/topics_index_bots_fbpages.json', orient = 'index')
-#%%
-
-example =groups_raw.loc[0, 'content']
-output = CMUTweetTagger.runtagger_parse([example])
-ent = output[0][1]
-ent
-#%%
-raw = groups_raw.append(pages_raw)
-groups_raw
-pages_raw
-raw
-raw.index = range(len(raw))
+# groups_raw = pd.read_json('../data/facebookgroups.json')
+# groups_topic_index = pd.read_json('../data/facebook_groups/topics_index_bots_fbgroups.json', orient = 'index')
+# pages_raw = pd.read_json('../data/facebookpages.json')
+# pages_topic_index = pd.read_json('../data/facebook_pages/topics_index_bots_fbpages.json', orient = 'index')
+# #%%
+#
+# example =groups_raw.loc[0, 'content']
+# output = CMUTweetTagger.runtagger_parse([example])
+# ent = output[0][1]
+# ent
+# #%%
+# raw = groups_raw.append(pages_raw)
+# groups_raw
+# pages_raw
+# raw
+# raw.index = range(len(raw))
 
 
 #%%
