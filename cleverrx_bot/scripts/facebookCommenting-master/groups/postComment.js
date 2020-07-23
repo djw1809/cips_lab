@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const jsdom = require("jsdom")
+const fs = require('fs');
 const {JSDOM} = jsdom
 global.DOMParser = new JSDOM().window.DOMParser
 
@@ -73,32 +74,51 @@ async function postComment(page,pagelink,commentMessage){
 
 
 async function logIn(page) {
-  
+
         await page.goto('https://m.facebook.com/',
         {waitUntil: 'networkidle2'})
-
+        
         await page.waitForSelector('input[name="email"]')
-
         await page.type('input[name="email"]', 'fredrik.abbott@gmail.com')
         await page.type('input[name="pass"]', 'CIDSEasu2019%')
 
         await page.click('button[name="login"]')
         await page.waitFor(1000);
+    
 }
+
 
 
 exports.gotopage = async function(){
 
-    const browser = await puppeteer.launch({headless: isHeadless})
+    const browser = await puppeteer.launch({headless: isHeadless,userDataDir: './myUserDataDir',args: ['--no-sandbox']})
     const page = await browser.newPage()
 
     await page.setViewport({width: 1280, height: 800})
     //pass the id here
-    var postLinks = ["https://m.facebook.com/story.php?story_fbid=1583986931661972&id=100001520422771"]
+    let postsData = fs.readFileSync('./data/1594682473360.json');
+    let fPosts = JSON.parse(postsData);
+  
     await logIn(page)
-    for(var t=0;t<postLinks.length;t++){
-        var commentMessage = 'Test Comment';
-        await postComment(page,postLinks[t],commentMessage);
+
+    // 1. Batch commenting 
+
+    /* 
+    for(var t=0;t<fPosts.length;t++){
+        var postLink = fPosts[t]['postlink'];
+        //console.log(postLink);
+
+        //var commentMessage = fPosts[t]['comment'];
+    
+        //var commentMessage = 'Test Comment';
+        //await postComment(page,postLink,commentMessage);
     }
+    */
+
+    var postLink = "link"
+    var commentMessage = "Message"
+
+    // 2. single post commenting.
+    await postComment(page,postLink,commentMessage);
 
 }

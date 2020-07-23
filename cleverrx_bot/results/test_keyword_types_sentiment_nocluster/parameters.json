@@ -1,1 +1,0 @@
-{"epochs": 1, "num_worker": 2, "batch_size": 5, "learning_rate": 5e-05, "weight_decay": 0, "eps": 1e-08, "warmup_steps": 0, "filename": "test_keyword_types_sentiment_nocluster"}

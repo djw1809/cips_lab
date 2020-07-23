@@ -52,4 +52,4 @@ if __name__ == '__main__':
     raw.index = range(len(raw))
     #raw = raw[0:3000]
     output = produce_entity_list(raw)
-    output[0].to_csv('diabetes_dataframe_short.csv')
+    output[0].to_csv('diabetes_dataframe_long.csv')

@@ -14,9 +14,14 @@ import bot_models as models
 from topic_link_creation import TopicLinkCreation
 import xlrd
 
+
 #%%
-from bot_utils import Comment_data_preprocessor
-import xlrd
+with open('../data/clusters.pkl', 'rb') as file:
+    clusters = pickle.load(file)
+
+clusters.keys()
+#%%
+
 
 #%%
 raw_data_path = '../data/topics_index_bots_new_042820.pkl'

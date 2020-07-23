@@ -133,6 +133,9 @@ async function getArticleDetails(page,pagelink,postid,groupid){
 
 
 
+
+
+
 async function getAllLatestPosts(page,groupId,url,pageScrollLength) {
     allData = {}
     try {
@@ -145,12 +148,10 @@ async function getAllLatestPosts(page,groupId,url,pageScrollLength) {
         for(var ltt =0;ltt<pageScrollLength;ltt++){
             await autoScroll(page);
             console.log(ltt);
-            
         }
-
             var flag = 0;
             var tg = 0;
-            //await autoScroll(page);
+            
             // await autoScroll(page);
             // await autoScroll(page);
             await page.waitFor(1000);
@@ -166,7 +167,7 @@ async function getAllLatestPosts(page,groupId,url,pageScrollLength) {
            		article_link = articles[i].querySelector('a');
 
            		if(article_link != null){
-                    if((article_link.textContent).includes("hrs") || (article_link.textContent).includes("mins") || (article_link.textContent).includes("hr") || (article_link.textContent).includes("min") ){
+                    if((article_link.textContent).includes("Yesterday")){
                         flag = 1;
                         pagelink = "https://m.facebook.com" + article_link.href;
                         if(pagelink.includes("view=permalink&id") ||  pagelink.includes("?story_fbid=")){
@@ -192,11 +193,6 @@ async function getAllLatestPosts(page,groupId,url,pageScrollLength) {
            		}
            	}
 
-            // if(flag==1 || articles.length == tg+1 || flag==0){
-            //     break;
-            // }
-         
-
     }catch (e) {
         console.log(e);
     }
@@ -209,11 +205,9 @@ async function goToGroup(page, groupId,pageScrollLength) {
 	{
 		var url = "https://m.facebook.com/groups/" + groupId +"/";
 		await page.goto(url,
-            {waitUntil: 'networkidle2'});
-        
-        var val = await getAllLatestPosts(page,groupId,url,pageScrollLength);
+			{waitUntil: 'networkidle2'});
+		var val = await getAllLatestPosts(page,groupId,url,pageScrollLength);
         return val;
-		
 	}
 	catch(e)
 	{
@@ -224,22 +218,17 @@ async function goToGroup(page, groupId,pageScrollLength) {
 
 
 async function logIn(page) {
-   
+    
         await page.goto('https://m.facebook.com/',
         {waitUntil: 'networkidle2'})
-        
-        var vat = await page.waitForSelector('input[name="email"]')
+
+        await page.waitForSelector('input[name="email"]')
         await page.type('input[name="email"]', 'fredrik.abbott@gmail.com')
         await page.type('input[name="pass"]', 'CIDSEasu2019%')
-
         await page.click('button[name="login"]')
         await page.waitFor(1000);
-        return true;
-        
-    
+
 }
-
-
 
 exports.getAllGroup = async function(pageScrollLength)
 {
@@ -249,10 +238,10 @@ exports.getAllGroup = async function(pageScrollLength)
         const browser = await puppeteer.launch({headless: isHeadless,args: ['--no-sandbox'], userDataDir: './myUserDataDir'})
         const page = await browser.newPage()
 	    const context = browser.defaultBrowserContext();
-	    context.overridePermissions("https://m.facebook.com", ["geolocation", "notifications"]);
+        context.overridePermissions("https://m.facebook.com", ["geolocation", "notifications"]);
 
         await page.setViewport({width: 1280, height: 800});
-        
+
         //await logIn(page);
 
     	groups = ["218845138622682","716380275128285", "814848708638342"]

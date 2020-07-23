@@ -3,6 +3,7 @@
 ```
 npm install
 npm start # The app starts.
+nodemon app.js
 
 and then go the URL to get all the posts and save it json file ==> http://localhost:8082/facebook/getPost
 and use this link to automatically comment on a post ==> http://localhost:8082/facebook/putComment.

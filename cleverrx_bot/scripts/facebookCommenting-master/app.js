@@ -18,23 +18,26 @@
 const express = require('express');
 const scrapeGroup = require('./groups/getPosts.js')
 const scrapeComment = require('./groups/postComment.js')
+const getYesPosts = require('./groups/getYesterdayPosts.js')
+// const offerUp = require('./groups/offerup.js')
 //const db = require('./db.js')
 
+const pageScrollLength = 2;
 const app = express();
 
 app.get('/', (req, res) => {
     res
     .status(200)
-    .send('Hello Jumping, world!')
+    .send('Come to decode facebook!')
     .end();
 });
 
 
-app.get('/facebook/getPost', async (req, res) => {
+// URL: http://0.0.0.0:8082/facebook/getLatestPost
 
+app.get('/facebook/getLatestPost', async (req, res) => {
 
-    await scrapeGroup.getAllGroup();
-
+    await scrapeGroup.getAllGroup(pageScrollLength);
     res
         .status(200)
         .send('Facebook_group logged in!')
@@ -42,7 +45,6 @@ app.get('/facebook/getPost', async (req, res) => {
 });
 
 app.get('/facebook/putComment', async (req, res) => {
-
 
     await scrapeComment.gotopage();
 
@@ -53,13 +55,64 @@ app.get('/facebook/putComment', async (req, res) => {
 });
 
 
+app.get('/facebook/getYesterdayPost', async (req, res) => {
+    
+    await getYesPosts.getAllGroup(pageScrollLength)
+    res
+        .status(200)
+        .send('Facebook_group logged in!')
+        .end();
+});
+
+app.get('/facebook/getDateRangePost', async (req, res) => {
+
+    var query = req.query;
+    var startdate = query['startdate'];
+    var enddate = query['enddate'];
+    // Samplate July 7 at 8:13 AM startdate=05/07/2019&enddate=06/07/2019
+    console.log(startdate);
+    console.log(enddate);
+
+    startdate = new Date(startdate).toLocaleDateString();
+    enddate = new Date(enddate).toLocaleDateString();
+
+    if(startdate === enddate){
+        res
+            .status(200)
+            .send('Your sent startdate and enddate is == !' + String(startdate) + " == " + String(enddate))
+            .end();
+    }
+    else{
+        var flag = startdate < enddate;
+
+        if(flag === true){
+
+            res
+            .status(200)
+            .send('Your sent startdate and enddate is <= !' + String(startdate) + " == " + String(enddate))
+            .end();
+
+        }
+        else{
+            res
+            .status(200)
+            .send('Format of startdate and enddate is wrong >=!' + String(startdate) + " == " + String(enddate))
+            .end();
+        }
+    }
+    
+});
+
+
+
+
 const http = require('http');
 
 const hostname = '0.0.0.0';
 
 
 // Start the server
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8082;
 app.listen(PORT,hostname, () => {
   console.log(`App listening on port  ${hostname} ${PORT}`);
   console.log('Press Ctrl+C to quit.');

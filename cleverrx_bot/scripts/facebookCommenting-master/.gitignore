@@ -2,3 +2,4 @@ models/
 myUserDataDir/
 node_modules/
 groups/temp.html
+data/*
