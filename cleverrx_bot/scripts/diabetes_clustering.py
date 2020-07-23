@@ -41,7 +41,7 @@ def produce_entity_list(data):
                     output_dict[enty] = {'pos': pos, 'count': 1}
 
     output_df = pd.DataFrame.from_dict(output_dict, orient = 'index')
-    output_df['entity'] =df.index
+    output_df['entity'] =output_df.index
     output_df.index = range(len(df))
     return output_df, output_dict
 
