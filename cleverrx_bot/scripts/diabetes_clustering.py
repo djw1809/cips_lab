@@ -22,9 +22,8 @@ import json
 # pages_raw
 # raw
 # raw.index = range(len(raw))
-
-
 #%%
+
 
 def produce_entity_list(data):
     output_dict = {}
@@ -51,6 +50,6 @@ if __name__ == '__main__':
     pages_raw = pd.read_json('../data/facebookpages.json')
     raw = groups_raw.append(pages_raw)
     raw.index = range(len(raw))
-    raw = raw[0:3000]
+    #raw = raw[0:3000]
     output = produce_entity_list(raw)
     output[0].to_csv('diabetes_dataframe_short.csv')
