@@ -24,13 +24,13 @@
     "jsdom": "^15.2.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
-    "nodemon": "^2.0.4",
     "puppeteer": "^2.0.0",
     "sequelize": "^5.21.8",
     "sequelize-auto": "^0.4.29"
   },
   "devDependencies": {
     "mocha": "^7.1.2",
+    "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   },
   "bugs": {
