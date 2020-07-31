@@ -14,7 +14,7 @@ import bot_utils as butils
 from bot_utils import Comment_data_preprocessor, Comment_dataset
 
 
-test = True
+test = False
 new_dataset = True
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 if new_dataset:
@@ -40,17 +40,17 @@ else:
 
 results_dir = '../results'
 model_storage_dir = '../saved_models'
-file_stem = 'test' #'batch_060120_gpt2medium_prepend'
+
 
 parameter_dict = {}
-parameter_dict['epochs'] = 2
+parameter_dict['epochs'] = 10
 parameter_dict['num_worker'] = 2
-parameter_dict['batch_size'] = 5
+parameter_dict['batch_size'] = 10
 parameter_dict['learning_rate'] =5e-5
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8
 parameter_dict['warmup_steps'] =0
-parameter_dict['filename'] = 'encoder'
+parameter_dict['filename'] = 'card_data_autoencoder_073020'
 
 results_path = Path(Path(results_dir)/Path(parameter_dict['filename']))
 model_path = Path(Path(model_storage_dir)/Path(parameter_dict['filename']))
