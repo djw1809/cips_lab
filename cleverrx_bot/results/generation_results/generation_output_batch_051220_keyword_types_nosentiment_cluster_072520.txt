@@ -1,5 +1,5 @@
-prompt1: ['insurance-', 'Diabetes is not']     prompt2: ['card+', 'Try'] 
-k = 0  p = 0: 
+prompt1: ['insurance-', 'Diabetes is not']     prompt2: ['card+', 'Try']
+k = 0  p = 0:
 ---------------
 First sentences:
 Diabetes is not a problem for people with diabetes. Here's how to save. https://t.co/0q1q3qxj6x!!!!!!!!!!!!!!!!!!!!!
@@ -22,7 +22,7 @@ Try @RxRevu for your medication. https://t.co/XZQQQ6YQK!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/XZQQQ6YQK!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/XZQQQ6YQK!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/XZQQQ6YQK!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 0  p = 0.1: 
+k = 0  p = 0.1:
 ---------------
 First sentences:
 Diabetes is not a disease. Here's how to save. https://t.co/8l9k1q0q0l!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -45,7 +45,7 @@ Try @RxRevu for your medication. https://t.co/XZdYUQQQKZ!!!!!!!!!!!!!!!!!!!!!!!!
 Try @BlinkHealth for more information on how to save on your medications. https://t.co/9JYQQZQZK!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx for more information on how to save on your medications. https://t.co/ZZYJYUJQQJ!!!!!!!!!!!!!!!!!!!
 Try this #BlinkHealth plan to save on your medications. https://t.co/ZUUJQKZZtK!!!!!!!!!!!!!!!!!!!!!!
-k = 0  p = 0.2: 
+k = 0  p = 0.2:
 ---------------
 First sentences:
 Diabetes is not a common condition, but it is a condition that is just like the other medications that are still not available. Here's how to save. https://t.co/XwV6jJd9T!!!!!!!
@@ -68,7 +68,7 @@ Try @DrRx for more #digitalhealth and #healthcare. https://t.co/QVVxQ5WcF8!!!!!!
 Try to find the best price for your medications. https://t.co/qj8g3wj3qh!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @HoyRx to save on your medications. https://t.co/FX6Y6ZdU7!!!!!!!!!!!!!!!!!!!!!!!!
 Try the new PillPack! https://t.co/5QKYU5dJKU!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 0  p = 0.3: 
+k = 0  p = 0.3:
 ---------------
 First sentences:
 Diabetes is not a type 2 diabetes. Here's how to save. https://t.co/g4k4g2s0x2!!!!!!!!!!!!!!!!!!!!!!!
@@ -91,7 +91,7 @@ Try to save money on your prescriptions. Here's how to save. https://t.co/4qfXxF
 Try the top 10 tips for making your medication a lot more effective. https://t.co/2n5jh0lq0a!!!!!!!!!!!!!!!!!!!!!
 Try the @BlinkHealth app to help you save on your prescriptions. https://t.co/3wWUU5W8E8!!!!!!!!!!!!!!!!!!!!
 Try a lot of medications, and you can get more information about your meds. https://t.co/jg5f8d3wqf!!!!!!!!!!!!!!!!!!
-k = 0  p = 0.4: 
+k = 0  p = 0.4:
 ---------------
 First sentences:
 Diabetes is not a vaccine. I dont care if it is a rare attack or a specific pain.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -115,7 +115,7 @@ Try to make it better for your clients. https://t.co/7xQvJvJQZt!!!!!!!!!!!!!!!!!
 Try this on #medicare and get the best quality and lower prices! https://t.co/f3p4qf1y8l!!!!!!!!!!!!!!!!!!!
 Try your job for your first time and see how you can help. https://t.co/6v5a8n8z1i!!!!!!!!!!!!!!!!!!!!!
 Try the latest the digital health daily! https://t.co/8eXU7JdZxT!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 0  p = 0.5: 
+k = 0  p = 0.5:
 ---------------
 First sentences:
 Diabetes is not the problem. But if you have an illness, you may need a big pill. https://t.co/aO7r2Ql7H!!!!!!!!!!!!!!!!!!
@@ -138,7 +138,7 @@ Try @HealthHealthotive for a $25 pharmacy (655) GoodRx medication, now with a $1
 Try it @GoodRx on @Walgreens. https://t.co/JUv9WN5KcV!!!!!!!!!!!!!!!!!!!!!!!
 Try @conwaySengel: here's what you need to know. https://t.co/9dL2a2K8Wf!!!!!!!!!!!!!!!!!!!
 Try blink health for more care! https://t.co/8yV4YK0eP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 0  p = 0.6: 
+k = 0  p = 0.6:
 ---------------
 First sentences:
 Diabetes is not the best job for a sick patients. https://t.co/zbMqBk1ShT!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -161,7 +161,7 @@ Try a big thing. Read a new thing. save a lot. stay healthy. #fixpharmacy https:
 Try what you can. https://t.co/XkQYYVMQ8Z!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try finding the best medication for you. https://t.co/iEn6XqG4K0!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try out this comment from @folksstories @realdonaldtrump on how he can be expensive in the case of real health care. https://t.co/fCUn7TnJwZ!!!!!!
-k = 0  p = 0.7: 
+k = 0  p = 0.7:
 ---------------
 First sentences:
 Diabetes is not a normal science, but it doesnt cause "scientists" to take out medications. Here are the best tips from @PillPack #Healthinsurance https://t.co/Jpp1TYe93e!!!!!
@@ -184,7 +184,7 @@ Try and win more already. https://t.co/qlr43byp4h!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try my new flu shot this weekend! #HoneybeeHealth #Xsm #FDA #Ldata https://t.co/3YfM3GfX4R!!!!!!!!!!!!!
 Try PillPack. GoodRxHelps you with the ways you can afford to get better how you can save on the prescription meds you're ready to get less than. https://t.co/KQm6LgCl9
 Try https://t.co/UxC1fD2UbS  #communitymarketing #digitalhealth https://t.co/ClYfRzZYQV!!!!!!!!!!
-k = 0  p = 0.8: 
+k = 0  p = 0.8:
 ---------------
 First sentences:
 Diabetes is not a pain, but it's really generic. Here's what you need to know. https://t.co/n1dx52NklZ!!!!!!!!!!!!!!!!!!!!
@@ -202,14 +202,14 @@ Try blink! Read how to understand a one-based process on here: https://t.co/TwYU
 Try @RxRevu where you can get access to a free gifts list! #Folks https://t.co/HcC5mkUQ4h!!!!!!!!!!!!!!!
 Try a client: john karemica, a single-soft vp, has died at a series of ggix teams, for them and for his team, especially the inc. https://t.co/3safnaj2
 Try ways to realize your diagnosis and get a comprehensive treatment without trying. https://t.co/h9ubwzP1uM!!!!!!!!!!!!!!!!!!!!!!
-Try @mysteryshome for more information on patient issues. 
+Try @mysteryshome for more information on patient issues.
 
 #longevity #7 http://t.co/fp9iqzASOf!!!!!!!!!!!!!!!!
 Try the nyc solution if you have for time or bit of pain. Here's what you need to know: https://t.co/uomI5y5APj!!!!!!!!!!!!!
 Try them here: https://t.co/aqJtmZrZ5F https://t.co/vmMfXqqF4w!!!!!!!!!!!!!!!!!!!
 Try @BlinkHealth for longer! https://t.co/Q1nrKYXbYf!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try your story https://t.co/1rRp8lmx6h https://t.co/uR0wq6zgWt!!!!!!!!!!!!!!!!!
-k = 0  p = 0.9: 
+k = 0  p = 0.9:
 ---------------
 First sentences:
 Diabetes is not a yoga strategy. we are not next to your belly. Here are the da-carter english diabetes savings, and email data. https://t.co/mxlJJrVcOn!!!!!!!!
@@ -234,7 +234,7 @@ Try at to save from eating your teen sunday traditional presents!
  To look pretty, deserve some baby goose 401s! https://t.co/h You might wait for the book before selling.  We're happy to help.!!!
 Try this programs account," to support our official customer engagement video instead. #marketing https://t.co/blPDqqZTujM!!!!!!!!!!!!!!!!!!!
 Try the first federal impact credit card program that can help you save! https://t.co/plQRlJg4KY!!!!!!!!!!!!!!!!!!!!!!
-k = 0  p = 1: 
+k = 0  p = 1:
 ---------------
 First sentences:
 Diabetes is not flu this point. http://t.co/4snzur2qxu.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -258,7 +258,7 @@ Try buying most medications, we're working to treat them as well. Here's what yo
 Try @ () accomplished this awards goals living with youracey'sephilia moment with @teaprieps773 have another time! prison driver, newithidine. family and father, champagneless.!!!!!!!!!!!
 Try how the trends in paternity treat your textbook without social security? It's go today https://t.co/8jftsg60Og!!!!!!!!!!!!!!!!!!!!!
 Try PillPack with PillPack $6.25 on according to your resolution  https://t.co/uyOHD cardiovascular betus. If you need breakthrough agency mindppide yourself i share the sometimes more important differences. learn more in our terms
-k = 20  p = 0: 
+k = 20  p = 0:
 ---------------
 First sentences:
 Diabetes is not an issue that you're working with and should be able to find out how to save money with the price of the medication. Here's what you need to know. https://t.co/wXQzJdY5tM!
@@ -281,7 +281,7 @@ Try this tips for a new year, but are you working on your business? https://t.co
 Try @PillPack to learn more about a good business plan and your business. We’ll be happy to help. https://t.co/5N5N3U3ZQ5!!!!!!!!!
 Try a big price plan for your meds - and get started: https://t.co/v0i8dQZdQf https://t.co/Jt1nUzJfBz!!!!!
 Try blink to learn why you're so hard on your own. https://t.co/gjf2x3p3p5!!!!!!!!!!!!!!!!!!!!!!
-k = 20  p = 0.1: 
+k = 20  p = 0.1:
 ---------------
 First sentences:
 Diabetes is not a problem for people with diabetes. Here's how to save. https://t.co/9q1jw1qxjh!!!!!!!!!!!!!!!!!!!!!
@@ -304,7 +304,7 @@ Try @RxRevu for your medication. https://t.co/XZQQQQQQ6K!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/XQUQQ6YQK!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/XZUQUQY6Q!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/YQQQKQKQKQ!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 20  p = 0.2: 
+k = 20  p = 0.2:
 ---------------
 First sentences:
 Diabetes is not a #healthcare system. Here's how to save. https://t.co/q9w9j9q3qf!!!!!!!!!!!!!!!!!!!!!!
@@ -327,7 +327,7 @@ Try @RxRevu for your #Folks. https://t.co/ZQKUQ6U8ZZ!!!!!!!!!!!!!!!!!!!!!!
 Try this out: https://t.co/8qw9d7q8j7!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx for more information on how to save on your medications. https://t.co/YYQKZZU6Zt!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/1j4q3j0q5a!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 20  p = 0.3: 
+k = 20  p = 0.3:
 ---------------
 First sentences:
 Diabetes is not a condition that can be used to treat the pain of the heart. Here's how to save. https://t.co/XnQdZdXg9q!!!!!!!!!!!!!!
@@ -350,7 +350,7 @@ Try @GoodRx for your medication. https://t.co/N7U1VQY1KQ!!!!!!!!!!!!!!!!!!!!!!!!
 Try this for your medication. https://t.co/0w9jw8xq5q!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @BlinkHealth! https://t.co/QQZZYYUJ6K!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this #BlinkHealth app to save on your prescriptions. https://t.co/XZdQQKZZfY!!!!!!!!!!!!!!!!!!!!!!
-k = 20  p = 0.4: 
+k = 20  p = 0.4:
 ---------------
 First sentences:
 Diabetes is not a type 2 diabetes. Here's how to save. https://t.co/q5j4x7j3xw!!!!!!!!!!!!!!!!!!!!!!!
@@ -394,7 +394,7 @@ Try the new #BlinkHealth app to save on your medications. https://t.co/8ZYY8VJU6
 Try to get your meds to help you get your meds to help you get your meds to help you get your meds to get your meds to help you get your meds to get your medications to help you get your meds to
 Try this with a good gift card. https://t.co/v1p7j4w9qy!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/v5l4k7p3w9!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 20  p = 0.5: 
+k = 20  p = 0.5:
 ---------------
 First sentences:
 Diabetes is not a problem. Here's how to save on your meds. https://t.co/8yT7qZfZgQ!!!!!!!!!!!!!!!!!!!!!
@@ -417,7 +417,7 @@ Try this with GoodRx for more information on how to save on your prescription me
 Try a GoodRx Advocate to help you save on your medications. https://t.co/V6XJZUqJ7Z!!!!!!!!!!!!!!!!!!!!!
 Try @BlinkHealth. Here's how to save. https://t.co/KZYQ6KZYtF!!!!!!!!!!!!!!!!!!!!!!!
 Try the @BlinkHealth app for free. https://t.co/KUZcQY8QT8!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 20  p = 0.6: 
+k = 20  p = 0.6:
 ---------------
 First sentences:
 Diabetes is not a problem for people with #BlinkHealth. If you're a patient with #BlinkHealth, you should be able to save on your medication. https://t.co/XrXj1KqZf!!!!
@@ -440,7 +440,7 @@ Try to find the best quality and affordable prescription drugs in your business.
 Try this video from @GoodRx to save on your prescriptions! https://t.co/9VQ1NQK8T5!!!!!!!!!!!!!!!!!!!!!
 Try the latest mobile health care news from @folksstories. https://t.co/ZdZxYZQ6V0!!!!!!!!!!!!!!!!!!!!!!
 Try a lot of the medications you need. https://t.co/q5l7p4p8xw!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 20  p = 0.7: 
+k = 20  p = 0.7:
 ---------------
 First sentences:
 Diabetes is not a major disease. You're not going to take a med. Here's how to save. https://t.co/xj5xk7v5p3!!!!!!!!!!!!!!!
@@ -463,7 +463,7 @@ Try a new pharmacy. You can save $50. https://t.co/q9qf4y3pqp!!!!!!!!!!!!!!!!!!!
 Try this article by @GoodRx https://t.co/VJQQWJ5Jt8 https://t.co/8J1ZqKUQQZ!!!!!!!!!!!
 Try @RxRevu today! We’re working to find a better resolution and #fixpharmacy #healthcare!!!!!!!!!!!!!!!!!!!!!!!!
 Try a GoodRx PillPack with your PillPack pharmacy. Here's what you need to know. #Folks https://t.co/TQWXQNxU8a!!!!!!!!!!
-k = 20  p = 0.8: 
+k = 20  p = 0.8:
 ---------------
 First sentences:
 Diabetes is not a real thing. Here are the best medications for your body, and how to help them make it better. https://t.co/8h9f2zw6i3!!!!!!!!!!!!
@@ -486,7 +486,7 @@ Try it: https://t.co/5i2e5g1y4w!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try PillPack: https://t.co/XVzUUXj8TJ https://t.co/XzJ8YZV5Y3!!!!!!!!!!!!!!!
 Try to get the medication you need and it’s better for you than you do if you have a flu. https://t.co/XQ1H5Zg6Zt!!!!!!!!!!!
 Try a new plan for your insurance, and you might have to pay $2,500 for your medications. #FDA https://t.co/CJYqYqMfM!!!!!!!!!!!
-k = 20  p = 0.9: 
+k = 20  p = 0.9:
 ---------------
 First sentences:
 Diabetes is not a common condition in americans. https://t.co/wj1w2f0s8u!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -500,7 +500,7 @@ Diabetes is not a #GoodRxHelps. You can save on your insurance meds and save ove
 Diabetes is not a major difference between the health and health of all americans. Here's what you need to know: https://t.co/9wVqKcK6jK!!!!!!!!!!!!!
 Diabetes is not just the cost of a medication, but how long it can be taken. #healthcare #hospital #healthcaregivers #telemedicine #healthcare https://t.co/8n8lzj0nqq!
 Try @DrRx for your customers, more than any other pharmacy. https://t.co/J7C5Lv6LJV!!!!!!!!!!!!!!!!!!!!
-Try @Hoy Health to save more money on your medication. 
+Try @Hoy Health to save more money on your medication.
 *
 *
 #BlinkHealth
@@ -521,11 +521,11 @@ Try this app and learn more about the #Folks.
 #BlinkHealth https://t.co/C6Y8JgQt2H!!!!!!!!!!!!
 Try this one, and you can't forget how you love them!  https://t.co/7sj2s8lj1!!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx for more info on our referral program: https://t.co/C6D8N4Y1Wc #medtech https://t.co/9YU7N3qK8E!!!
-Try your new #HealthGoodRx app to get your prescription medication in the end. 
+Try your new #HealthGoodRx app to get your prescription medication in the end.
 
 
 https://t.co/KZpVUwVKcK!!!!!!!!!!!!!
-k = 20  p = 1: 
+k = 20  p = 1:
 ---------------
 First sentences:
 Diabetes is not the best example of what happened to the social media community because a person is just as expensive as a doctor. https://t.co/g5v0vj5g3n!!!!!!!!!!!!
@@ -548,7 +548,7 @@ Try to get more expensive and healthy by helping those in the world get more cus
 Try the PillPack app to save on my medications. http://t.co/WKQUU5l4YQ!!!!!!!!!!!!!!!!!!!!!!!!
 Try to use your best insurance list for your brand! The price of your PillPack pharmacy can be more than $3,000, and the prices of your prescription medications might help you with them. http://t.co/4VV2Y
 Try one of the big tips in the article about how the #data can help you save on prescription meds. https://t.co/q0v1d3d0e7!!!!!!!!!!!!
-k = 40  p = 0: 
+k = 40  p = 0:
 ---------------
 First sentences:
 Diabetes is not the first option for your body, but it can help your patients get better their prescription medications or have their medications lower the cost until the best product is done. #HIMSS14 #Bvsm #digitalhealth https://t.co/
@@ -575,7 +575,7 @@ Try any pillpack.
  You can use GoodRx in GoodRx in the mail, and you can save on this.!!!!!!!!!!!!!!!!!!!!!!
 Try a popular plan now and get $200 in cash for the opportunity to win. https://t.co/xw4gjh2VyJ!!!!!!!!!!!!!!!!!!
 Try some tips from your health plan to earn more, more and more online https://t.co/5mwv0q0jy1 https://t.co/qn5u5vh4zj!!!!
-k = 40  p = 0.1: 
+k = 40  p = 0.1:
 ---------------
 First sentences:
 Diabetes is not a problem for people with diabetes. Here's how to save. https://t.co/0l0q3jw9qf!!!!!!!!!!!!!!!!!!!!!
@@ -598,7 +598,7 @@ Try @RxRevu for your medication. https://t.co/ZUQZQQ6Y8!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/ZUZQK6QQZ!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/XUUU6ZZdZQ!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/XZQQQQ6Q6!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 40  p = 0.2: 
+k = 40  p = 0.2:
 ---------------
 First sentences:
 Diabetes is not a problem for people with diabetes. Here's how to save. https://t.co/j1q3jqxw6y!!!!!!!!!!!!!!!!!!!!!
@@ -621,7 +621,7 @@ Try @GoodRx for more information on how to save on your medications. https://t.c
 Try this #BlinkHealth list of the most expensive medications in the world. https://t.co/9N1D8YQJQW!!!!!!!!!!!!!!!!!!!
 Try this out! https://t.co/8xjw5j4j1u!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/0j9xj8x8q5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 40  p = 0.3: 
+k = 40  p = 0.3:
 ---------------
 First sentences:
 Diabetes is not a disease. Here's how to save. https://t.co/1i0y9p1xw1!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -644,7 +644,7 @@ Try @BlinkHealth for your medication. https://t.co/YN6Y1J7QZ!!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/5g1x5q1x8p!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this for your #BlinkHealth. https://t.co/5ZKxXU7ZcW!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try the #BlinkHealth app to save on your medications. https://t.co/0q1a9g7q1p!!!!!!!!!!!!!!!!!!!!!!
-k = 40  p = 0.4: 
+k = 40  p = 0.4:
 ---------------
 First sentences:
 Diabetes is not a type 2 diabetes. Here's how to save. https://t.co/8g5j8h1q5q!!!!!!!!!!!!!!!!!!!!!!!
@@ -667,7 +667,7 @@ Try this with your own medication. https://t.co/wV5dYQQfX5!!!!!!!!!!!!!!!!!!!!!!
 Try @PillPack. You can save on your prescriptions with GoodRx. https://t.co/XKU1Y6ZUZN!!!!!!!!!!!!!!!!!!
 Try this article to help you get your medication at the pharmacy you’re taking. https://t.co/v7p8v3x0n1!!!!!!!!!!!!!!!!!
 Try to get your medication from the pharmacy you want, and it's not just the insurance. https://t.co/0j7y2k1h8a!!!!!!!!!!!!!!!!
-k = 40  p = 0.5: 
+k = 40  p = 0.5:
 ---------------
 First sentences:
 Diabetes is not a bad thing. Here's how to get better. https://t.co/3d0a4w3h8x!!!!!!!!!!!!!!!!!!!!!!!
@@ -690,7 +690,7 @@ Try @GoodRx for more information on the GoodRx GoodRx coupon. #fixpharmacy #heal
 Try the @GoodRx PillPack and learn how to save on your medications. https://t.co/YVwM3Y6N3!!!!!!!!!!!!!!!!!!!
 Try to find the best pharmacy for your clients! https://t.co/qk8y5pq8d8!!!!!!!!!!!!!!!!!!!!!!!!!
 Try a lot of GoodRx. Here's how to save. https://t.co/9wZ7XjQ1tC!!!!!!!!!!!!!!!!!!!!!
-k = 40  p = 0.6: 
+k = 40  p = 0.6:
 ---------------
 First sentences:
 Diabetes is not a bad way to make your life a new year's holiday. Here's what you need to know. https://t.co/9qx3k7k2d7!!!!!!!!!!!!!
@@ -713,7 +713,7 @@ Try the new @PillPack app on @PillPack and you can save $10 off your medication.
 Try this with your PillPack pharmacy. https://t.co/wZwT5WQ9K5!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try these tips to help you get your medications more affordable. https://t.co/1yTxXxYbJt!!!!!!!!!!!!!!!!!!!!!!!
 Try to get the most expensive medication in your life, and if youre interested in the pharmacy, you should look into these ways. https://t.co/xWY3n4n0K1!!!!!!!!
-k = 40  p = 0.7: 
+k = 40  p = 0.7:
 ---------------
 First sentences:
 Diabetes is not a type 2 diabetes, but it is not an #FDA problem. https://t.co/9Rj9Q5Hc5a!!!!!!!!!!!!!!!!!!!
@@ -739,7 +739,7 @@ Try @PillPack to help you save on your medications! https://t.co/Y3WXxDkUxJ!!!!!
 Try your GoodRx medication for free. Here are some ways you can save. https://t.co/N0Y5E1W3W!!!!!!!!!!!!!!!!!!!
 Try PillPack for less than 1 month at your pharmacy. #Folks https://t.co/Xj9N1Jg7VZ!!!!!!!!!!!!!!!!!!!
 Try this on Blink with @RxRevu  https://t.co/XWV6HQN9KN https://t.co/dXJzYQfQ4Z!!!!!!!!
-k = 40  p = 0.8: 
+k = 40  p = 0.8:
 ---------------
 First sentences:
 Diabetes is not the worst problem in the us. Here's how to help. https://t.co/QJ5qW3Vv9V!!!!!!!!!!!!!!!!!!!!!
@@ -762,7 +762,7 @@ Try Blink: http://t.co/YXj6W9U1TV!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try to take time off when you are doing something you want to look into https://t.co/x7qw2pz6h0!!!!!!!!!!!!!!!!!!!!
 Try your best to get the best information from your customers! #FDA https://t.co/JXzW8K9t5s!!!!!!!!!!!!!!!!!!!!
 Try some new medications, but it will help them save the life of your doctor. https://t.co/5lq1x4y4f8!!!!!!!!!!!!!!!!!!
-k = 40  p = 0.9: 
+k = 40  p = 0.9:
 ---------------
 First sentences:
 Diabetes is not a "pharmacy" but a #hitsm. Here's how to save your meds. https://t.co/fM7R7W4D5q!!!!!!!!!!!!
@@ -776,7 +776,7 @@ Diabetes is not just a problem for people with #Pharmacy – it is an opportunit
 Diabetes is not one of my own and its also not the best solution.  #PillPack #GoodRxHelps!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Diabetes is not a disease, but it's a problem, and it's a pain. https://t.co/zY0Y1Qg8qE!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/kvwqx6l2k8 #standup...!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Try it @PillPack 
+Try it @PillPack
 
 
 *
@@ -791,7 +791,7 @@ Try the app for one of your prescriptions. https://t.co/nFW4Cz0yJt!!!!!!!!!!!!!!
 Try this #BlinkHealth with your local PillPack today! https://t.co/TJXG0t9N0!!!!!!!!!!!!!!!!!!!!!!!
 Try the latest #fixpharmacy marketing #Folks! https://t.co/3D2XQQT1tH https://t.co/8ZgXDqB8Qg!!!!!
 Try our Blink Health list of one-time medications with GoodRx. https://t.co/V1YnVzIbq!!!!!!!!!!!!!!!!!!!!!
-k = 40  p = 1: 
+k = 40  p = 1:
 ---------------
 First sentences:
 Diabetes is not much more than something about your health. Here in the link to the website, it was available in good and good care for every type of people. https://t.co/5r8s9Yd8dQ!!!!
@@ -803,7 +803,7 @@ Diabetes is not just a need for medication.  Here's why. https://t.co/vQ8d5r3d1b
 Diabetes is not real. If there's not a lot of pain that you need to reach for this #insulin isnt an only-time-to-fitness #privacy!!!!!!!!!!!!!!!!
 Diabetes is not just a real type of depression.  Here are some ways to create a better time for children, a better life and your loved one that can help your patients save for a more in-health daily. https://t.co/0yj
 Diabetes is not the only thing that can be addressed by a doctor. Here’s an more affordable way to keep #healthcare customers safe and more safe. https://t.co/2N8hvKt7WK!!!!
-Diabetes is not a rare diagnosis, but often a pain - and its not a solution. 
+Diabetes is not a rare diagnosis, but often a pain - and its not a solution.
 
 PillPack works for you with generic medications that are recyclable, not simple to get.  https://t.co/eLkCZ
 Try this great plan. This #BlinkHealth program can help you treat more chronic pain & #BlinkHealth patients https://t.co/wDZqVhHkDp #medicine #digitalmed!!!!
@@ -819,7 +819,7 @@ Try this video of your #BlinkHealth team's experience tonight with a lot of my p
 Try PillPack for those of your friends who care about your own health. Here's how we love their #healthcare. https://t.co/vZ8QYNtLVd!!!!!!!!!!
 Try the free app! https://t.co/0HdQVWUqg8 #standup...!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try a app that looks forward to creating a great solution while you were there. https://t.co/yS8yC4Lp8H!!!!!!!!!!!!!!!!!!!
-k = 60  p = 0: 
+k = 60  p = 0:
 ---------------
 First sentences:
 Diabetes is not a lot more than a high blood pressure, but one way that patients can get the same access to myrx is in their own business! #Health #tech #drugpricing!!!!!!!!!!!!!!
@@ -845,7 +845,7 @@ Try this free @HoyRx app to get $2,000 https://t.co/u4GUHnMtVp https://t.co/HJjw
 Try it: https://t.co/7p0z7t7cgO #staffing!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try your pharmacist's PillPack website in pharmacy! We're happy to reach out to you shortly to help save your community. #FDA #FDAapproval https://t.co/vfkGG0UkN5 via
 Try to learn more about social determinants of health when using GoodRx! https://t.co/m1p8xfVqZWZ https://t.co/5e2g3MwQgU!!
-k = 60  p = 0.1: 
+k = 60  p = 0.1:
 ---------------
 First sentences:
 Diabetes is not a #FDA problem. Here's how to save. https://t.co/QXQJ6XJ6T!!!!!!!!!!!!!!!!!!!!!!!
@@ -868,7 +868,7 @@ Try @RxRevu for your medication. https://t.co/YZZU6UQQZ!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/ZUQQQQ6K6!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/ZZZQU6U6Y!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/YYZUQKZQZt!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 60  p = 0.2: 
+k = 60  p = 0.2:
 ---------------
 First sentences:
 Diabetes is not a problem for people with diabetes. Here's how to save. https://t.co/7jwW7JqK7E!!!!!!!!!!!!!!!!!!!!!
@@ -891,7 +891,7 @@ Try this out! https://t.co/7x5j4j4j3p!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medications. https://t.co/NQZJ6VU6Y!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/8wXJt2Q6ZQ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx for more info on how to save on your medications. https://t.co/YVZNQZJZf!!!!!!!!!!!!!!!!!!!!
-k = 60  p = 0.3: 
+k = 60  p = 0.3:
 ---------------
 First sentences:
 Diabetes is not a disease. Here's how to save. https://t.co/q1x0kqg8l9!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -914,7 +914,7 @@ Try to get your medication at the pharmacy that you can afford. https://t.co/q0n
 Try @RxRevu for more information on how to save on your prescription medications. https://t.co/ZYVZ6QxXYQ!!!!!!!!!!!!!!!!!
 Try the #BlinkHealth app for your medications. https://t.co/KZYVV5VU2W!!!!!!!!!!!!!!!!!!!!!!!!
 Try the new #BlinkHealth program, here: https://t.co/VUZY8K6T5Q!!!!!!!!!!!!!!!!!!!!!!!!
-k = 60  p = 0.4: 
+k = 60  p = 0.4:
 ---------------
 First sentences:
 Diabetes is not a bad thing. Here's how to save on your meds. https://t.co/q4p1hjq9y0!!!!!!!!!!!!!!!!!!!!
@@ -937,7 +937,7 @@ Try the app to get your medications in the same time. https://t.co/7pq3v0y0n5!!!
 Try a new PillPack account with GoodRx and save $10 on your prescription. https://t.co/7xJYVZYt2N!!!!!!!!!!!!!!!!!
 Try @RxRevu https://t.co/XdZ6VzNxVp!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this article here: https://t.co/p9kq1k0h8p https://t.co/x5jw7y3y8q!!!!!!!!!!!!!!
-k = 60  p = 0.5: 
+k = 60  p = 0.5:
 ---------------
 First sentences:
 Diabetes is not a common condition, but it can be a problem. Here's how to save. https://t.co/k6lXg4WfZt!!!!!!!!!!!!!!!!!
@@ -960,7 +960,7 @@ Try this for your prescriptions: https://t.co/p1qg8jk3l8 https://t.co/j4d2d4x8y7
 Try this #BlinkHealth https://t.co/KN3H3N7TqV https://t.co/FU1V2M7JQ1!!!!!!!!!!!!!
 Try this for your #Healthtech team! https://t.co/5JZVJ7H2JU!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try it out here: https://t.co/3q7h9xz2p3!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 60  p = 0.6: 
+k = 60  p = 0.6:
 ---------------
 First sentences:
 Diabetes is not a problem in #BlinkHealth. You can get the best cost for your medications by taking our website on GoodRx. https://t.co/xZn7JYjJQ6!!!!!!!!
@@ -972,7 +972,8 @@ Diabetes is not a real condition, but it is a pain. Here are some ways to save o
 Diabetes is not a problem for people with diabetes. Here's what you need to know. https://t.co/3g5d7lx0jy!!!!!!!!!!!!!!!!!!!
 Diabetes is not a rare condition, but it's not a thing that will be approved for that year. https://t.co/Xb1Xv8qKxE!!!!!!!!!!!!!!!!
 Diabetes is not a condition that may be prescribed in a lot of people. Here are the top 5 medications that are on the right thing to do. https://t.co/hj7d8r3d2o!!!!!!!
-Diabetes is not the same as a type 2 diabetes. Here's how to save. https://t.co/jh3tKdWjRj!!!!!!!!!!!!!!!!!!!!
+Diabetes is not the same as a type 2 diabetes. Here's how to save. https://t.co/jh3tKdWjRj!!!!!!!!!!!!!!!!!!!!Look into your medication, and you can get a $50 gift card for your medication. https://t.co/QJwRZmYqQe!!!!!!!!!!!!!!!!!!
+
 Try a #BlinkHealth site with GoodRx, here: https://t.co/XUUJd2T4L6 https://t.co/T8LjRJn7QE!!!!!
 Try this: https://t.co/p3pqd5qjzr #staffing!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try these tips to improve your health: https://t.co/3r2z4h9g7g #Folks!!!!!!!!!!!!!!!!!!!!!!!
@@ -1000,7 +1001,7 @@ Try @RxRevu to save your life with GoodRx.
 
 
 #Folks https://t.co/ZdYK4TfO0M!!!!!!!!!!
-k = 60  p = 0.7: 
+k = 60  p = 0.7:
 ---------------
 First sentences:
 Diabetes is not a serious problem, but it is the right thing to do. https://t.co/5w0n4d2i1u!!!!!!!!!!!!!!!!!!!!!
@@ -1034,7 +1035,7 @@ Try your best to get your prescriptions available today! https://t.co/1XzDvZdK6n
 Try a new customer service solution this holiday season, here's how to get $50 in gift cards! https://t.co/3d5j3j5a8n!!!!!!!!!!!!!!
 Try this @BlinkHealth. If you have any questions, you can find it in the blog post: https://t.co/D7VnK1YgWf https://t.co/7wWW2Q1
 Try to get the most affordable meds on your medications. We're working on the opportunity to help. #FDA #FDAapproval https://t.co/YYvI9GfBxO!!!!!!
-k = 60  p = 0.8: 
+k = 60  p = 0.8:
 ---------------
 First sentences:
 Diabetes is not a disease, but it's a brain failure. Read more about it here: https://t.co/Yq6WjKYQjZ #Folks https://t.co/C8F5Lb1a
@@ -1057,7 +1058,7 @@ Try the new PillPack: https://t.co/GZqd7QZdR0 #staffing!!!!!!!!!!!!!!!!!!!!!!!!!
 Try finding a one-year prescription for a prescription this week. https://t.co/jfYw5B1d6N!!!!!!!!!!!!!!!!!!!!!!
 Try our new digital marketing pharmacy app to save on your medications. https://t.co/QnGgYQqF1K #marketing https://t.co/7UVnXpNjG7!!!
 Try to get the price you need at a pharmacy and keep it in my site. https://t.co/KZWxZw3NnQ!!!!!!!!!!!!!!!!!!
-k = 60  p = 0.9: 
+k = 60  p = 0.9:
 ---------------
 First sentences:
 Diabetes is not something that isnt not important to me. Glad to hear you are trying to get on and pay for a new order.
@@ -1087,7 +1088,7 @@ Try to make sure your medication would be the same when you buy it. They're in y
 Try these tips to help us find a better health plan with your data. https://t.co/1k3gJxZq5O!!!!!!!!!!!!!!!!!!!!
 Try the Blink Health account to get in touch with your doctor if you're a patient who has disabilities and get the most out of it. https://t.co/yXeZQ5wVUb!!!!!!!
 Try the latest mobile trends and how to make money on your #customers' medication. https://t.co/f8x7zdC1Sj #mentalhealth!!!!!!!!!!!!!!
-k = 60  p = 1: 
+k = 60  p = 1:
 ---------------
 First sentences:
 Diabetes is not a disease, but it is a disease. Here's how to help you know why. https://t.co/u8xR8O0cfy!!!!!!!!!!!!!!!!!
@@ -1110,7 +1111,7 @@ Try the new #FDA #FDA’s link and learn free coverage of the generic GoodRx Adv
 Try it: You can join my blog program and see the guide to your site with your first free @RxRevu tomorrow! https://t.co/vB7Hq7Jh6y!!!!!!!!
 Try GoodRx for more customers! https://t.co/IH7sC0pZMJ!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try #Folks  Here are 10 things you need to know about #BlinkHealth!  http://t.co/1I4tYPZQBx!!!!!!!!!!!!!!
-k = 80  p = 0: 
+k = 80  p = 0:
 ---------------
 First sentences:
 Diabetes is not the first thing that makes a doctor an easy to get drug. Here are the most expensive medications in the world. https://t.co/ZaHXr6lT8s!!!!!!!!!!!
@@ -1129,7 +1130,7 @@ Try this, and how you can improve your own family service. https://t.co/VZY1t5WY
 Try one of these ways to save yourself on your prescriptions: httmo https://t.co/Mi9eW3RxKp!!!!!!!!!!!!!!!!!!!!!
 Try a new PillPack article – we're happy to help. https://t.co/OU4HeM2RQt!!!!!!!!!!!!!!!!!!!!!!
 Try to make it right. https://t.co/dfyqzpsb1q #Folks https://t.co/4g2PI9XhQN!!!!!!!!!!!
-Try this in a new podcast post, just with Blink https://t.co/eP6P3KqJi0.  We are excited to hear about your medication and take your pain treatment for a time. 
+Try this in a new podcast post, just with Blink https://t.co/eP6P3KqJi0.  We are excited to hear about your medication and take your pain treatment for a time.
 ”
 
 Try @GoodRxHelps  - which doesn't mean you can't do it. We're thankful to help you save. It’s free and can feel easy to call today.
@@ -1140,7 +1141,7 @@ Try @GoodRxHelps  - which doesn't mean you can't do it. We're thankful to help y
 #Blink
 Try a donation to save up to $70 for some medications https://t.co/X4Nnza9ojJ!!!!!!!!!!!!!!!!!!!!!!!!!
 Try these great tips, as well as https://t.co/aqiT1vgU4P!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 80  p = 0.1: 
+k = 80  p = 0.1:
 ---------------
 First sentences:
 Diabetes is not a problem for people with diabetes. Here's how to save. https://t.co/9wQdXg8qQ!!!!!!!!!!!!!!!!!!!!!!
@@ -1163,7 +1164,7 @@ Try @RxRevu for your medication. https://t.co/XUQQ6U6QZ!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/YYZU8Y8YZ!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/YZQQU6Q6Y!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/YZQKQZ6YQ!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 80  p = 0.2: 
+k = 80  p = 0.2:
 ---------------
 First sentences:
 Diabetes is not a disease. Here's how to save. https://t.co/9h3y9x0w9x!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1186,7 +1187,7 @@ Try @GoodRx for more information on how to save on your medications. https://t.c
 Try this out: https://t.co/0d5d4q8p0q!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this #BlinkHealth list of the most expensive medications for your patients. https://t.co/NxYqJdW1T!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu to save on your medications. https://t.co/WUQJQ6QJK!!!!!!!!!!!!!!!!!!!!!!!!
-k = 80  p = 0.3: 
+k = 80  p = 0.3:
 ---------------
 First sentences:
 Diabetes is not a major problem in the us. Here's how to save. https://t.co/j8d4l5p1y1!!!!!!!!!!!!!!!!!!!!!
@@ -1209,7 +1210,7 @@ Try the @RxRevu app to save on your prescriptions. https://t.co/XYZQY7dKcQ!!!!!!
 Try this article: https://t.co/8g8d7p3xw5 https://t.co/0e1j7q1q5r!!!!!!!!!!!!!!!
 Try the #BlinkHealth plan to save on your medications. https://t.co/7XK5JJ4T6V!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your #BlinkHealth. https://t.co/Z9V1RQQ1Y0!!!!!!!!!!!!!!!!!!!!!!
-k = 80  p = 0.4: 
+k = 80  p = 0.4:
 ---------------
 First sentences:
 Diabetes is not a problem for people with #FDA #FDAapproval. Here's how to save. https://t.co/Y6Y1Q3QqGf!!!!!!!!!!!!!!
@@ -1232,7 +1233,7 @@ Try a new PillPack account and enter to win a $25,000 gift card! https://t.co/XZ
 Try to find a better resolution and #fixpharmacy  https://t.co/XZt9N6QnX!!!!!!!!!!!!!!!!!!!!!!!
 Try to get the best app for your medications. https://t.co/4XYdGv9Xt2!!!!!!!!!!!!!!!!!!!!!!!!!
 Try the link below to learn more about how you can save on your prescriptions. https://t.co/wJZjHcZ6H!!!!!!!!!!!!!!!!!!!!
-k = 80  p = 0.5: 
+k = 80  p = 0.5:
 ---------------
 First sentences:
 Diabetes is not a problem. Here's how to get started. https://t.co/yj5w8q3yjh!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1271,7 +1272,7 @@ Try this #BlinkHealth list of ways to get your meds more safe and affordable. ht
 Try to save money on your prescriptions, and get started with your medications! https://t.co/4w4e3n8e3y!!!!!!!!!!!!!!!!!!!!
 Try to get the best gift for your doctor. https://t.co/x2v8fq4qy9!!!!!!!!!!!!!!!!!!!!!!!!!
 Try to get a better care for your patients. Here's how to get more money from your customers. https://t.co/XmQYxG3Z7!!!!!!!!!!!!!!!
-k = 80  p = 0.6: 
+k = 80  p = 0.6:
 ---------------
 First sentences:
 Diabetes is not a #Rx drug. Here's how to get a better resolution. https://t.co/PXUQ1cXY3e!!!!!!!!!!!!!!!!!!!
@@ -1294,7 +1295,7 @@ Try the app, but you can't see your insurance and can't get the price you need. 
 Try this for your local GoodRx app. https://t.co/C5D5x5WU7Y!!!!!!!!!!!!!!!!!!!!!!!!!
 Try it and save. https://t.co/QXU1qJ7RKZ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try these tips to save on your medications. https://t.co/VJ6YwY4TqT!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 80  p = 0.7: 
+k = 80  p = 0.7:
 ---------------
 First sentences:
 Diabetes is not a major disease. Here are some tips to help you save on your meds. https://t.co/2p1rkw0nj3!!!!!!!!!!!!!!!!!
@@ -1317,10 +1318,10 @@ Try Blink for your medication. https://t.co/D5U8q2dKW2!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @DrCuHealth https://t.co/Y8PcYWWX4d!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @WIRED: Here's what you need to know. #Folks https://t.co/ZJWV0DQ7Ww!!!!!!!!!!!!!!!!!!
 Try @GoodRx for more affordable prescription drugs https://t.co/QD1KqL8ZV https://t.co/n1T6IbCvC0!!!!!!!!!!
-k = 80  p = 0.8: 
+k = 80  p = 0.8:
 ---------------
 First sentences:
-Diabetes is not a disease. 
+Diabetes is not a disease.
 
 #FDA #FDAapproval http://t.co/Y4DZdGkP7Z #HIMSS14 #FDAapproval #FDA #PillPack #Fol
 Diabetes is not a key one in a health insurance model. https://t.co/0u4e1p5cwq!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1342,10 +1343,10 @@ Try one of these tips to save money: https://t.co/0iPfO8c4t3 #GoodRxHelps!!!!!!!
 Try @RxRevu! https://t.co/xWQ4UQ5UnQ!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try to find the best medication for you, and be better than you did on the right side of your heart. https://t.co/y4o2i8c4yj!!!!!!!!!!!!
 Try some one-time generic medications? We review this tips to protect your medications with GoodRx! https://t.co/XKbDw5lXvE!!!!!!!!!!!!!!
-k = 80  p = 0.9: 
+k = 80  p = 0.9:
 ---------------
 First sentences:
-Diabetes is not really the best place for healthcare. 
+Diabetes is not really the best place for healthcare.
 #BlinkHealth @RxRevu @MedsitGiabetes
 
 *
@@ -1375,7 +1376,7 @@ Try one of these solutions, in the site in bio. We're offering a "fda" app. #FDA
 Try this important data-based platform to improve your #medication in our #patient care program. https://t.co/HTU2tXV0XH https://t.co/XwJF1jVy9
 Try these tips to build a good health insurance program. https://t.co/SYRV1cQTm9!!!!!!!!!!!!!!!!!!!!!!!!
 Try these tips to get your meds done! https://t.co/9p3L3YfqnS!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 80  p = 1: 
+k = 80  p = 1:
 ---------------
 First sentences:
 Diabetes is not like a problem that is not part of the flu, but is wrong here all over the world.. https://t.co/9TuF2ToPv0!!!!!!!!!!!!!!
@@ -1399,7 +1400,7 @@ Try something very kind to your child, in someone living with cancer. You’re w
 Try all most customers at diabetes drugs. Here's what you need to know. https://t.co/7J0XgKtUQN!!!!!!!!!!!!!!!!!!!
 Try @RxRevu today for a chance to win a $3-2 online gift! https://t.co/bppn1R7lI1!!!!!!!!!!!!!!!!
 Try my coupon by providing the cost of your prescription, or a part of these pills. Here are some more data-income solutions the digital health program helps us find. https://t.co/nVMQ0HlmgH!!
-k = 100  p = 0: 
+k = 100  p = 0:
 ---------------
 First sentences:
 Diabetes is not our own! Today, the business of #biotech is into the change to take health services the future of health, according to @RxRevu is in the holidays! https://t.co/o7JwjJfyi
@@ -1426,7 +1427,7 @@ Try @livesfederal. We’re working towards a price transparency discount this ye
 Try PillPack. – your meds can lose its same price for 10rd or $25. read more: https://t.co/7S7sEdYtNv!!!!!!!!!!!!
 Try an type 2 diabetes marketing customer service pharmacy at how i care for my patients. Happy the amazing job they're making in 2018. https://t.co/1nm1E5tRO3!!!!!!!!
 Try a great idea.... To avoid your vision, learn how to take care of everything you're reading and the information you want to do.“ https://t.co/ZcRZtY8ygM!!!!!!
-k = 100  p = 0.1: 
+k = 100  p = 0.1:
 ---------------
 First sentences:
 Diabetes is not a problem for people with diabetes. Here's how to save. https://t.co/q3q1xjw1x3!!!!!!!!!!!!!!!!!!!!!
@@ -1449,7 +1450,7 @@ Try @RxRevu for your medication. https://t.co/KZQU8ZQ6Y!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/ZZZQZdQ6K!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/KQQZZdQQZQ!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your #Folks. Here's how to save. https://t.co/XZUQYQQ6YQ!!!!!!!!!!!!!!!!
-k = 100  p = 0.2: 
+k = 100  p = 0.2:
 ---------------
 First sentences:
 Diabetes is not a type 2 diabetes. Here's how to save. https://t.co/9q1j9q0w8e!!!!!!!!!!!!!!!!!!!!!!!
@@ -1472,7 +1473,7 @@ Try the @RxRevu app to save on your medications. https://t.co/KxYJU8YQK!!!!!!!!!
 Try @RxRevu to save on your medications. https://t.co/9XJUZYJ7U!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your #BlinkHealth app. https://t.co/N6TU1VJ6ZQ!!!!!!!!!!!!!!!!!!!!!
 Try the new @GoodRx app to save on your medications. https://t.co/XUJZKU8K8W!!!!!!!!!!!!!!!!!!!!!
-k = 100  p = 0.3: 
+k = 100  p = 0.3:
 ---------------
 First sentences:
 Diabetes is not a problem for people with #healthcare. Here's how to save. https://t.co/0h0d4q1y0w!!!!!!!!!!!!!!!!!!!
@@ -1495,7 +1496,7 @@ Try to get your meds from the pharmacy you want. https://t.co/XjU7d9YbZ!!!!!!!!!
 Try @GoodRx for more affordable prescription medications. https://t.co/W6ZUU7XK8Z!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu to get your medication, and enter to win a $50 gift card! https://t.co/q9XZt5WcW!!!!!!!!!!!!!!!
 Try @GoodRx for your prescriptions! https://t.co/8XVZZdUJ4J!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 100  p = 0.4: 
+k = 100  p = 0.4:
 ---------------
 First sentences:
 Diabetes is not a disease. Here's how to get your medications through the holidays. https://t.co/9qjh3y4y3a!!!!!!!!!!!!!!!!!!!!
@@ -1518,7 +1519,7 @@ Try a new PillPack and get your meds on your phone. https://t.co/XdUJ5KxWg2!!!!!
 Try to get your medication to be more affordable. https://t.co/9VQJQQQKfO!!!!!!!!!!!!!!!!!!!!!!!!!
 Try the @BlinkHealth team to learn more about your #FDA and how to save on your medications. https://t.co/8R7HxN8W1K!!!!!!!!!!!!
 Try to get your medication on the way. Here's how to get it to you. https://t.co/ZNqVUxK5d2!!!!!!!!!!!!!!!!!
-k = 100  p = 0.5: 
+k = 100  p = 0.5:
 ---------------
 First sentences:
 Diabetes is not a bad thing. Here's how to get started: https://t.co/2v0jwW5TjT!!!!!!!!!!!!!!!!!!!!!!!
@@ -1541,7 +1542,7 @@ Try this video to find out how to find your medications on the app. https://t.co
 Try it: https://t.co/vq0f1y1v4a!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this video of @folksstories: https://t.co/wVkYtM6dZd!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @folksstories: https://t.co/xZU2pJvR2a!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 100  p = 0.6: 
+k = 100  p = 0.6:
 ---------------
 First sentences:
 Diabetes is not the same as a pain. Here's how to get your medications directly. https://t.co/kY0Vj5XwKQ!!!!!!!!!!!!!!!!!!!
@@ -1564,7 +1565,7 @@ Try your new pharmacy: https://t.co/7XYZ8Y4HY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try it: https://t.co/f5i3s1k4p2 https://t.co/p9dz2s0f3q!!!!!!!!!!!!!!!!
 Try this article from @blinkhealth and learn more about how to use it to save on your prescription medications. https://t.co/uCUjJXn9E2!!!!!!!!!!!!
 Try to find the best way to save on your medications. Here's what to do. https://t.co/Y8WXK1TqT!!!!!!!!!!!!!!!!!!
-k = 100  p = 0.7: 
+k = 100  p = 0.7:
 ---------------
 First sentences:
 Diabetes is not an #fixpharmacy, but we've got the most common condition. Here's how to help! https://t.co/4kzwv1zd8m!!!!!!!!!!!!
@@ -1590,7 +1591,7 @@ Try the new PillPack program, we've been diagnosed with a generic of the new med
 Try the top 7 tips for #healthcare in #digitalhealth  #healthcare #healthcare #medicine #healthtech #medtech #healthtech #digitalhealth #medtwitter #hcldr #pharmacy #medic
 Try this: https://t.co/p0lwZ9WxD1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try PillPack for your prescription. Here's what you need to know. https://t.co/D5K5Q2E8Cz!!!!!!!!!!!!!!!!!!!!
-k = 100  p = 0.8: 
+k = 100  p = 0.8:
 ---------------
 First sentences:
 Diabetes is not a problem when your health isnt available. Here are some medications that will help! https://t.co/Z9yFXX5s6b!!!!!!!!!!!!!!!!!
@@ -1601,7 +1602,7 @@ Diabetes is not so easy to read when it comes to the #Cpf #JekieHealth https://t
 Diabetes is not an exciting way to help patients save on medications. Read our latest webinar to find out more about how our prescription drugs can help. https://t.co/N0gMj8t5Ed #Folks https://t
 Diabetes is not a a major disease, but it is a thing of what it is. Here's how it can save your life. https://t.co/3V3U4dFtZb!!!!!!!!!!
 Diabetes is not just the problem of your blood sugar, it's the impact on your diabetes. #SaveWalgreens!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Diabetes is not too dangerous. You can be able to make the price of your prescriptions available. 
+Diabetes is not too dangerous. You can be able to make the price of your prescriptions available.
 
 
 
@@ -1621,7 +1622,7 @@ Try @honeybeehealth with your favorite medications and your prescriptions and yo
 #BlinkHealth https://t.co/H7JZlOqWgW!!!
 Try GoodRx for the chance to win a chance to win 1 of 12 health care systems. https://t.co/gVcY5wCbZ!!!!!!!!!!!!!!!!
 Try the big new medication (yes, so you can get any reason, and also use your own) to save on a generic or lower costs. https://t.co/6v4iSZ7bV6!!!!!
-k = 100  p = 0.9: 
+k = 100  p = 0.9:
 ---------------
 First sentences:
 Diabetes is not a disease. Here's how you can save on your #healthcare goals. https://t.co/dPYKQzN0bW!!!!!!!!!!!!!!!!!!
@@ -1644,7 +1645,7 @@ Try it out: https://t.co/WwN4nJGxvE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try an GoodRx medication that can save you some money. https://t.co/h9d8i1p2e0!!!!!!!!!!!!!!!!!!!!!!
 Try your health plan and learn how to learn more about your health insurance. https://t.co/DYwZp4bYWJ!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx here: https://t.co/kKdNYQfP8E!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 100  p = 1: 
+k = 100  p = 1:
 ---------------
 First sentences:
 Diabetes is not a simple advantage. The most popular brands take advantage of you.https://t.co/p9s5pjZtKQ #digitalhealth https://t.co/y3rjMqo2tM!!
@@ -1667,7 +1668,7 @@ Try the new @Ornavox Health coverage card on @njhealth. https://t.co/sBpYQ3tWmg 
 Try sharing these tips with you in #Folks  https://t.co/JvqOv7Hv0l!!!!!!!!!!!!!!!!!!!!!!!
 Try @KIM Health. It’s so good to have you with PillPack. #HIMSS14!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try help @BlinkHealth. https://t.co/F9xQX7UpEW https://t.co/e1EG7MhKNhQ!!!!!!!!!!!
-k = 120  p = 0: 
+k = 120  p = 0:
 ---------------
 First sentences:
 Diabetes is not a nightmare. Here's how to treat it. https://t.co/w74okcfybq!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1690,7 +1691,7 @@ Try finding the affordable meds you need to find free insurance. https://t.co/B4
 Try our #Rx providers to grow your membership in the #Hoybeat https://t.co/QtHbZvvUkg!!!!!!!!!!!!!!!!!!!!
 Try using GoodRx 1/19 at #healthcare. https://t.co/8RGWnC4rhR!!!!!!!!!!!!!!!!!!!!!!!
 Try @BlinkHealth with #RxRevu: Here are some tips to save less on your GoodRx site. https://t.co/3j73JJtWux!!!!!!!!!!!
-k = 120  p = 0.1: 
+k = 120  p = 0.1:
 ---------------
 First sentences:
 Diabetes is not a problem for people with diabetes. Here's how to save. https://t.co/9q1q1j9qx0!!!!!!!!!!!!!!!!!!!!!
@@ -1713,7 +1714,7 @@ Try @RxRevu for your #Folks. Here's how to save. https://t.co/ZUZUJZQ6Z!!!!!!!!!
 Try @RxRevu for your #Folks. Here's how to save. https://t.co/YYZQU6VU6Z!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/XQUJU6U8K!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your #Folks. Here's how to save. https://t.co/XQQQYQYJZQ!!!!!!!!!!!!!!!!
-k = 120  p = 0.2: 
+k = 120  p = 0.2:
 ---------------
 First sentences:
 Diabetes is not a disease. Here's how to save. https://t.co/8g8lqg7l8h!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1736,7 +1737,7 @@ Try @RxRevu to save on your medications. https://t.co/KcZJZU6QY!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/Y1QU5U6ZZV!!!!!!!!!!!!!!!!!!!!!!!!!
 Try the new @GoodRx app to save on your medications. https://t.co/YJKUQZU8U!!!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx for your medication. https://t.co/W1UZU8VZQ!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 120  p = 0.3: 
+k = 120  p = 0.3:
 ---------------
 First sentences:
 Diabetes is not a major disease. Here's how to save. https://t.co/1y9h3p5qyq!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1759,7 +1760,7 @@ Try the GoodRx coupon for $10,000. Here's how to save. https://t.co/5K1U6K7ZtZ!!
 Try this tips for building your #healthcare company. https://t.co/xZQxWcKQ6J!!!!!!!!!!!!!!!!!!!!!!!!
 Try @PillPack for your medication. https://t.co/KQKQ5Y4jY!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try the new PillPack app and get the best price on your medications. https://t.co/g1j0n5j3d2!!!!!!!!!!!!!!!!!!!!
-k = 120  p = 0.4: 
+k = 120  p = 0.4:
 ---------------
 First sentences:
 Diabetes is not a diabetes. Here's how to get it. https://t.co/w9z8h7y0n8!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1801,7 +1802,7 @@ Try @BlinkHealth for your medications. Here's how to save. https://t.co/5CJQN9XZ
 Try a new PillPack and get a free gift card. https://t.co/5ZwVj1ZgQ3!!!!!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/g7q2d7n1d5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try a new #BlinkHealth plan for your medications, including a $100k copay. https://t.co/XZxQU5VqU2!!!!!!!!!!!!!!!
-k = 120  p = 0.5: 
+k = 120  p = 0.5:
 ---------------
 First sentences:
 Diabetes is not a type 1 diabetes. Here's how to save on it. https://t.co/lw5qg7q1w2!!!!!!!!!!!!!!!!!!!!!
@@ -1841,7 +1842,7 @@ Try a good idea to be able to get your meds on the same day. Here's how to get t
 Try @GoodRx for free. You can save on your prescription. #FDA #FDAapproval https://t.co/P6V0Zx2Zt5!!!!!!!!!!!!
 Try to be a different place when you see the pharmacy. https://t.co/q3pq1d8l4o!!!!!!!!!!!!!!!!!!!!!!!
 Try @DrRx for your medication. https://t.co/YZ6L4K2Zt!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 120  p = 0.6: 
+k = 120  p = 0.6:
 ---------------
 First sentences:
 Diabetes is not a #BlinkHealth! Here's how to save. https://t.co/D0T8C1xNxE!!!!!!!!!!!!!!!!!!!!!!
@@ -1864,7 +1865,7 @@ Try GoodRx for your meds! https://t.co/2QK5xB5J3!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @BlinkHealth. Here's how you can save. https://t.co/PQ2Xn5VVfF!!!!!!!!!!!!!!!!!!!!!!
 Try a free gift card on this list! https://t.co/1aP4Nx9c2F!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try your new PillPack online. https://t.co/D4O3dWvQ4T!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 120  p = 0.7: 
+k = 120  p = 0.7:
 ---------------
 First sentences:
 Diabetes is not a condition that could bent happen in the same way that diabetes is a condition that has been used to lower costs for our patients. https://t.co/d0z6sjv5x3!!!!!!!
@@ -1887,7 +1888,7 @@ Try to get the best from your customers! https://t.co/ZvOqIg9T2e!!!!!!!!!!!!!!!!
 Try GoodRx today. https://t.co/W1F1GY5YZV!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this in #BlinkHealth! https://t.co/kVxD6P6tJK!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try these tips to find a new healthcare app https://t.co/kf0yXgK4Zw https://t.co/pJ7gCZtKxP!!!!!!!!!!
-k = 120  p = 0.8: 
+k = 120  p = 0.8:
 ---------------
 First sentences:
 Diabetes is not the first major vaccine to happen.  Here's what you need to know. https://t.co/zkZdJtTjfM!!!!!!!!!!!!!!!!!!
@@ -1910,7 +1911,7 @@ Try the link to share your best data on the #FDA. https://t.co/HcG0Pg8cJ!!!!!!!!
 Try a big PillPack account for all your meds. If you have a app you can use, give it a call to help, and the pharmacy will help. https://t.co/5R1bQYQ4W5!
 Try one of our best brands in your health pharmacy and get a $25,000 pharmacy gift card! #GoodRxHelps https://t.co/T8KM8VbEvR!!!!!!!!
 Try the generic medications you need to pay up. https://t.co/9nZnGl8I5P!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 120  p = 0.9: 
+k = 120  p = 0.9:
 ---------------
 First sentences:
 Diabetes is not even available with your pharmacy. The insurance cost of your medication can cause your insurance insurance to save over $250. Here's what you should say: https://t.co/p7WiXQtW5!!!!!
@@ -1933,7 +1934,7 @@ Try more common brands of #sopharmacy in 2020. Here's what you need to know. htt
 Try PillPack for your online pharmacy. https://t.co/qN8K0qCxqE!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try GoodRx – even if it might be easy to check it out and even do a copy. Here are 5 of these tips to help you get started: https://t.co/X7BzXtPY5v https://
 Try a #diabetes donation at pharmacy where your medications are used at the pharmacy as a insurance plan. https://t.co/knHtGQQ1CZ!!!!!!!!!!!!!!
-k = 120  p = 1: 
+k = 120  p = 1:
 ---------------
 First sentences:
 Diabetes is not a serious stress trial and the risk of dementia is currently being removed? https://t.co/FGwYsO8jql!!!!!!!!!!!!!!!!!!!!!
@@ -1962,7 +1963,7 @@ Try GoodRx more at blink. https://t.co/7l3ebwZ8ZK!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try all your medications at the most affordable price. -
 
  PillPack @blinkhealth https://t.co/zH2Eq6tX4n!!!!!!!!!!!!!!!!
-k = 140  p = 0: 
+k = 140  p = 0:
 ---------------
 First sentences:
 Diabetes is not high with diabetes and medications that make it better for you can be a fun work-for-home for the ones that believe their personal health is one and enough. https://t.co/7l9qk8TrhX!!
@@ -1987,7 +1988,7 @@ Try more resources to earn $25,000 a month: https://t.co/W6V2dQzZcY  #mentalheal
 Try to win new gifts like #folksstories with your great friend or family member. Goodrx doesn't be the next brand to do it. https://t.co/0J2Ut6rhH!!!!!!!
 Try a lot of #Healthtech at the aca! https://t.co/6QuWJf4B6TS!!!!!!!!!!!!!!!!!!!!!!!
 Try a drug for another plan so you can get expensive prescription medications!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 140  p = 0.1: 
+k = 140  p = 0.1:
 ---------------
 First sentences:
 Diabetes is not a condition that can be used to treat it. Here's how to save. https://t.co/XnQ5jYQ1jH!!!!!!!!!!!!!!!!!!
@@ -2010,7 +2011,7 @@ Try @GoodRx for more information on how to save on your medications. https://t.c
 Try @GoodRx for more information on how to save on your medications. https://t.co/ZYQUJYZZQ!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx for more information on how to save on your medications. https://t.co/YJQKUZYQZ!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your medication. https://t.co/XZZQQ6U6Q!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 140  p = 0.2: 
+k = 140  p = 0.2:
 ---------------
 First sentences:
 Diabetes is not a disease. Here's how to save. https://t.co/0wW7dG1dYc!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -2033,7 +2034,7 @@ Try the #BlinkHealth app to save on your medications. https://t.co/5R7YJJZZUJ!!!
 Try this: https://t.co/v5p5q4j8j2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx for your medications. https://t.co/XUZY8Y1QJ!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this out! https://t.co/wQWYU7U8K!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 140  p = 0.3: 
+k = 140  p = 0.3:
 ---------------
 First sentences:
 Diabetes is not a serious condition, but it can be a big problem for people with diabetes. Here's how to save. https://t.co/5p3i5k4l2x!!!!!!!!!!!!
@@ -2056,7 +2057,7 @@ Try @RxRevu to save your life. https://t.co/ZtKUZtW8QV!!!!!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx to save on your medications. https://t.co/Y1QY8W1YcF!!!!!!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/1v5k8d4j0w!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/p5l4vq4j1w!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 140  p = 0.4: 
+k = 140  p = 0.4:
 ---------------
 First sentences:
 Diabetes is not a condition that can be used to save money. Here's how to save. https://t.co/x5lkz9vq0l!!!!!!!!!!!!!!!!!!
@@ -2079,7 +2080,7 @@ Try this with your medication. https://t.co/4h3XdJ6xF4!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try to get the best app for your business. Here's how to get your meds! https://t.co/2wW7W5Y1U3!!!!!!!!!!!!!!!!
 Try @GoodRx for your PillPack account. https://t.co/C0L9JJ1QT5!!!!!!!!!!!!!!!!!!!!!!!!
 Try a new #BlinkHealth app to help you get the best prices on your prescriptions. https://t.co/8DQ1XlGvG0!!!!!!!!!!!!!!!!
-k = 140  p = 0.5: 
+k = 140  p = 0.5:
 ---------------
 First sentences:
 Diabetes is not a big thing. Here's what you need to know. https://t.co/h8f8z4s9lx!!!!!!!!!!!!!!!!!!!!!!
@@ -2102,7 +2103,7 @@ Try @HoyHealth: https://t.co/K7R9H3N5WZ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @folksstories to learn more about your life and what you need to know about your #mentalhealth. https://t.co/q6xZ6ZvJ7N!!!!!!!!!!!!
 Try to find the right brand of prescription drugs for your medications. https://t.co/XVJJ3R0UZw!!!!!!!!!!!!!!!!!!!!!!
 Try the link below to learn more about the #Folks of @GoodRx. https://t.co/UQQV6RY4KQ!!!!!!!!!!!!!!!!
-k = 140  p = 0.6: 
+k = 140  p = 0.6:
 ---------------
 First sentences:
 Diabetes is not the only thing that's not a "cannabis" drug. https://t.co/w9p3vw4k4e!!!!!!!!!!!!!!!!!!!!
@@ -2125,7 +2126,7 @@ Try to get some customers to talk about your customer service. Here's how to get
 Try to use your medication through your pharmacy – but you can't find it? https://t.co/ZZg9ZJ3Wc!!!!!!!!!!!!!!!!!!!!
 Try to make sure you're still trying to get your medications in the past year. https://t.co/W6MfKp2Y3!!!!!!!!!!!!!!!!!!!
 Try GoodRx for your medications. https://t.co/FZVK8MxBc5!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 140  p = 0.7: 
+k = 140  p = 0.7:
 ---------------
 First sentences:
 Diabetes is not a cancer, but it may be a small quality and medication that works better for you. Here's how you can save. https://t.co/1sQ1iCxjw!!!!!!!!!!
@@ -2148,7 +2149,7 @@ Try @CindyHealth for better use of your medications https://t.co/6TQ2OvM0qd!!!!!
 Try GoodRx for your GoodRx with PillPack. https://t.co/Zm9XKN0WfS!!!!!!!!!!!!!!!!!!!!!!
 Try GoodRx for your medication, including $500 on your prescriptions! https://t.co/8D8Iz5K0xZ!!!!!!!!!!!!!!!!!!!!
 Try #medicare for more than a week and save for your prescriptions. Here's what you need to know. https://t.co/WQ2Q2TxZj9!!!!!!!!!!!
-k = 140  p = 0.8: 
+k = 140  p = 0.8:
 ---------------
 First sentences:
 Diabetes is not the only option for diabetes. Here's how to get a lot of it, and what the data will get you. https://t.co/CgQ5Y2q1Qp!!!!!!!!!!
@@ -2171,7 +2172,7 @@ Try this at https://t.co/bFkQJnGfY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu: https://t.co/v5CzK0x2Qp!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try more about your marketing solutions! https://t.co/2aXwOjwJ3O https://t.co/aZtJnWv3aD!!!!!!!!!!!!
 Try these tips to get your medication to help you take the next few days from your flu season: https://t.co/vzNfDvHvYV!!!!!!!!!!!!!!!
-k = 140  p = 0.9: 
+k = 140  p = 0.9:
 ---------------
 First sentences:
 Diabetes is not the only cancer-focused #FDA pharmacy.
@@ -2196,7 +2197,7 @@ Try the gifts you need to get started: https://t.co/8GEb5dGY8q!!!!!!!!!!!!!!!!!!
 Try PillPack. Read the app, save out! https://t.co/bJyS7T3QqS!!!!!!!!!!!!!!!!!!!!!!!!
 Try and use GoodRx there and go to the mail order link https://t.co/1iVC1HkXm2!!!!!!!!!!!!!!!!!!!!!
 Try our free job to win a chance to win a free cash game so we can help you shop! https://t.co/nK4KlVx5x!!!!!!!!!!!!!!!
-k = 140  p = 1: 
+k = 140  p = 1:
 ---------------
 First sentences:
 Diabetes is not about the medications they want, it's the other stuff you're going to be able to hear these day - one of my amazing work of strength, and the job that could be forced (and not also are) to mail-order/breast
@@ -2220,7 +2221,7 @@ Try making a app that will become your own https://t.co/9qWnHDzHjU #Folks https:
 Try the list. Here are 3 tips for reaching your local patient's pharmacy. https://t.co/IMyq7W4Bfz!!!!!!!!!!!!!!!!!!!
 Try some things that justll save your life. https://t.co/blfyqssw61!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try getting your own food on the ground now: https://t.co/gn1EJ0JwZc https://t.co/RtO2mlI6fx!!!!!!!!!!!
-k = 160  p = 0: 
+k = 160  p = 0:
 ---------------
 First sentences:
 Diabetes is not a "disability" but also risk for any other problem in our system. #biotech #healthtech #digitalhealth https://t.co/0s4wl4v1JN!!!!!!!!!!
@@ -2233,7 +2234,7 @@ Diabetes is not a nightmare or a horrible thing to vote for. but it is nice to h
 Diabetes is not all it's job. When you have any of these medications, you might be able to pay it off. https://t.co/6ThF7xYd5Q!!!!!!!!!!!!
 Diabetes is not a risk at some time or per year. Find out what it means since when do individuals to the room turn all the money to sexual exercise? https://t.co/EyQVVyqv6E!!!!!
 Diabetes is not a scam, but its a personal idea. This: see, no one is killing me! https://t.co/6q7hMg0t1x!!!!!!!!!!!!!!!
-Try it: - |                                              
+Try it: - |
 Try how much you don't like the flu. Find out more by supporting your patient's hospital service system: https://t.co/9F2rNXlN1W #Cinix #CyM https://t.co
 Try to address the risks that are in your prescription medication like the drug prices on the GoodRx list https://t.co/eZQblMPnkj#staffing!!!!!!!!!!!!!
 Try these tips to connect with the people you recommend with all your life. https://t.co/F0Cv8LhWqB!!!!!!!!!!!!!!!!!!!!
@@ -2243,7 +2244,7 @@ Try your pillpack in 2020: https://t.co/T7wBW2Q7mjO via @Xlaura http:!!!!!!!!!!!
 Try @kapor_sfl.  We're amazing and help customers save on prescription medications. #BlinkHealth https://t.co/I0I1WQ3uiJ!!!!!!!!!!!
 Try @KarenTrondial, I’s proud to be your pharmacy. We're excited to announce we work on a new price for medications and medications that are in credit-all of them! https://t.co/H7
 Try us: https://t.co/p2LkF7o7Pk!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 160  p = 0.1: 
+k = 160  p = 0.1:
 ---------------
 First sentences:
 Diabetes is not a condition that can be used to treat it. Here's how to save. https://t.co/9q1xq3xj3x!!!!!!!!!!!!!!!!!!
@@ -2266,7 +2267,7 @@ Try @GoodRx for more information on how to save on your medications. https://t.c
 Try @RxRevu for your #Folks. Here's how to save. https://t.co/XUUUZdZdKQ!!!!!!!!!!!!!!!!
 Try @GoodRx for more information on how to save on your medications. https://t.co/KZZUQQQ6Q!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your #Folks. Here's how to save. https://t.co/XUQUQZQYQ!!!!!!!!!!!!!!!!!
-k = 160  p = 0.2: 
+k = 160  p = 0.2:
 ---------------
 First sentences:
 Diabetes is not a problem for people with diabetes. Here's how to save. https://t.co/7xq9lqg1jk!!!!!!!!!!!!!!!!!!!!!
@@ -2289,7 +2290,7 @@ Try @GoodRx for more information on how to save on your medications. https://t.c
 Try @BlinkHealth for more information on Blink Health. https://t.co/ZQKYQY1QJZ!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu to save on your medications. https://t.co/ZUZYYQYqKZ!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu to save on your medications. https://t.co/ZUJUQJ1YZ!!!!!!!!!!!!!!!!!!!!!!!!
-k = 160  p = 0.3: 
+k = 160  p = 0.3:
 ---------------
 First sentences:
 Diabetes is not a common condition, but it is a real problem. Here's how to save. https://t.co/j4y1h9y4y3!!!!!!!!!!!!!!!!!
@@ -2312,7 +2313,7 @@ Try to get the best app for your business. Here's how to save. https://t.co/3XjZ
 Try the @GoodRx coupon to save on your prescriptions. https://t.co/JZJYVZQQ1Z!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu today! https://t.co/YXZdU5jJ8Y!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx to get the best price on your medications. https://t.co/8KcYQxDQZZ!!!!!!!!!!!!!!!!!!!!!
-k = 160  p = 0.4: 
+k = 160  p = 0.4:
 ---------------
 First sentences:
 Diabetes is not a major problem in the us, but it is not the most expensive medication. Here's how to save. https://t.co/0njz0y3k0l!!!!!!!!!!!!
@@ -2335,7 +2336,7 @@ Try @GoodRx to help you save on your prescription meds. https://t.co/YQGU7M7Kq2!
 Try the top $10,000 medications for the best prescription. https://t.co/4k5e5g5qw3!!!!!!!!!!!!!!!!!!!!!!
 Try @folksstories for your best chance to win $25,000! https://t.co/YZUU5J6Z6C!!!!!!!!!!!!!!!!!!!
 Try this video to find out how to save on your prescription medications. https://t.co/5i0pq9e0p8!!!!!!!!!!!!!!!!!!!!!
-k = 160  p = 0.5: 
+k = 160  p = 0.5:
 ---------------
 First sentences:
 Diabetes is not a pain. it is a condition that is important to us. Here are the top 3 tips to help you get more from your #diabetes https://t.co/n9k2s5z1j3!!!!!
@@ -2358,7 +2359,7 @@ Try a free prescription for a medication that can be expensive. https://t.co/9v1
 Try PillPack: https://t.co/ZVV9V3QQV3!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try a lot of #BlinkHealth and enter to win a $2,500 gift card! https://t.co/Y4T3YZK1R8!!!!!!!!!!!!!!!
 Try this video to get the best information about your medication. https://t.co/1XQ3t6T0W4!!!!!!!!!!!!!!!!!!!!!!!
-k = 160  p = 0.6: 
+k = 160  p = 0.6:
 ---------------
 First sentences:
 Diabetes is not the only disease that's going to be used to lower your health. Here's what you need to know. https://t.co/5s7XxFq1QJ!!!!!!!!!!!!
@@ -2381,7 +2382,7 @@ Try to make sure your prescription meds have access to the meds you're getting. 
 Try this one at the same time. https://t.co/5g4f5n4vxv!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try a good holiday gift today! https://t.co/5uRjR9Z4lF!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @FolksArt for some chance to win a $10,000 gift card! https://t.co/YZxKqR1XJJ!!!!!!!!!!!!!!!!
-k = 160  p = 0.7: 
+k = 160  p = 0.7:
 ---------------
 First sentences:
 Diabetes is not an effective pharmacy model. Here's how to save on your prescription medications: https://t.co/V0U3WJJmC1!!!!!!!!!!!!!!!!!!!
@@ -2394,7 +2395,7 @@ Diabetes is not a disease. it can be an illness. Here's how you can save. https:
 Diabetes is not about the #PillPack. I’ve had the meds to keep my thyroid high, but it wasnt going to be to my own medication. It’s not about the other medications, but how we could take it.
 Diabetes is not a condition that has been done much for the next decade. Here are some tips to help you treat it: https://t.co/mw7r1p7z8y!!!!!!!!!!!!
 Diabetes is not about the medical disease. its about the blood sugar. https://t.co/v7N8nH0Jc1!!!!!!!!!!!!!!!!!!!!!!!
-Try the video and use it for your medication. 
+Try the video and use it for your medication.
 https://t.co/wXD3kU8U9s!!!!!!!!!!!!!!!!!!!!!!!
 Try this https://t.co/qxCvqIzMp2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try PillPack for free at GoodRx. It might help to live your life and start doing the most of your life. #FDA #FDAapproval https://t.co/T7WZWgVg1W!
@@ -2426,7 +2427,7 @@ Try this for your local pharmacist: https://t.co/P8yTb4RzKd!!!!!!!!!!!!!!!!!!!!!
 Try the latest healthcare, health care, and health care marketing. https://t.co/T1SxNxRV5H #staffing!!!!!!!!!!!!!!!!!!!
 Try this out here: https://t.co/zrjXQK0n2V #Folks https://t.co/4a1nq5T9y1!!!!!!!!!!
 Try to get more weight at the end of the year, but that's not a good time to be sure. https://t.co/1z0zb6j0wg!!!!!!!!!!!!
-k = 160  p = 0.8: 
+k = 160  p = 0.8:
 ---------------
 First sentences:
 Diabetes is not a #healthinsurance account https://t.co/8xV0zwVlRm!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -2443,7 +2444,7 @@ Try these tips for having a good idea about being able to manage your medication
 Try them out https://t.co/FmH9H3kJr7 https://t.co/ZYQ5YmWmWQ!!!!!!!!!!!!!!!!
 Try blink-ed on our referral card.
  http://t.co/PZQzLQ6Vv https://t.co/Ug8x2UX3rY!!!!!!!!!!
-Try @PillPack 
+Try @PillPack
 
 
 
@@ -2458,7 +2459,7 @@ Try @RxRevu today! https://t.co/rQgKdKNKcH!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @folksstories to help your loved one find the best meds. #BlinkHealth https://t.co/CZqYkHk8UZ!!!!!!!!!!!!!!!
 Try these tips from our local pharmacy at the pharmacy. https://t.co/VzI2R0X5E4 https://t.co/8lHNU1ZJ0Y!!!!!!!!
 Try @RxRevu for your gift today! https://t.co/R2gK5CJj4X!!!!!!!!!!!!!!!!!!!!!!!!
-k = 160  p = 0.9: 
+k = 160  p = 0.9:
 ---------------
 First sentences:
 Diabetes is not something to leave a person to understand when youve got it as a life. #GoodRxHelps https://t.co/E1pGW8wYTf!!!!!!!!!!!!
@@ -2477,7 +2478,7 @@ Try one of the new prices. Here's how it'll get in touch with you. https://t.co/
 Try @chanmms #Mavlives https://t.co/h1WwFQdXGGX!!!!!!!!!!!!!!!!!!!!!!!!
 Try @Shsgov: https://t.co/3Wc8ZsWu6W!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try working with a GoodRx pharmacist. That’s why I do not forget to send @GoodRx their gift! https://t.co/H2RYy4SBcR!!!!!!!
-Try @BlinkHealth until you get to the #HivDay + customers learn how their medications are considered too much! 
+Try @BlinkHealth until you get to the #HivDay + customers learn how their medications are considered too much!
 
 
 
@@ -2489,12 +2490,12 @@ Try @BlinkHealth until you get to the #HivDay + customers learn how their medica
 Try how much to save on medication: https://t.co/9o8xBdH7f0 https://t.co/H6nD8rJqxW!!!!!!!!!!!
 Try more ways to improve your life if you do have disabilities. https://t.co/aCDN8k5l2j!!!!!!!!!!!!!!!!!!!!!!
 Try @FDA for ways to pay for prescription medications: https://t.co/CvH2KlJHSI #BlinkHealth #FDA #Folks https://t.co/RwZQV1
-k = 160  p = 1: 
+k = 160  p = 1:
 ---------------
 First sentences:
 Diabetes is not a pain, but it is a value. https://t.co/ND8bUpIKuk!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Diabetes is not an problem. In the us, this is essential when youre alive.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Diabetes is not a massive cost, but any drug could help. Here's why. 
+Diabetes is not a massive cost, but any drug could help. Here's why.
 https://t.co/TqTbZtT7Sh!!!!!!!!!!!!!!!!!!!
 Diabetes is not the only deal you can add to your #blockchain customer service. Here's how consumers can save. https://t.co/jp9lKNZdbq!!!!!!!!!!!!!!
 Diabetes is not the best place to come out of the front of the doctor about how they can save lives. https://t.co/eq3L7m6wZZ!!!!!!!!!!!!!!!!
@@ -2514,7 +2515,7 @@ Try this important pharmacy patient plan here. You can make an data pharmacist o
 Try this: #Healthmadeeasy https://t.co/xZg8s4W6xU!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxArt for prescription medications. https://t.co/QQKmpJTf5S!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try a better video study on the new year #customers #hacks #tech https://t.co/5tY0I1VsjM!!!!!!!!!!!!!!!!!!
-k = 180  p = 0: 
+k = 180  p = 0:
 ---------------
 First sentences:
 Diabetes is not a lower drug-packard levels. Here can be a huge difference? https://t.co/3kOQ4MSe2o!!!!!!!!!!!!!!!!!!!!
@@ -2540,7 +2541,7 @@ Try a PillPack today  https://t.co/vt2yJzZpRt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try more stuff! Find the data on GoodRx that has the cost of the product you’re making. https://t.co/s7efEZtIoU!!!!!!!!!!!!
 Try dr. stl for 10 minutes:https://t.co/3XLmfwqN6I https://t.co/zw6ItYbTqd!!!!!!!!!!
 Try to find an account that includes you and our patients. https://t.co/9xBwJQVva2!!!!!!!!!!!!!!!!!!!!!!!!
-k = 180  p = 0.1: 
+k = 180  p = 0.1:
 ---------------
 First sentences:
 Diabetes is not a problem for people with diabetes. Here's how to save. https://t.co/q9q0xj0j3x!!!!!!!!!!!!!!!!!!!!!
@@ -2563,7 +2564,7 @@ Try @RxRevu for your medication. https://t.co/XUQZdZQ6K!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx for more information on how to save on your medications. https://t.co/KQKZQKZZQW!!!!!!!!!!!!!!!!!!!
 Try @GoodRx for more information on how to save on your medications. https://t.co/KUUZQYYZtK!!!!!!!!!!!!!!!!!!!
 Try @GoodRx for more information on how to save on your medications. https://t.co/YZQU6UQJ6!!!!!!!!!!!!!!!!!!!!
-k = 180  p = 0.2: 
+k = 180  p = 0.2:
 ---------------
 First sentences:
 Diabetes is not a disease. Here's how to save. https://t.co/1w1i9q1h9x!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -2586,7 +2587,7 @@ Try @GoodRx for more info on how to save on your medications. https://t.co/XJJUJ
 Try the new @RxRevu #Folks https://t.co/ZdZcKQKUZK!!!!!!!!!!!!!!!!!!!!!!!
 Try the #BlinkHealth app to save on your medications. https://t.co/YZZZUQJQZ!!!!!!!!!!!!!!!!!!!!!!!
 Try this for your medication. https://t.co/9v3d5vq8p2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 180  p = 0.3: 
+k = 180  p = 0.3:
 ---------------
 First sentences:
 Diabetes is not a serious disease, but it is a lot of something. Here's how to save. https://t.co/3p3x2x5p5k!!!!!!!!!!!!!!!!
@@ -2609,7 +2610,7 @@ Try to get your medication at the pharmacy and save on your medication. https://
 Try to find the best price for your medications. https://t.co/9d8l8w0l8e!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this for your own #healthcare plan https://t.co/q0vwqk4l2k!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu today! https://t.co/QW7X6VJ1Q!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 180  p = 0.4: 
+k = 180  p = 0.4:
 ---------------
 First sentences:
 Diabetes is not a major problem in the us, but it is a big problem in the us. Here's how to save. https://t.co/h8YbJ1QQYt!!!!!!!!!!!
@@ -2632,7 +2633,7 @@ Try to get your meds on the same time. https://t.co/wWV9W9J4JV!!!!!!!!!!!!!!!!!!
 Try a new PillPack pharmacy. https://t.co/N3K1dUJ2QW!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try the @PillPack app to save on your prescriptions. https://t.co/0qN7YZqG4V!!!!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/2XU1H4j4jQ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 180  p = 0.5: 
+k = 180  p = 0.5:
 ---------------
 First sentences:
 Diabetes is not a chronic condition, but it is a patient-free plan. Here's how to save. https://t.co/x8k1n0f5pq!!!!!!!!!!!!!!!
@@ -2655,7 +2656,7 @@ Try it here: https://t.co/d9r9v7g8r5 https://t.co/p2k7p9r7kf!!!!!!!!!!!!!!!
 Try PillPack: https://t.co/1S0YQVYt4!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/hW4VzVUQZc!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try a lot of your medications and sign up for a free chance to win a $10,000 gift card! https://t.co/Z0YdJU3T3 https://t.co/1qKZJt1
-k = 180  p = 0.6: 
+k = 180  p = 0.6:
 ---------------
 First sentences:
 Diabetes is not a bad thing. Here's how to get your medications and the savings. https://t.co/lXzdKZZ8QT!!!!!!!!!!!!!!!!!!!
@@ -2702,7 +2703,7 @@ Try @BlinkHealth!
 Try Blink Health for your meds, & better: https://t.co/Y6UqT7YdF5 https://t.co/nF4VbXKJ6W!!!!!!!!
 Try Blink: Here are the most expensive medications in the us. https://t.co/KU8N2U8EzZ!!!!!!!!!!!!!!!!!!!!!!
 Try @BlinkHealth. https://t.co/7V5TQ6Xm2R!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 180  p = 0.7: 
+k = 180  p = 0.7:
 ---------------
 First sentences:
 Diabetes is not a serious disease, but it may be a type of pain. Here's how to reduce your risk. https://t.co/1Xyq0g6W7q!!!!!!!!!!!!!
@@ -2731,7 +2732,7 @@ Try #PillPack with blink.
 
 
 #PillPack https://t.co/8Q6HcM4jKT!!!!!!!!!!!!!!!!!!
-k = 180  p = 0.8: 
+k = 180  p = 0.8:
 ---------------
 First sentences:
 Diabetes is not a brain health problem. #FDA https://t.co/NgTmCxjKqF!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -2759,7 +2760,7 @@ Try @linkedin for your life to save money and get your meds the same time. https
 Try @berniesanders to enter our new list of the most expensive medications for anyone who needs to get your medication. https://t.co/0w6i3dF0YZ https://t.co/KUyJq
 Try more #BlinkHealth! https://t.co/3c5q1Rk8Tb via @statnews!!!!!!!!!!!!!!!!!!!!!!!!
 Try a different one! https://t.co/wG3Mz9OJlq!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 180  p = 0.9: 
+k = 180  p = 0.9:
 ---------------
 First sentences:
 Diabetes is not a patient service. This is why it is wrong to be a #marketing and #marketing advocate. #Folks https://t.co/r8VdFJMzVe!!!!!!!!
@@ -2779,11 +2780,11 @@ Try creating your pharmacy’s one-friendly, age-friendly, with health insurance
 Try Blink again, dec. december 1, 2020. Here are what you need to know. https://t.co/v0S7QwQ5N!!!!!!!!!!!!!!!!
 Try a video on your marketing #success strategy, and get more information about it: https://t.co/jyZ8ZqIlSt!!!!!!!!!!!!!!!!!!
 Try the latest the #PillPack daily! https://t.co/sR3K1G6hVJW!!!!!!!!!!!!!!!!!!!!!!!!
-Try this and get a good test at the first $2,000 per $25,000, and some 3% soon for some common medications. 
+Try this and get a good test at the first $2,000 per $25,000, and some 3% soon for some common medications.
  http://t.co/fOW6JhOjN!!!!
 Try this https://t.co/iKU0P9F3W5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this for free here: https://t.co/9WQ5N4PdDW #mentalhealth #healthinsurance #hitsm https://t.co/WvQ3GGbQVdK!
-k = 180  p = 1: 
+k = 180  p = 1:
 ---------------
 First sentences:
 Diabetes is not worth understanding because it's hard to provide a better price for patients.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -2806,7 +2807,7 @@ Try GoodRx if you don't mean to add them to your Blink – you'll get lower pric
 Try this with insulin. It'll make your drug worth it! https://t.co/BX2N4q2cGC!!!!!!!!!!!!!!!!!!!!!!
 Try some things available in the pharmacy your own way. #BlinkHealth https://t.co/YP4ptT8S0L!!!!!!!!!!!!!!!!!!!!!
 Try job choice or pharmacy price: https://t.co/pmj7x6Ux8c https://t.co/jMwXa8lBNr!!!!!!!!!!!!!
-k = 200  p = 0: 
+k = 200  p = 0:
 ---------------
 First sentences:
 Diabetes is not a medical story, it works. https://t.co/dbwQgwlI4P!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -2825,7 +2826,7 @@ Try @worldsuspears when it works for you https://t.co/NPvOVJ8Hkw!!!!!!!!!!!!!!!!
 Try @RxRevu in jan. jan.19, 2019. #medtwitter #hit #drugprices https://t.co/hBQYojQ3Iz!!!!!!!!!!!!
 Try PillPack when you're fighting #mentalmedicine to reduce your insulin fees: https://t.co/V5PMUnqrGp #Folks!!!!!!!!!!!!!
 Try them coming together for a chance to win a chance to win $5 of your best #prematureat_all  #drugpricing #digitalestate https://t.co/uPwGY22Fkm!!!!!
-Try your medication: 
+Try your medication:
 
 
 
@@ -2837,7 +2838,7 @@ Try your medication:
 Try one of our popular business solutions today! https://t.co/lMf4eHv7Kx!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try using PillPack after getting some and doing any of 20 reasons. https://t.co/6QY5BjqJZ via @folksstories!!!!!!!!!!!!!!!!!
 Try to avoid these points with your body & hair! I want to see your way cheaper until you get to this year's pharmacy. Please give us a call at 888-799-2553 and a real point of quality. https://t.
-k = 200  p = 0.1: 
+k = 200  p = 0.1:
 ---------------
 First sentences:
 Diabetes is not a condition that can be used to treat it. Here's how to save. https://t.co/0j4q1qx0jh!!!!!!!!!!!!!!!!!!
@@ -2860,7 +2861,7 @@ Try @RxRevu for your #Folks. Here's how to save. https://t.co/XUQYYYQ6Q!!!!!!!!!
 Try @GoodRx for more information on how to save on your medications. https://t.co/KQUJQKYZZZ!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for your #Folks. Here's how to save. https://t.co/YQQKU6U6Z!!!!!!!!!!!!!!!!!
 Try @GoodRx for more information on how to save on your medications. https://t.co/YQKZYQK6K!!!!!!!!!!!!!!!!!!!!
-k = 200  p = 0.2: 
+k = 200  p = 0.2:
 ---------------
 First sentences:
 Diabetes is not a #digitalhealth problem. Here's how to save on your medications. https://t.co/9XQKcXZtJ!!!!!!!!!!!!!!!!!!!!
@@ -2883,7 +2884,7 @@ Try @RxRevu for more information on the #Folks. https://t.co/YXKcQQYJYZ!!!!!!!!!
 Try @BlinkHealth for more information on how to save on your medications. https://t.co/ZYZKY6Y6Q!!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/4j9xq3p0qr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this: https://t.co/1XwQK6Q8Z https://t.co/ZpWJtYt9ZQ!!!!!!!!!!!!!!!!!
-k = 200  p = 0.3: 
+k = 200  p = 0.3:
 ---------------
 First sentences:
 Diabetes is not a disease. Here's how to get your meds, and how to get your meds at the pharmacy. https://t.co/v4h9y0n0xq!!!!!!!!!!!
@@ -2906,7 +2907,7 @@ Try this: https://t.co/g3l8x0jq4p!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @PillPack for more affordable medications. https://t.co/ZZdQnQYtKd!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @GoodRx to get the best price on your medications. https://t.co/8XUXWJ8WUQ!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu for more information on Blink Health. https://t.co/KXVJY4Y4UZ!!!!!!!!!!!!!!!!!!!!!!
-k = 200  p = 0.4: 
+k = 200  p = 0.4:
 ---------------
 First sentences:
 Diabetes is not a diabetes. it is a #medicare for all. https://t.co/p9l1x7w3lh!!!!!!!!!!!!!!!!!!!!!
@@ -2929,7 +2930,7 @@ Try the blink health list to find the best way to get your meds. https://t.co/w1
 Try a new PillPack and save $10 on your medication. https://t.co/1n1D5R1pJY!!!!!!!!!!!!!!!!!!!!!!
 Try to get your medication through your insurance. https://t.co/q2a9d3k5j3!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @RxRevu https://t.co/5XgW6HQdYZ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-k = 200  p = 0.5: 
+k = 200  p = 0.5:
 ---------------
 First sentences:
 Diabetes is not a a disease. it is a condition. https://t.co/8m1k7qp8m8!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -2970,10 +2971,10 @@ Try this and see how much you can save on your prescriptions. https://t.co/0dFvK
 Try @BlinkHealth: https://t.co/Xr2Mv6XrZ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try this comment at @cbsnews and share it with your friends. We're excited to help. https://t.co/KXKxJ9T7Xw!!!!!!!!!!!!!!
 Try @RxRevu to help you save on your prescriptions! https://t.co/4LxZcWZYJq!!!!!!!!!!!!!!!!!!!!!
-k = 200  p = 0.6: 
+k = 200  p = 0.6:
 ---------------
 First sentences:
-Diabetes is not a problem. 
+Diabetes is not a problem.
 
  http://t.co/0h1wXQY6Rt!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Diabetes is not an disease, but it is a condition that makes it easier for patients to find affordable medications. Here's what to do if you have an illness. https://t.co/N6TJqVj9J4!!!!
@@ -3003,7 +3004,7 @@ Try @HIMSS14 for your own prescriptions!
 
 #HIMSS #FDA #FDAapproval #FDAapproval https://t.co/5Vg5D6wVp
 Try @Walgreens and get more options for your medications. https://t.co/NQ6d0EgV8Z!!!!!!!!!!!!!!!!!!!!!!
-k = 200  p = 0.7: 
+k = 200  p = 0.7:
 ---------------
 First sentences:
 Diabetes is not a risk for #cancer. https://t.co/W3eWlRQ1x8!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -3033,7 +3034,7 @@ Try the link below to see what it's going to be and how it's done. https://t.co/
 Try @Orrangemd in PillPack for $25. Here's how to get it with GoodRx. #PharmacySims https://t.co/PzY3N4P0nV!!!!!
 Try these tips for getting a small quality free gift cards for you: https://t.co/eW3DxZmHZf!!!!!!!!!!!!!!!!!!!!!
 Try our latest #HoyRx prices for less than $2. Here's how to save. https://t.co/Z1I2FxTQ5E!!!!!!!!!!!!!!
-k = 200  p = 0.8: 
+k = 200  p = 0.8:
 ---------------
 First sentences:
 Diabetes is not a "lilt" from a bad-to-to-customers choice. https://t.co/3HvSh3JqdM!!!!!!!!!!!!!!!!!
@@ -3056,7 +3057,7 @@ Try something i still love today. #customers #Folks!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try @shawnbrennan's @drt_ny: https://t.co/d1dXnUQzCq!!!!!!!!!!!!!!!!!!!!!
 Try it https://t.co/xuDX7Dj6Db!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Try the link on @folksstories to get your home card for free at https://t.co/qQrHQM6U0F  #security #cybersecurity #databreach #cybercrime #datapriv
-k = 200  p = 0.9: 
+k = 200  p = 0.9:
 ---------------
 First sentences:
 Diabetes is not the day that doctors spend another year considering the flu for the medical company that matters.
@@ -3071,7 +3072,7 @@ Diabetes is not not something you can wait on...that is why i do not keep to the
 Diabetes is not a complete problem. Here's how it works. https://t.co/7kUnUz9BhE!!!!!!!!!!!!!!!!!!!!!!!!
 Diabetes is not a heart issue, but it will cause you to death if you have brain testing from an insurance pharmacy at a pharmacy that is not your doctor.!!!!!!!!!!!!!!!!!!!!!
 Try blink health. https://t.co/oIYvVk5V9V!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Try @HIMSS14 @Ablacias! 
+Try @HIMSS14 @Ablacias!
 
 
 *
@@ -3089,7 +3090,7 @@ Try some #GoodRx’s as well as the @BlinkHealth solution!
 
 “
 #HcjZ #medicaldata #healthcare #ecommerce #medication https://t.co/1i9
-k = 200  p = 1: 
+k = 200  p = 1:
 ---------------
 First sentences:
 Diabetes is not a good marketing option and you may still accept it for the most likely insurance costs/on-the-voice treatment you have.https://t.co/ln2wxpOqzE!!!!!!!!!
