@@ -23,6 +23,7 @@ const getYesPosts = require('./groups/getYesterdayPosts.js')
 //const db = require('./db.js')
 
 const pageScrollLength = 2;
+var uniqueID = 1100;
 const app = express();
 
 app.get('/', (req, res) => {
@@ -46,7 +47,7 @@ app.get('/facebook/getLatestPost', async (req, res) => {
 
 app.get('/facebook/putComment', async (req, res) => {
 
-    await scrapeComment.gotopage();
+    await scrapeComment.gotopage(uniqueID);
 
     res
         .status(200)
@@ -56,7 +57,7 @@ app.get('/facebook/putComment', async (req, res) => {
 
 
 app.get('/facebook/getYesterdayPost', async (req, res) => {
-    
+
     await getYesPosts.getAllGroup(pageScrollLength)
     res
         .status(200)
@@ -100,7 +101,7 @@ app.get('/facebook/getDateRangePost', async (req, res) => {
             .end();
         }
     }
-    
+
 });
 
 

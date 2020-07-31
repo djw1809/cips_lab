@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const jsdom = require("jsdom")
 const fs = require('fs');
+const { post } = require('../app');
 const {JSDOM} = jsdom
 global.DOMParser = new JSDOM().window.DOMParser
 
@@ -51,25 +52,73 @@ async function autoScroll(page) {
 
 
 
-async function postComment(page,pagelink,commentMessage){
-
+async function postComment(page,pagelink,commentMessage,addLink){
+        var postObj = {}
         await page.goto(pagelink,
         {waitUntil: 'networkidle2'});
 
         await autoScroll(page);
         // for commenting on the post.
-        await page.waitForSelector('textarea[id="composerInput"]')
-        await page.focus('textarea[id="composerInput"]');
-        await page.type('textarea[id="composerInput"]',commentMessage )
-        
-        await page.waitFor(2000)
+        try{
+            await page.waitForSelector('textarea[id="composerInput"]')
+            await page.focus('textarea[id="composerInput"]');
+            await page.type('textarea[id="composerInput"]',commentMessage )
 
-        await page.waitForSelector('button[data-sigil="touchable composer-submit"]',{visible: true, timeout: 1000})
-        // await page.waitForSelector('#comment_form_100001520422771_1583986931661972 > div._7om2._2pin._2pi8._4-vo > div:nth-child(3) > button',
-        //    {visible: true})
-        await page.click('button[data-sigil="touchable composer-submit"]')
+            await page.waitFor(2000)
 
-        return true;
+            await page.waitForSelector('button[data-sigil="touchable composer-submit"]',{visible: true, timeout: 1000})
+            // await page.waitForSelector('#comment_form_100001520422771_1583986931661972 > div._7om2._2pin._2pi8._4-vo > div:nth-child(3) > button',
+            //    {visible: true})
+            await page.click('button[data-sigil="touchable composer-submit"]')
+            await page.waitFor(1000);
+            await autoScroll(page);
+
+            const storyHtml = await page.content();
+            const dom = new JSDOM(storyHtml);
+            comments = dom.window.document.querySelector("div[data-sigil='m-photo-composer m-noninline-composer']");
+
+            var replyid = ""
+            if(comments!=null){
+                allComments = comments.querySelector("div[data-sigil='comment']");
+                replyid = allComments.id;
+            }
+
+            reply = dom.window.document.querySelector("div[id='"+ replyid +"']");
+            reply_reply = reply.querySelector("a[data-sigil='touchable']");
+
+            reply_link = (reply_reply.dataset)['uri'];
+
+            await page.goto(reply_link,
+                {waitUntil: 'networkidle2'});
+
+            await page.waitForSelector('textarea[id="composerInput"]')
+            await page.focus('textarea[id="composerInput"]');
+            await page.type('textarea[id="composerInput"]',addLink )
+
+            await page.waitFor(2000)
+
+            await page.waitForSelector('button[data-sigil="touchable composer-submit"]',{visible: true, timeout: 1000})
+            await page.click('button[data-sigil="touchable composer-submit"]')
+            await page.waitFor(1000);
+
+            postObj['comment_id'] = replyid;
+            postObj['comment_link'] = pagelink;
+            postObj['comment_msg'] = commentMessage;
+            postObj['reply_link'] = reply_link;
+            postObj['reply_adlink'] = addLink;
+            postObj["status"] = " Commented successful"
+            return postObj;
+        }
+        catch (error) {
+            console.log(error);
+            //pagelink,commentMessage,addLink
+            postObj["pageLink"] = pagelink;
+            postObj["commentMessage"] = commentMessage;
+            postObj["addLink"] = addLink;
+            postObj["status"] = "failed"
+            return postObj;
+
+        }
 }
 
 
@@ -77,48 +126,119 @@ async function logIn(page) {
 
         await page.goto('https://m.facebook.com/',
         {waitUntil: 'networkidle2'})
-        
+
         await page.waitForSelector('input[name="email"]')
-        await page.type('input[name="email"]', 'fredrik.abbott@gmail.com')
-        await page.type('input[name="pass"]', 'CIDSEasu2019%')
+        await page.type('input[name="email"]', 'katrina199609@gmail.com')
+        await page.type('input[name="pass"]', 'Katrina&1234')
+        // await page.type('input[name="email"]', 'alukau2894@gmail.com')
+        // await page.type('input[name="pass"]', '#aluka2894#')
 
         await page.click('button[name="login"]')
         await page.waitFor(1000);
-    
+
 }
 
 
 
-exports.gotopage = async function(){
+exports.gotopage = async function(uniqueID){
 
     const browser = await puppeteer.launch({headless: isHeadless,userDataDir: './myUserDataDir',args: ['--no-sandbox']})
     const page = await browser.newPage()
 
     await page.setViewport({width: 1280, height: 800})
     //pass the id here
-    let postsData = fs.readFileSync('./data/1594682473360.json');
+
+    let postsData = fs.readFileSync('./data/salvo_combined_evening072620_morning072720.json');
     let fPosts = JSON.parse(postsData);
-  
-    await logIn(page)
 
-    // 1. Batch commenting 
+    //await logIn(page)
 
-    /* 
+    // 1. Batch commenting
+
+
     for(var t=0;t<fPosts.length;t++){
         var postLink = fPosts[t]['postlink'];
+        uniqueID = Date.now();
+        var addLink = "https://paylessformeds.us/?"+uniqueID;
+
         //console.log(postLink);
 
-        //var commentMessage = fPosts[t]['comment'];
-    
-        //var commentMessage = 'Test Comment';
-        //await postComment(page,postLink,commentMessage);
+        var commentMessage = fPosts[t]['comment'];
+        var postObj = await postComment(page,postLink,commentMessage,addLink);
+        var d = new Date();
+        var fileName= d.getTime();
+        var dir = './comments';
+
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
+
+        var dir = './failed_comments';
+
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
+
+        if(postObj['status'] == "failed"){
+            fs.writeFile("./failed_comments/"+String(fileName)+'.json', JSON.stringify(postObj), (err) => {
+                // throws an error, you could also catch it here
+                if (err) throw err;
+
+                // success case, the file was saved
+                console.log('Reply Comment are Saved in the file! ' +  String(fileName));
+        });
+        }
+        else{
+            fs.writeFile("./comments/"+String(fileName)+'.json', JSON.stringify(postObj), (err) => {
+                // throws an error, you could also catch it here
+                if (err) throw err;
+
+                // success case, the file was saved
+                console.log('Reply Comment are Saved in the file! ' +  String(fileName));
+        });
+        }
+        await page.waitFor(300000)
     }
-    */
 
-    var postLink = "link"
-    var commentMessage = "Message"
+    // // 2. single post commenting.
+    // uniqueID = Date.now();
+    // var postLink = "https://m.facebook.com/100006486194617/posts/1655675234658667/"
+    // var commentMessage = "Test Comment"
+    // var addLink = "http://cleverrx-dev.s3-website.us-east-2.amazonaws.com/?"+uniqueID;
+    // var postObj = await postComment(page,postLink,commentMessage,addLink);
+    //     var d = new Date();
+    //     var fileName= d.getTime();
+    //     var dir = './comments';
 
-    // 2. single post commenting.
-    await postComment(page,postLink,commentMessage);
+    //     if (!fs.existsSync(dir)){
+    //         fs.mkdirSync(dir);
+    //     }
+
+    //     var dir = './failed_comments';
+
+    //     if (!fs.existsSync(dir)){
+    //         fs.mkdirSync(dir);
+    //     }
+
+    //     if(postObj['status'] == "failed"){
+    //         fs.writeFile("./failed_comments/"+String(fileName)+'.json', JSON.stringify(postObj), (err) => {
+    //             // throws an error, you could also catch it here
+    //             if (err) throw err;
+
+    //             // success case, the file was saved
+    //             console.log('Reply Comment are Saved in the file! ' +  String(fileName));
+    //     });
+    //     }
+    //     else{
+    //         fs.writeFile("./comments/"+String(fileName)+'.json', JSON.stringify(postObj), (err) => {
+    //             // throws an error, you could also catch it here
+    //             if (err) throw err;
+
+    //             // success case, the file was saved
+    //             console.log('Reply Comment are Saved in the file! ' +  String(fileName));
+    //     });
+    //     }
+
+
 
 }

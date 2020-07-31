@@ -67,7 +67,7 @@ async function getArticleDetails(page,pagelink,postid,groupid){
     postobj = {}
     //jj.split("?")[1].split("&")[0]
     console.log(" $$ Just fecthed the HTML content for post and loaded in dom $$ ");
-    try { 
+    try {
 
         console.log(" @@ Fetching Post. @@ ")
         postProfileLink=""
@@ -77,7 +77,7 @@ async function getArticleDetails(page,pagelink,postid,groupid){
         postlinks = ""
 
         post = dom.window.document.querySelector("div[class='story_body_container']");
-        
+
         if(post!=null){
             header = post.querySelector('header').querySelectorAll('a');
             if(header!=null){
@@ -111,9 +111,9 @@ async function getArticleDetails(page,pagelink,postid,groupid){
         postshares=""
         shareobj = dom.window.document.querySelector("span[data-sigil='feed-ufi-sharers']")
         if(shareobj!=null){
-            postshares = dom.window.document.querySelector("span[data-sigil='feed-ufi-sharers']").textContent;  
+            postshares = dom.window.document.querySelector("span[data-sigil='feed-ufi-sharers']").textContent;
         }
-        
+
         postobj["profile_link"] = postProfileLink;
         postobj["datetime"] = postDateTime;
         postobj["content"] = postContent;
@@ -123,7 +123,7 @@ async function getArticleDetails(page,pagelink,postid,groupid){
         postobj["shares"] = postshares;
         postobj["postid"] = postid;
 
-        
+
     }catch (e) {
         console.error(e);
     }
@@ -144,14 +144,14 @@ async function getAllLatestPosts(page,groupId,url,pageScrollLength) {
         const hftml = await page.content();
         const dodm = new JSDOM(hftml);
         var about = dodm.window.document.querySelectorAll("span[data-sigil='expose']");
-        
+
         for(var ltt =0;ltt<pageScrollLength;ltt++){
             await autoScroll(page);
             console.log(ltt);
         }
             var flag = 0;
             var tg = 0;
-            
+
             // await autoScroll(page);
             // await autoScroll(page);
             await page.waitFor(1000);
@@ -212,13 +212,13 @@ async function goToGroup(page, groupId,pageScrollLength) {
 	catch(e)
 	{
 		console.log("Exception" + e);
-	}	
-	
+	}
+
 }
 
 
 async function logIn(page) {
-    
+
         await page.goto('https://m.facebook.com/',
         {waitUntil: 'networkidle2'})
 
@@ -233,7 +233,7 @@ async function logIn(page) {
 exports.getAllGroup = async function(pageScrollLength)
 {
     (async() => {
-        
+
         //console.log(pageScrollLength);
         const browser = await puppeteer.launch({headless: isHeadless,args: ['--no-sandbox'], userDataDir: './myUserDataDir'})
         const page = await browser.newPage()
@@ -244,13 +244,13 @@ exports.getAllGroup = async function(pageScrollLength)
 
         //await logIn(page);
 
-    	groups = ["218845138622682","716380275128285", "814848708638342"]
+    	groups = ["814848708638342", "2249357341987919", "984698274924505", "353881365032121" ]//["218845138622682","716380275128285", "814848708638342"]
         groupPost = {}
         for(var t = 0;t<groups.length;t++){
             var getPost = await goToGroup(page,groups[t],pageScrollLength);
             groupPost[t] = getPost;
         }
-    	
+
         console.log(groupPost);
 
         allPostsData = [];
@@ -264,12 +264,17 @@ exports.getAllGroup = async function(pageScrollLength)
         }
         var d = new Date();
         var fileName= d.getTime();
+        var dir = './data';
+
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
         fs.writeFile("./data/"+String(fileName)+'.json', JSON.stringify(allPostsData), (err) => {
             // throws an error, you could also catch it here
             if (err) throw err;
 
             // success case, the file was saved
-            console.log('Posts are Saved in the file!');
+            console.log('Posts are Saved in the file! ' + String(fileName) );
         });
 
     })();

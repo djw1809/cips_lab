@@ -229,8 +229,8 @@ async function logIn(page) {
         {waitUntil: 'networkidle2'})
 
         var vat = await page.waitForSelector('input[name="email"]')
-        await page.type('input[name="email"]', 'fredrik.abbott@gmail.com')
-        await page.type('input[name="pass"]', 'CIDSEasu2019%')
+        await page.type('input[name="email"]', 'woodmellisa3@gmail.com')
+        await page.type('input[name="pass"]', 'woods751')
 
         await page.click('button[name="login"]')
         await page.waitFor(1000);
@@ -238,8 +238,13 @@ async function logIn(page) {
 
 
 }
-
-
+// woodmellisa3@gmail.com ; woods751
+// brianajohnson185@outlook.com ; model2020
+// markjohnson199921@outlook.com ; #Mark211999#
+// garretsofia1998@outlook.com ; #Garret011998#
+// michelwilliam199207@gmail.com ; #Michel071992#
+//  katrina199609@gmail.com ; Katrina&1234
+//  jnfsmith7@gmail.com ; CIDSEasu2020!
 
 exports.getAllGroup = async function(pageScrollLength)
 {
@@ -255,8 +260,7 @@ exports.getAllGroup = async function(pageScrollLength)
 
         //await logIn(page);
 
-    	groups = ["218845138622682","716380275128285", "814848708638342", "1257074254459704", "984698274924505", "353881365032121", "2249357341987919", "470394413362405", "1227435557400085", "259395740774523", "1061668313867467", "175056849088", "cleanketofordiabetics"]
-    
+    	groups = ["814848708638342", "2249357341987919", "984698274924505", "353881365032121", "diabeticrecipes1", "703959236339876", "218845138622682" ] //218845138622682"
         groupPost = {}
         for(var t = 0;t<groups.length;t++){
             var getPost = await goToGroup(page,groups[t],pageScrollLength);
@@ -276,12 +280,18 @@ exports.getAllGroup = async function(pageScrollLength)
         }
         var d = new Date();
         var fileName= d.getTime();
+        var dir = './data';
+
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
+
         fs.writeFile("./data/"+String(fileName)+'.json', JSON.stringify(allPostsData), (err) => {
             // throws an error, you could also catch it here
             if (err) throw err;
 
             // success case, the file was saved
-            console.log('Posts are Saved in the file!');
+            console.log('Posts are Saved in the file! ' + String(fileName) );
         });
 
     })();
