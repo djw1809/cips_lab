@@ -51,8 +51,20 @@ async function autoScroll(page) {
 }
 
 
+async function logout(page){
+    await page.goto("https://m.facebook.com/?ref=dbl&soft=bookmarks",
+                {waitUntil: 'networkidle2'});
 
-async function postComment(page,pagelink,commentMessage,addLink){
+    await page.click('div[id="bookmarks_jewel"]')
+    await page.waitFor(1000);
+    await autoScroll(page);
+    await page.waitForSelector('a[data-sigil="logout"]')
+    await page.click('a[data-sigil="logout"]')
+    await page.waitFor(1000);
+}
+
+
+async function postComment(page,pagelink,commentMessage,addLink,randSampling){
         var postObj = {}
         await page.goto(pagelink,
         {waitUntil: 'networkidle2'});
@@ -101,12 +113,20 @@ async function postComment(page,pagelink,commentMessage,addLink){
             await page.click('button[data-sigil="touchable composer-submit"]')
             await page.waitFor(1000);
 
+
+
             postObj['comment_id'] = replyid;
             postObj['comment_link'] = pagelink;
             postObj['comment_msg'] = commentMessage;
             postObj['reply_link'] = reply_link;
             postObj['reply_adlink'] = addLink;
             postObj["status"] = " Commented successful"
+
+            if(randSampling == true){
+                await logout(page);
+            }
+
+
             return postObj;
         }
         catch (error) {
@@ -116,55 +136,87 @@ async function postComment(page,pagelink,commentMessage,addLink){
             postObj["commentMessage"] = commentMessage;
             postObj["addLink"] = addLink;
             postObj["status"] = "failed"
+            if(randSampling == true){
+                await logout(page);
+            }
+
             return postObj;
 
         }
+
 }
 
 
-async function logIn(page) {
+async function logIn(page,email,password) {
 
-        await page.goto('https://m.facebook.com/',
+        await page.goto('https://m.facebook.com/login/?next&ref=dbl&fl&refid=8',
         {waitUntil: 'networkidle2'})
+        const storyHtml = await page.content();
+        const dom = new JSDOM(storyHtml);
+        try{
+            await page.waitForSelector('input[name="email"]')
+            await page.type('input[name="email"]', email)
+            await page.type('input[name="pass"]', password)
+            await page.click('button[name="login"]')
+            await page.waitFor(1000);
+            return true;
+        }
+        catch (error) {
+            console.log(error);
+            //pagelink,commentMessage,addLink
 
-        await page.waitForSelector('input[name="email"]')
-        await page.type('input[name="email"]', 'katrina199609@gmail.com')
-        await page.type('input[name="pass"]', 'Katrina&1234')
-        // await page.type('input[name="email"]', 'alukau2894@gmail.com')
-        // await page.type('input[name="pass"]', '#aluka2894#')
-
-        await page.click('button[name="login"]')
-        await page.waitFor(1000);
+            await page.click('div[id="bookmarks_jewel"]')
+            await page.waitFor(1000);
+            await autoScroll(page);
+            await page.waitForSelector('a[data-sigil="logout"]')
+            await page.click('a[data-sigil="logout"]')
+            await page.waitFor(1000);
+            return false;
+        }
 
 }
 
 
 
-exports.gotopage = async function(uniqueID){
-
+exports.gotopage = async function(randSampling,singleAccount){
     const browser = await puppeteer.launch({headless: isHeadless,userDataDir: './myUserDataDir',args: ['--no-sandbox']})
+    // browser = await browser.createIncognitoBrowserContext();
     const page = await browser.newPage()
 
     await page.setViewport({width: 1280, height: 800})
     //pass the id here
-
-    let postsData = fs.readFileSync('./data/salvo_combined_evening072620_morning072720.json');
+    var fbLogins = fs.readFileSync('./groups/facebookAccounts.json');
+    fbLogins = JSON.parse(fbLogins);
+    let postsData = fs.readFileSync('./data/data.json');
     let fPosts = JSON.parse(postsData);
-
-    //await logIn(page)
+    if(randSampling == false){
+        var rand = singleAccount-1;
+        var loginFlag = await logIn(page,fbLogins[rand].email,fbLogins[rand].password)
+        if(loginFlag == false){
+            loginFlag = await logIn(page,fbLogins[rand].email,fbLogins[rand].password)
+        }
+    }
 
     // 1. Batch commenting
 
-
     for(var t=0;t<fPosts.length;t++){
+
+        if(randSampling == true){
+            var rand = Math.floor(Math.random() * 1) + 1;
+            rand = rand-1;
+            var loginFlag = await logIn(page,fbLogins[rand].email,fbLogins[rand].password)
+            if(loginFlag == false){
+                loginFlag = await logIn(page,fbLogins[rand].email,fbLogins[rand].password)
+            }
+        }
+
         var postLink = fPosts[t]['postlink'];
-        uniqueID = Date.now();
-        var addLink = "https://paylessformeds.us/?"+uniqueID;
+        var uniqueID = Date.now();
+        var addLink = "http://cleverrx-dev.s3-website.us-east-2.amazonaws.com/?"+uniqueID;
 
         //console.log(postLink);
-
         var commentMessage = fPosts[t]['comment'];
-        var postObj = await postComment(page,postLink,commentMessage,addLink);
+        var postObj = await postComment(page,postLink,commentMessage,addLink,randSampling);
         var d = new Date();
         var fileName= d.getTime();
         var dir = './comments';
@@ -197,7 +249,8 @@ exports.gotopage = async function(uniqueID){
                 console.log('Reply Comment are Saved in the file! ' +  String(fileName));
         });
         }
-        await page.waitFor(300000)
+
+        await page.waitFor(10000)
     }
 
     // // 2. single post commenting.
