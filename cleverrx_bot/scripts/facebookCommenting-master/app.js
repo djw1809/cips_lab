@@ -23,7 +23,8 @@ const getYesPosts = require('./groups/getYesterdayPosts.js')
 //const db = require('./db.js')
 
 const pageScrollLength = 2;
-var uniqueID = 1100;
+var randSampling = true; // if true selects random accounts from facebookAccounts.json.
+var singleAccount = 1; // selects specific account from facebookAccounts.json.
 const app = express();
 
 app.get('/', (req, res) => {
@@ -47,7 +48,7 @@ app.get('/facebook/getLatestPost', async (req, res) => {
 
 app.get('/facebook/putComment', async (req, res) => {
 
-    await scrapeComment.gotopage(uniqueID);
+    await scrapeComment.gotopage(randSampling,singleAccount);
 
     res
         .status(200)
@@ -57,7 +58,7 @@ app.get('/facebook/putComment', async (req, res) => {
 
 
 app.get('/facebook/getYesterdayPost', async (req, res) => {
-
+    
     await getYesPosts.getAllGroup(pageScrollLength)
     res
         .status(200)
@@ -101,7 +102,7 @@ app.get('/facebook/getDateRangePost', async (req, res) => {
             .end();
         }
     }
-
+    
 });
 
 

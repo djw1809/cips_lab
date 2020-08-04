@@ -17,9 +17,9 @@ model_name1 = 'batch_051220_keyword_types_sentiment_cluster'
 model_name2 = 'batch_051220_keyword_types_nosentiment_cluster'
 model_name3 = 'batch_051220_keyword_types_sentiment_nocluster'
 
-save_name_1 = '_072320_insulin'
-save_name_2 = '_072320_insulin'
-save_name_3 ='_072320_insulin'
+save_name_1 = '_080420'
+save_name_2 = '_080420'
+save_name_3 ='_080420'
 
 
 model1 = models.GPT2Model_bagofctrl.load(model_path + model_name1)
@@ -28,10 +28,11 @@ model3 = models.GPT2Model_bagofctrl.load(model_path + model_name3)
 
 model_dict = {model_name1 + save_name_1:model1, model_name2+save_name_2:model2, model_name3+save_name_3:model3}
 
-k_list = [0,20,40,60,80,100,120,140,160,180,200]
-p_list = [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1]
+k_list = [60,80,100,120,140,160,180,200]
+p_list = [.3, .4, .5, .6, .7, .8, .9, 1]
 length = 30
-prompt1 = ['insurance-', 'Insulin is']
+num_return_sequences = 20
+prompt1 = ['insurance-', 'diabetes']
 prompt2 = ['card+', 'I use']
 
 
