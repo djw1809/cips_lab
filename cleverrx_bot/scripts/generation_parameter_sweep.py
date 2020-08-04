@@ -21,7 +21,7 @@ model_name3 = 'batch_051220_keyword_types_sentiment_nocluster'
 
 save_name_1 = '_080420_insurance'
 save_name_2 = '_080420_insurance'
-save_name_3 ='_080420'
+save_name_3 ='_080420_insurance'
 
 
 model1 = models.GPT2Model_bagofctrl.load(model_path + model_name1)
