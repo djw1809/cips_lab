@@ -2,4 +2,4 @@ cleverrx_bot/saved_models
 cleverrx_bot/data
 cleverrx_data/data
 env/
-*/__pycache__
+cleverrx_bot/scripts/__pycache__/
