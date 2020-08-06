@@ -4,4 +4,4 @@ cleverrx_data/data
 env/
 cleverrx_bot/scripts/__pycache__/
 cleverrx_bot/scripts/facebookCommenting-master/myUserDataDir/ 
-cleverrx_bot/scripts/facebookCommenting-master/node_modules/
+cleverrx_bot/scripts/facebookCommenting-master/node_modules/*
