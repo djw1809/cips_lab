@@ -1,3 +1,0 @@
-{
-    "ignore": ["*.json", "data/*.json","comments/*.json"]
-}
