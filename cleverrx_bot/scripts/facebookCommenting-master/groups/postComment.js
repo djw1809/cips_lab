@@ -187,7 +187,7 @@ exports.gotopage = async function(randSampling,singleAccount){
     //pass the id here
     var fbLogins = fs.readFileSync('./groups/facebookAccounts.json');
     fbLogins = JSON.parse(fbLogins);
-    let postsData = fs.readFileSync('./data/salvo_morning_072920.json');
+    let postsData = fs.readFileSync('./data/salvo_morning073020.json');
     let fPosts = JSON.parse(postsData);
     if(randSampling == false){
         var rand = singleAccount-1;
