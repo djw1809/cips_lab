@@ -1,0 +1,72 @@
+sudo npm install nodemon -g --save
+
+Diabetics:
+
+Pages:
+(1)    https://m.facebook.com/AmericanDiabetesAssociation/
+
+(2)    https://m.facebook.com/NIDDKgov/
+
+(3)    https://m.facebook.com/theDiabetesTeam/
+
+(4)    https://m.facebook.com/DiabetesPro/
+
+(5)    https://m.facebook.com/diabeticsweekly/
+
+(6)    https://m.facebook.com/beyondtype1/
+
+(7)    https://m.facebook.com/dmdsccalicut/
+
+(8)    https://m.facebook.com/DiabeticDanica/
+
+(9)    https://m.facebook.com/myJDRF/
+
+(10)https://m.facebook.com/YouWeCan/
+
+Groups:
+1) https://www.facebook.com/groups/814848708638342/
+
+2) https://www.facebook.com/groups/218845138622682/
+
+3) https://www.facebook.com/groups/716380275128285/
+
+
+Account_1:
+Facebook Credentials
+Facebook account: fredrik.abbott@gmail.com
+Facebook password: CIDSEasu2019%
+
+
+Account_2:
+Outlook Account:
+Michel william 34
+michelwilliam34@outlook.com
+#Facebook1234#
+DOB : May 7 1992
+
+Gmail:
+michelwilliam199207@gmail.com
+#Facebook1234#
+DOB : May 7 1992
+
+
+Facebook:
+Email: michelwilliam199207@gmail.com
+Password: #Michel071992#
+DOB: May 9 1992
+
+Account_3:
+
+Facebook Account:
+Email: katrina199609@gmail.com
+Password: Katrina&1234
+
+Gmail Account:
+Email: katrina199609@gmail.com
+Password: Katrina&1234
+Gmail Recovery: timsofia1997@outlook.com
+
+Recovery Email Outlook Account
+Email: timsofia1997@outlook.com
+Password: #Tim211997#
+Mobile Number Used: 480-304-5552
