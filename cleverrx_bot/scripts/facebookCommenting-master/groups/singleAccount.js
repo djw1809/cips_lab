@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const jsdom = require("jsdom")
 const fs = require('fs');
 const { post } = require('../app');
+const { pathToFileURL } = require('url');
 const {JSDOM} = jsdom
 global.DOMParser = new JSDOM().window.DOMParser
 
@@ -52,9 +53,9 @@ async function autoScroll(page) {
 
 
 async function logout(page){
-
     await page.goto("https://m.facebook.com/?ref=dbl&soft=bookmarks",
                 {waitUntil: 'networkidle2'});
+
     await page.click('div[id="bookmarks_jewel"]')
     await page.waitFor(1000);
     await autoScroll(page);
@@ -74,7 +75,7 @@ async function logout(page){
 }
 
 
-async function postComment(page,pagelink,commentMessage,addLink,randSampling){
+async function postComment(page,pagelink,commentMessage,addLink){
         var postObj = {}
         await page.goto(pagelink,
         {waitUntil: 'networkidle2'});
@@ -133,6 +134,8 @@ async function postComment(page,pagelink,commentMessage,addLink,randSampling){
             postObj["status"] = " Commented successful"
 
 
+
+
             return postObj;
         }
         catch (error) {
@@ -152,17 +155,14 @@ async function postComment(page,pagelink,commentMessage,addLink,randSampling){
 
 async function logIn(page,email,password) {
 
-        await page.goto('https://m.facebook.com/login/?ref=dbl&fl',
+        await page.goto('https://m.facebook.com/login/?next&ref=dbl&fl&refid=8',
         {waitUntil: 'networkidle2'})
         const storyHtml = await page.content();
         const dom = new JSDOM(storyHtml);
         try{
             await page.waitForSelector('input[name="email"]')
             await page.type('input[name="email"]', email)
-            await page.waitForSelector('input[name="pass"]')
             await page.type('input[name="pass"]', password)
-            await page.waitForSelector('button[name="login"]')
-            await page.waitFor(1000);
             await page.click('button[name="login"]')
             await page.waitFor(1000);
 
@@ -178,24 +178,25 @@ async function logIn(page,email,password) {
         catch (error) {
             console.log(error);
             //pagelink,commentMessage,addLink
-            await page.goto("https://m.facebook.com/?ref=dbl&soft=bookmarks",
-                {waitUntil: 'networkidle2'});
+
             await page.click('div[id="bookmarks_jewel"]')
             await page.waitFor(1000);
             await autoScroll(page);
             await page.waitForSelector('a[data-sigil="logout"]')
             await page.click('a[data-sigil="logout"]')
-            await page.waitFor(1000);
+            // await page.waitForSelector('a[data-sigil="touchable primary_action"]')
+            await page.click('a[data-sigil="touchable primary_action"]');
             const storyHtml = await page.content();
             const dom = new JSDOM(storyHtml);
             var tempLogout = dom.window.document.querySelector('div[data-sigil="logout_dialog_content_wrapper"]');
 
             if(tempLogout!=undefined){
-            var tem = dom.window.document.querySelector('a[data-sigil="touchable primary_action"]');
-
+                var tem = dom.window.document.querySelector('a[data-sigil="touchable primary_action"]');
                 await page.goto("https://m.facebook.com"+tem.href,
-                        {waitUntil: 'networkidle2'});
+                {waitUntil: 'networkidle2'});
             }
+
+            await page.waitFor(1000);
             return false;
         }
 
@@ -203,7 +204,7 @@ async function logIn(page,email,password) {
 
 
 
-exports.gotopage = async function(randSampling){
+exports.gotopage = async function(singleAccount){
     const browser = await puppeteer.launch({headless: isHeadless})
     // browser = await browser.createIncognitoBrowserContext();
     const page = await browser.newPage()
@@ -212,67 +213,65 @@ exports.gotopage = async function(randSampling){
     //pass the id here
     var fbLogins = fs.readFileSync('./groups/facebookAccounts.json');
     fbLogins = JSON.parse(fbLogins);
-    let postsData = fs.readFileSync('./data/salvo_evening_073020_1.json');
+    let postsData = fs.readFileSync('./data/salvo_evening_073020_2.json');
     let fPosts = JSON.parse(postsData);
 
-    // 1. Batch commenting
 
-    for(var t=0;t<fPosts.length;t++){
-        if(randSampling == true){
-            var rand = Math.floor(Math.random() * fbLogins.length) + 1;
-            rand = rand-1;
-            var loginFlag = await logIn(page,fbLogins[rand].email,fbLogins[rand].password)
-            if(loginFlag == true){
-                await logout(page);
+    var rand = singleAccount-1;
+    if(rand < fbLogins.length){
+
+        var loginFlag = await logIn(page,fbLogins[rand].email,fbLogins[rand].password)
+        if(loginFlag == true){
+            await logout(page);
+        }
+        loginFlag = await logIn(page,fbLogins[rand].email,fbLogins[rand].password)
+
+        // 1. Batch commenting
+
+        for(var t=0;t<fPosts.length;t++){
+
+            var postLink = fPosts[t]['postlink'];
+            var uniqueID = Date.now();
+            var addLink = "http://access-health-care-prod.s3-website.us-east-2.amazonaws.com/?"+uniqueID;
+
+            //console.log(postLink);
+            var commentMessage = fPosts[t]['comment'];
+            var postObj = await postComment(page,postLink,commentMessage,addLink);
+            var d = new Date();
+            var fileName= d.getTime();
+            var dir = './comments';
+
+            if (!fs.existsSync(dir)){
+                fs.mkdirSync(dir);
             }
-            loginFlag = await logIn(page,fbLogins[rand].email,fbLogins[rand].password);
-        }
 
-        console.log(" Logged In : ", fbLogins[rand].email);
-        await page.waitFor(1000);
-        var postLink = fPosts[t]['postlink'];
-        var uniqueID = Date.now();
-        var addLink = "http://access-health-care-prod.s3-website.us-east-2.amazonaws.com/?"+uniqueID;
+            var dir = './failed_comments';
 
-        //console.log(postLink);
-        var commentMessage = fPosts[t]['comment'];
-        var postObj = await postComment(page,postLink,commentMessage,addLink,randSampling);
-        var d = new Date();
-        var fileName= d.getTime();
-        var dir = './comments';
+            if (!fs.existsSync(dir)){
+                fs.mkdirSync(dir);
+            }
 
-        if (!fs.existsSync(dir)){
-            fs.mkdirSync(dir);
-        }
+            if(postObj['status'] == "failed"){
+                fs.writeFile("./failed_comments/"+String(fileName)+'.json', JSON.stringify(postObj), (err) => {
+                    // throws an error, you could also catch it here
+                    if (err) throw err;
 
-        var dir = './failed_comments';
-
-        if (!fs.existsSync(dir)){
-            fs.mkdirSync(dir);
-        }
-
-        if(postObj['status'] == "failed"){
-            fs.writeFile("./failed_comments/"+String(fileName)+'.json', JSON.stringify(postObj), (err) => {
-                // throws an error, you could also catch it here
-                if (err) throw err;
-
-                // success case, the file was saved
-                console.log('Reply Comment are Saved in the file! ' +  String(fileName));
-        });
-        }
-        else{
-            fs.writeFile("./comments/"+String(fileName)+'.json', JSON.stringify(postObj), (err) => {
-                // throws an error, you could also catch it here
-                if (err) throw err;
-
-                // success case, the file was saved
-                console.log('Reply Comment are Saved in the file! ' +  String(fileName));
+                    // success case, the file was saved
+                    console.log('Reply Comment are Saved in the file! ' +  String(fileName));
             });
+            }
+            else{
+                fs.writeFile("./comments/"+String(fileName)+'.json', JSON.stringify(postObj), (err) => {
+                    // throws an error, you could also catch it here
+                    if (err) throw err;
+
+                    // success case, the file was saved
+                    console.log('Reply Comment are Saved in the file! ' +  String(fileName));
+            });
+            }
+
+            await page.waitFor(30000);
         }
-
-        await logout(page);
-        await page.waitFor(30000);
-
 
     }
 

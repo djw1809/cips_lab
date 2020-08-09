@@ -19,12 +19,12 @@ const express = require('express');
 const scrapeGroup = require('./groups/getPosts.js')
 const scrapeComment = require('./groups/postComment.js')
 const getYesPosts = require('./groups/getYesterdayPosts.js')
-// const offerUp = require('./groups/offerup.js')
-//const db = require('./db.js')
+const singleAccount = require('./groups/singleAccount.js')
+
 
 const pageScrollLength = 2;
-var randSampling = false; // if true selects random accounts from facebookAccounts.json.
-var singleAccount = 4; // selects specific account from facebookAccounts.json.
+var randSampling = true; // if true selects random accounts from facebookAccounts.json.
+var accountNo = 1; // selects specific account from facebookAccounts.json.
 const app = express();
 
 app.get('/', (req, res) => {
@@ -48,8 +48,17 @@ app.get('/facebook/getLatestPost', async (req, res) => {
 
 app.get('/facebook/putComment', async (req, res) => {
 
-    await scrapeComment.gotopage(randSampling,singleAccount);
+    await scrapeComment.gotopage(randSampling);
 
+    res
+        .status(200)
+        .send('Facebook_group logged in!')
+        .end();
+});
+
+app.get('/facebook/singleAccount', async (req, res) => {
+
+    await singleAccount.gotopage(accountNo);
     res
         .status(200)
         .send('Facebook_group logged in!')
