@@ -19,9 +19,9 @@ model_name3 = 'batch_051220_keyword_types_sentiment_nocluster'
 
 
 
-save_name_1 = '_080520_eating'
-save_name_2 = '_080520_eating'
-save_name_3 ='_080520_eating'
+save_name_1 = '_080920_selfcare'
+save_name_2 = '_080920_selfcare'
+save_name_3 ='_080920_selfcare'
 
 
 model1 = models.GPT2Model_bagofctrl.load(model_path + model_name1)
