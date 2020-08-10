@@ -34,8 +34,8 @@ k_list = [60,80,100,120,140,160,180,200]
 p_list = [.3, .4, .5, .6, .7, .8, .9, 1]
 length = 50
 num_return_sequences = 20
-prompt1 = [('diabetes',), 'Diabetes is']
-prompt2 = [('card+',), 'I try to']
+prompt1 = (['diabetes'], 'Diabetes is')
+prompt2 = (['card+'], 'I try to')
 
 
 for key in model_dict.keys():
