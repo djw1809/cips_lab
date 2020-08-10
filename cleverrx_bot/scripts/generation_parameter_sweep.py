@@ -8,7 +8,7 @@ from transformers import GPT2Tokenizer
 from topic_link_creation import TopicLinkCreation
 import bot_utils as butils
 import bot_models as models
-
+#%%
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
 model_path = '../saved_models/'
@@ -19,9 +19,9 @@ model_name3 = 'batch_051220_keyword_types_sentiment_nocluster'
 
 
 
-save_name_1 = '_080920'
-save_name_2 = '_080920'
-save_name_3 ='_080920'
+save_name_1 = '_081020'
+save_name_2 = '_081020'
+save_name_3 ='_081020'
 
 
 model1 = models.GPT2Model_bagofctrl.load(model_path + model_name1)
@@ -34,9 +34,18 @@ k_list = [60,80,100,120,140,160,180,200]
 p_list = [.3, .4, .5, .6, .7, .8, .9, 1]
 length = 50
 num_return_sequences = 20
-prompt1 = ['insurance-', 'Diabetes is']
-prompt2 = ['card+', 'I try to']
+prompt1 = [('diabetes',), 'Diabetes is']
+prompt2 = [('card+',), 'I try to']
 
 
 for key in model_dict.keys():
     output = butils.parameter_sweep(model_dict[key], tokenizer, length, k_list, p_list, prompt1, prompt2, key, num_return_sequences)
+
+
+keywords, bos = prompt1
+keywords
+for keyword in keywords:
+    print(keyword)
+
+for keyword in keywords:
+    print(keyword)
