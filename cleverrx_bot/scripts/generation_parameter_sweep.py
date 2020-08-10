@@ -40,12 +40,3 @@ prompt2 = [('card+',), 'I try to']
 
 for key in model_dict.keys():
     output = butils.parameter_sweep(model_dict[key], tokenizer, length, k_list, p_list, prompt1, prompt2, key, num_return_sequences)
-
-
-keywords, bos = prompt1
-keywords
-for keyword in keywords:
-    print(keyword)
-
-for keyword in keywords:
-    print(keyword)
