@@ -212,7 +212,7 @@ exports.gotopage = async function(randSampling){
     //pass the id here
     var fbLogins = fs.readFileSync('./groups/facebookAccounts.json');
     fbLogins = JSON.parse(fbLogins);
-    let postsData = fs.readFileSync('./data/salvo_evening_073020_1.json');
+    let postsData = fs.readFileSync('./data/salvo_morning_080420.json');
     let fPosts = JSON.parse(postsData);
 
     // 1. Batch commenting

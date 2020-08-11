@@ -229,8 +229,8 @@ async function logIn(page) {
         {waitUntil: 'networkidle2'})
 
         var vat = await page.waitForSelector('input[name="email"]')
-        await page.type('input[name="email"]', 'garretsofia1998@outlook.com')
-        await page.type('input[name="pass"]', '#Garret011998#')
+        await page.type('input[name="email"]', 'woodmellisa3@gmail.com')
+        await page.type('input[name="pass"]', 'woods751')
 
         await page.click('button[name="login"]')
         await page.waitFor(1000);
