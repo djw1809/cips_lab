@@ -58,7 +58,7 @@ model_path = Path(Path(model_storage_dir)/Path(parameter_dict['filename']))
 results_path.mkdir(parents = True, exist_ok = True)
 model_path.mkdir(parents = True, exist_ok = True)
 
-model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
+model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-large-uncased', 'bert-large-uncased')
 trained_model, optimizer, scheduler, loss_data = butils.train_hugging_encode_decode(dataset, parameter_dict['epochs'],
                                                                                              parameter_dict['num_worker'],
                                                                                              parameter_dict['batch_size'],
