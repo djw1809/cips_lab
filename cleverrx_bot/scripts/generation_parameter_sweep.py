@@ -19,9 +19,9 @@ model_name3 = 'batch_051220_keyword_types_sentiment_nocluster'
 
 
 
-save_name_1 = '_081120_insurance'
-save_name_2 = '_081120_insurance'
-save_name_3 ='_081120_insurance'
+save_name_1 = '_081120_insulin_cluster'
+save_name_2 = '_081120_insulin_cluster'
+save_name_3 ='_081120_insulin_cluster'
 
 
 model1 = models.GPT2Model_bagofctrl.load(model_path + model_name1)
@@ -34,7 +34,7 @@ k_list = [60,80,100,120,140,160,180,200]
 p_list = [.3, .4, .5, .6, .7, .8, .9, 1]
 length = 50
 num_return_sequences = 20
-prompt1 = (['insurance-'], 'Insurance is')
+prompt1 = (['diabetes'], 'Insulin is')
 prompt2 = (['card+'], 'I try to')
 
 
