@@ -93,7 +93,7 @@ def check_posts(post_list, save = False, save_location = 'facebookCommenting-mas
     for post in post_list:
         print(post['content'])
         keep = input()
-        if int(keep) == 1:
+        if keep == '1':
             keep_list.append(post)
         else:
             pass

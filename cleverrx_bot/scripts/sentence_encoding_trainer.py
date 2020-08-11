@@ -18,8 +18,9 @@ test = False
 new_dataset = True
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 if new_dataset:
-    raw_data_path = '../data/topics_index_bots_new_042820.pkl'
-    raw_data_text_field = 'tweet'
+    raw_data_path = '../data/full_facebook_data.pkl'
+    raw_data_text_field = 'content'
+    raw_data_id_field = 'id'
 
     with open(raw_data_path, 'rb') as file:
         raw_data = pickle.load(file)
@@ -27,7 +28,7 @@ if new_dataset:
     if test:
         raw_data = {i:raw_data[i] for i in list(raw_data.keys())[0:5]}
 
-    preprocessor = Comment_data_preprocessor(raw_data, raw_data_text_field, tokenizer)
+    preprocessor = Comment_data_preprocessor(raw_data, raw_data_text_field, raw_data_id_field, tokenizer)
     tokenized_df = preprocessor.df_to_tokenized_df(preprocessor.input_df)
     dataset = Comment_dataset(tokenized_df, 'token_ids', tokenizer)
 

@@ -17,7 +17,7 @@ class Comment_data_preprocessor(Dataset):
         - TODO: assert that if a synonym dict has been provided then so should a keyword_field
         '''
     #PREPROCESSING
-    def __init__(self, raw_data, text_field, tokenizer, keyword_field = None, synonym_dict = None):
+    def __init__(self, raw_data, text_field, id_field, tokenizer, keyword_field = None, synonym_dict = None):
         #sefl.tokenizer = tokenizer
         self.tokenizer = tokenizer
         self.synonym_dict = synonym_dict
@@ -35,7 +35,7 @@ class Comment_data_preprocessor(Dataset):
 
         elif isinstance(raw_data, pd.DataFrame): #process input data if it is a dataframe
             self.input_df = raw_data
-            self.input_df = self.input_df.rename(columns = {text_field: 'text'})
+            self.input_df = self.input_df.rename(columns = {text_field: 'text', id_field: 'id'})
             # intermediate_df = pd.DataFrame(columns = ['id', 'text'])
             # intermediate_df.loc[:, 'id'] = raw_data.loc[:, id_field]
             # intermediate_df.loc[:, 'text'] = raw_data.loc[:, text_field]
@@ -46,7 +46,7 @@ class Comment_data_preprocessor(Dataset):
 
         elif isinstance(raw_data, list):  #process input data if it is json list of dicts, each dict representing a comment
             self.input_df = pd.DataFrame(raw_data)
-            self.input_df = self.input_df.rename(columns = {text_field: 'text'})
+            self.input_df = self.input_df.rename(columns = {text_field: 'text', id_field: 'id'})
 
             # if keyword_field != None:
             #     drop_columns = [column for column in intermediate_df.columns if column not in [id_field, text_field, keyword_field]]
@@ -64,7 +64,7 @@ class Comment_data_preprocessor(Dataset):
         elif isinstance(raw_data, dict): #process input data if it is json dict of dicts, each dict representing a comment with ids as keys
             self.input_df = pd.DataFrame.from_dict(raw_data, orient = 'index')
             self.input_df['id'] = self.input_df.index
-            self.input_df = self.input_df.rename(columns = {text_field: 'text'})
+            self.input_df = self.input_df.rename(columns = {text_field: 'text', id_field: 'id'})
 
 
         else:

@@ -13,6 +13,38 @@ from torch.nn import CrossEntropyLoss
 import bot_models as models
 from topic_link_creation import TopicLinkCreation
 import xlrd
+import json
+#%%
+with open('../data/facebookgroups.json', 'rb') as file:
+    group_data = json.load(file)
+
+with open('../data/facebookpages.json', 'rb') as file:
+    page_data = json.load(file)
+
+group_data[0].keys()
+page_data[0].keys()
+len(group_data)
+len(page_data)
+
+with open('../data/full_facebook_data.pkl', 'wb') as file:
+    pickle.dump(group_data, file)
+
+
+
+#%%
+with open('../data/facebookgroups.json', 'rb') as file:
+    data = json.load(file)
+
+short_data = data[0:5]
+short_data[0].keys()
+tokenizer = transformers.BertTokenizer.from_pretrained('bert-base-uncased')
+preprocessor = butils.Comment_data_preprocessor(short_data, 'content', 'postid', tokenizer)
+preprocessor.input_df
+tokenized_df = preprocessor.df_to_tokenized_df(preprocessor.input_df)
+tokenized_df
+
+
+
 
 
 #%%
