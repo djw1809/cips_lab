@@ -20,7 +20,7 @@ tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 if new_dataset:
     raw_data_path = '../data/full_facebook_data.pkl'
     raw_data_text_field = 'content'
-    raw_data_id_field = 'id'
+    raw_data_id_field = 'postid'
 
     with open(raw_data_path, 'rb') as file:
         raw_data = pickle.load(file)
