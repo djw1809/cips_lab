@@ -26,7 +26,6 @@ import bot_models as models
 
 #functions for general data processing
 
-
 def produce_entity_list(data):
     output_dict = {}
     for i in data.index:

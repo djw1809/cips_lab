@@ -19,7 +19,7 @@ with open('../data/topics_index_bots_new_042820.pkl', 'rb') as file:
 
 
 #%% regular data
-raw_data = {1: {'tweet': 'a tweet'},
+raw_data_regular = {1: {'tweet': 'a tweet'},
             2:{'tweet': 'a second tweet'},
             3:{'tweet': 'a third tweet'},
             4:{'tweet': 'a fouth tweet'},
@@ -37,11 +37,11 @@ short_fb_data_dict = {i:fbgroups[i] for i in list(fbgroups.keys())[0:6]}
 
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 #%% testing __init__
-list_preprocessor = butils.Comment_data_preprocessor(short_raw_data_list, 'tweet', tokenizer)
+list_preprocessor = butils.Comment_data_preprocessor(short_raw_data_list, 'tweet', 'id', tokenizer)
 dict_preprocessor = butils.Comment_data_preprocessor(short_raw_data_dict, 'tweet', tokenizer)
 df_preprocessor = butils.Comment_data_preprocessor(short_raw_data_df, 'tweet', tokenizer)
 short_fbgroups_preprocessor = butils.Comment_data_preprocessor(short_fb_data_dict, 'tweet', tokenizer)
-# regular_dict_preprocessor = butils.Comment_data_preprocessor(raw_data, 'tweet', tokenizer)
+regular_dict_preprocessor = butils.Comment_data_preprocessor(raw_data_regular, 'tweet', tokenizer)
 
 
 #regular_dict_preprocessor.input_df
@@ -49,7 +49,7 @@ list_preprocessor.input_df
 dict_preprocessor.input_df
 df_preprocessor.input_df
 short_fbgroups_preprocessor.input_df
-
+regular_dict_preprocessor.input_df
 
 
 #%% testing tokenizing keyword datasets

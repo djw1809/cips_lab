@@ -15,6 +15,54 @@ from topic_link_creation import TopicLinkCreation
 import xlrd
 import json
 #%%
+model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
+
+
+#%%
+with open('../data/pairs_v1.json', 'rb') as file:
+    data = json.load(file)
+
+short_data = data[0:5]
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+dataset = butils.Comment_pair_dataset(short_data, 'fb_post', 'tweet', tokenizer)
+dataset.max_len = 5
+
+
+
+
+
+
+loader = DataLoader(dataset, collate_fn = dataset.collate, batch_size = 1, shuffle = True)
+batch1 = next(iter(loader))
+len(batch1[0][0])
+
+
+batch1
+if torch.all(torch.eq(batch1[0], batch2[1])) == True:
+    print('dicks')
+batch2[1] == batch1[0]
+
+
+
+#%%
+def blah(a,b):
+    return a,b
+
+def blah1(a,b):
+    return (a,b)
+
+blah(1,2) == blah1(1,2)
+#%%
+with open('../data/pairs_v1.json', 'rb') as file:
+    data = json.load(file)
+
+example = data[69]
+example
+
+df = pd.DataFrame(data)
+df
+
+#%%
 with open('../data/facebookgroups.json', 'rb') as file:
     group_data = json.load(file)
 

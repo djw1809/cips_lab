@@ -17,7 +17,7 @@ class Comment_data_preprocessor(Dataset):
         - TODO: assert that if a synonym dict has been provided then so should a keyword_field
         '''
     #PREPROCESSING
-    def __init__(self, raw_data, text_field, id_field, tokenizer, keyword_field = None, synonym_dict = None):
+    def __init__(self, raw_data, text_field, tokenizer, id_field = None, keyword_field = None, synonym_dict = None):
         #sefl.tokenizer = tokenizer
         self.tokenizer = tokenizer
         self.synonym_dict = synonym_dict
@@ -35,7 +35,12 @@ class Comment_data_preprocessor(Dataset):
 
         elif isinstance(raw_data, pd.DataFrame): #process input data if it is a dataframe
             self.input_df = raw_data
-            self.input_df = self.input_df.rename(columns = {text_field: 'text', id_field: 'id'})
+            if id_field is not None:
+                self.input_df = self.input_df.rename(columns = {text_field: 'text', id_field: 'id'})
+
+            else:
+                self.input_df = self.input_df.rename(columns = {text_field: 'text'})
+                self.input_df['id'] = range(len(self.input_df))
             # intermediate_df = pd.DataFrame(columns = ['id', 'text'])
             # intermediate_df.loc[:, 'id'] = raw_data.loc[:, id_field]
             # intermediate_df.loc[:, 'text'] = raw_data.loc[:, text_field]
@@ -46,7 +51,13 @@ class Comment_data_preprocessor(Dataset):
 
         elif isinstance(raw_data, list):  #process input data if it is json list of dicts, each dict representing a comment
             self.input_df = pd.DataFrame(raw_data)
-            self.input_df = self.input_df.rename(columns = {text_field: 'text', id_field: 'id'})
+
+            if id_field is not None:
+                self.input_df = self.input_df.rename(columns = {text_field: 'text', id_field: 'id'})
+
+            else:
+                self.input_df = self.input_df.rename(columns = {text_field: 'text'})
+                self.input_df['id'] = range(len(self.input_df))
 
             # if keyword_field != None:
             #     drop_columns = [column for column in intermediate_df.columns if column not in [id_field, text_field, keyword_field]]
@@ -64,7 +75,7 @@ class Comment_data_preprocessor(Dataset):
         elif isinstance(raw_data, dict): #process input data if it is json dict of dicts, each dict representing a comment with ids as keys
             self.input_df = pd.DataFrame.from_dict(raw_data, orient = 'index')
             self.input_df['id'] = self.input_df.index
-            self.input_df = self.input_df.rename(columns = {text_field: 'text', id_field: 'id'})
+            self.input_df = self.input_df.rename(columns = {text_field: 'text'})
 
 
         else:
@@ -327,6 +338,80 @@ class Comment_dataset(Dataset):
              padded_texts = pad_sequence(text_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
 
         return padded_texts
+
+class Comment_pair_dataset(Dataset):
+
+    def __init__(self, raw_data, sample_column1, sample_column2, tokenizer, already_tokenized = False):
+        self.tokenizer = tokenizer
+        self.sample_column1 = sample_column1
+        self.sample_column2 = sample_column2
+        self.raw_data = raw_data
+        self.input_data = pd.DataFrame(raw_data)
+        self.get_type = 'sample1_first'
+        self.max_len = None
+        if already_tokenized:
+            self.active_data = self.input_data
+        else:
+            self.active_data = self.df_to_tokenized_df(self.input_data, self.sample_column1, self.sample_column2)
+
+    def df_to_tokenized_df(self, input_data, sample_column1, sample_column2):
+        tokenized_df = pd.DataFrame(columns = ['id', 'sample1', 'sample2', 'tokenized_text_sample1', 'tokenized_text_sample2', 'token_ids_sample1', 'token_ids_sample2'])
+        tokenized_df.loc[:, 'id'] = input_data.index
+        tokenized_df.loc[:, 'sample1'] = input_data.loc[:, sample_column1]
+        tokenized_df.loc[:, 'sample2'] = input_data.loc[:, sample_column2]
+        tokenized_df.loc[:, 'tokenized_text_sample1'] = input_data.loc[:, sample_column1].apply(self.tokenizer.tokenize)
+        tokenized_df.loc[:, 'tokenized_text_sample2'] = input_data.loc[:, sample_column2].apply(self.tokenizer.tokenize)
+        tokenized_df.loc[:, 'token_ids_sample1'] = input_data.loc[:, sample_column1].apply(self.tokenizer.encode)
+        tokenized_df.loc[:, 'token_ids_sample2'] = input_data.loc[:, sample_column2].apply(self.tokenizer.encode)
+
+        return tokenized_df
+
+    def set_get_type(self,type):
+        if type == 'sample1_first':
+            self.get_type = 'sample1_first'
+
+        elif type == 'sample2_first':
+            self.get_type = 'sample2_first'
+
+        else:
+            print('not a valid get type')
+
+
+    def __getitem__(self, index):
+
+        if self.max_len is None:
+            sample1 = self.active_data.loc[index, 'token_ids_sample1']
+            sample2 = self.active_data.loc[index, 'token_ids_sample2']
+
+        else:
+            sample1 = self.active_data.loc[index, 'token_ids_sample1'][:self.max_len]
+            sample2 = self.active_data.loc[index, 'token_ids_sample2'][:self.max_len]
+
+
+        if self.get_type == 'sample1_first':
+            return (sample1, sample2)
+
+        elif self.get_type == 'sample2_first':
+            return (sample2, sample1)
+
+    def __len__(self):
+        return len(self.active_data)
+
+    def collate(self, batch):
+        tokenizer = self.tokenizer
+        sample1_ids = [torch.tensor(item[0]) for item in batch]
+        sample2_ids = [torch.tensor(item[1]) for item in batch]
+
+        if tokenizer._pad_token is None:
+             padded_sample1_ids = pad_sequence(sample1_ids, batch_first = True)
+             padded_sample2_ids = pad_sequence(sample2_ids, batch_first = True)
+        else:
+             padded_sample1_ids = pad_sequence(sample1_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
+             padded_sample2_ids = pad_sequence(sample2_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
+
+        return padded_sample1_ids, padded_sample2_ids
+
+
 
 
 # %% Training
