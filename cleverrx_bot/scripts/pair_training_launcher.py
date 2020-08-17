@@ -29,7 +29,7 @@ if new_dataset:
         raw_data = json.load(file)
 
     if test:
-        raw_data = {i:raw_data[i] for i in list(raw_data.keys())[0:5]}
+        raw_data = raw_data[0:5]
 
     dataset = Comment_pair_dataset(raw_data, sample1_field, sample2_field, tokenizer)
     dataset.set_get_type(get_type)
