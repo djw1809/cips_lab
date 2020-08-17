@@ -11,7 +11,7 @@ from pathlib import Path
 import torch.nn as nn
 import bot_models as models
 import bot_utils as butils
-from bot_utils import Comment_data_preprocessor, Comment_dataset, Comment_pair_dataset 
+from bot_utils import Comment_data_preprocessor, Comment_dataset, Comment_pair_dataset
 
 
 test = True
@@ -61,7 +61,7 @@ model_path = Path(Path(model_storage_dir)/Path(parameter_dict['filename']))
 results_path.mkdir(parents = True, exist_ok = True)
 model_path.mkdir(parents = True, exist_ok = True)
 
-model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-large-uncased', 'bert-large-uncased')
+model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
 trained_model, optimizer, scheduler, loss_data = butils.train_hugging_encode_decode_keyword(dataset, parameter_dict['epochs'],
                                                                                              parameter_dict['num_worker'],
                                                                                              parameter_dict['batch_size'],
