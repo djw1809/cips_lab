@@ -16,6 +16,7 @@ import xlrd
 import json
 #%%
 model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
+model.config.to_dict()
 
 
 #%%
@@ -27,7 +28,7 @@ tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 dataset = butils.Comment_pair_dataset(short_data, 'fb_post', 'tweet', tokenizer)
 dataset.max_len = 5
 
-
+tokenizer.max_len
 
 
 

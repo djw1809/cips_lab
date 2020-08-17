@@ -11,7 +11,7 @@ from pathlib import Path
 import torch.nn as nn
 import bot_models as models
 import bot_utils as butils
-from bot_utils import Comment_data_preprocessor, Comment_dataset
+from bot_utils import Comment_data_preprocessor, Comment_dataset, Comment_pair_dataset 
 
 
 test = True
