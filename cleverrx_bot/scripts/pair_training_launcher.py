@@ -73,7 +73,7 @@ trained_model, optimizer, scheduler, loss_data = butils.train_hugging_encode_dec
                                                                                              dataset.collate
                                                                                              )
 
-tokenized_df.to_csv(results_path/'training_data.csv')
+dataset.active_data.to_csv(results_path/'training_data.csv')
 
 trained_model.save_pretrained(model_storage_dir + '/' + parameter_dict['filename'])
 tokenizer.save_pretrained(model_storage_dir+'/'+parameter_dict['filename'])
