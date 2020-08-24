@@ -88,8 +88,11 @@ def add_comments(post_list, comment_dict):
 def check_posts(post_list, save = False, save_location = 'facebookCommenting-master/data/', title = None):
     keep_list = []
     for post in post_list:
-        print(post['content'])
-        keep = input()
+        try:
+            print(post['content'])
+            keep = input()
+        except:
+            keep = '0' 
         if keep == '1':
             keep_list.append(post)
         else:

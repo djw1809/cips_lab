@@ -2,6 +2,9 @@ import requests
 import json
 import pandas as pd
 import time
+import sys
+import traceback
+import urllib
 #%%
 
 def get_tweets(limit):
@@ -78,6 +81,8 @@ def create_salvo(keep_list):
                     tweet_dict['text'] = original_tweet['extended_tweet']['full_text']
                 except:
                     tweet_dict['text'] = original_tweet['text']
+            else:
+                tweet_dict['text'] = original_tweet['text']
 
             tweet_dict['username'] = original_tweet['user']['screen_name']
             tweet_dict['id'] = original_tweet['id_str']
@@ -89,6 +94,9 @@ def create_salvo(keep_list):
                     tweet_dict['text'] = original_tweet['extended_tweet']['full_text']
                 except:
                     tweet_dict['text'] = original_tweet['text']
+
+            else:
+                tweet_dict['text'] = original_tweet['text']
 
             tweet_dict['username'] = original_tweet['user']['screen_name']
             tweet_dict['id'] = original_tweet['id_str']
@@ -107,7 +115,7 @@ def create_salvo(keep_list):
         else:
             tweet_dict['text'] = tweet['text']
             tweet_dict['username'] = tweet['user']['screen_name']
-            tweet_dict['id'] = tweet['id_str'] 
+            tweet_dict['id'] = tweet['id_str']
 
 
         print(tweet_dict['text'])
@@ -117,7 +125,14 @@ def create_salvo(keep_list):
             pass
 
         else:
-            tweet_dict['reply'] = reply
+            url_in = input('Which link should be used anything-access, 1-payless')
+            uniqueID = str(int(time.time()))
+            if url_in == '1':
+                url = 'https://tinyurl.com/y23j5a36'              #'https://www.paylessformeds.us/info/?TW3541122'#+uniqueID #
+            else:
+                url =  'https://tinyurl.com/y5hebpdr'                  #'https://www.paylessformeds.us/?TW3541122'#+uniqueID
+            tweet_dict['reply'] = reply + ' ' + url
+            tweet_dict['post_id'] = uniqueID
             salvo.append(tweet_dict)
 
     return salvo
@@ -125,6 +140,7 @@ def create_salvo(keep_list):
 
 def post_salvo(salvo, url):
     output = []
+    ids = []
     for tweet in salvo:
         payload = {}
         payload['tid'] = tweet['id']
@@ -133,8 +149,25 @@ def post_salvo(salvo, url):
         payload['apikey'] = 'dylankey'
         r = requests.post(url, data = payload)
         output.append(r.json())
+        ids.append(tweet['post_id'])
+    return output, ids
 
-    return output
 
+
+
+class UrlShortenTinyurl:
+    URL = "http://tinyurl.com/api-create.php"
+
+    def shorten(self, url_long):
+        try:
+            url = self.URL + "?" \
+                + urllib.parse.urlencode({"url": url_long})
+            res = requests.get(url)
+            print("STATUS CODE:", res.status_code)
+            print("   LONG URL:", url_long)
+            print("  SHORT URL:", res.text)
+        except Exception as e:
+            raise
 #%%
 #%% test
+# url1: 'http://10.218.106.4:8080/twitter/reply'
