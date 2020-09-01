@@ -14,7 +14,7 @@ import bot_utils as butils
 from bot_utils import Comment_data_preprocessor, Comment_dataset, Comment_pair_dataset
 
 
-test = True
+test = False 
 new_dataset = True
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 get_type = 'sample1_first'
