@@ -14,7 +14,7 @@ import bot_utils as butils
 from bot_utils import Comment_data_preprocessor, Comment_dataset, Comment_pair_dataset
 
 
-test = False
+test = True
 new_dataset = True
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 get_type = 'sample1_first'
@@ -24,9 +24,13 @@ if new_dataset:
     raw_data_path = '../data/pairs_v1.json'
     sample1_field = 'fb_post'
     sample2_field = 'tweet'
-
-    with open(raw_data_path, 'rb') as file:
-        raw_data = json.load(file)
+    json = False
+    if json:
+        with open(raw_data_path, 'rb') as file:
+            raw_data = json.load(file)
+    else:
+        with open(raw_data_path, 'rb') as file:
+            raw_data = pickle.load(file)
 
     if test:
         raw_data = raw_data[0:5]
@@ -54,7 +58,7 @@ parameter_dict['learning_rate'] =5e-5
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8
 parameter_dict['warmup_steps'] =0
-parameter_dict['filename'] = 'pair_v1_encode_decode_082420'
+parameter_dict['filename'] =  'test'#'pair_v1_encode_decode_082420'
 
 results_path = Path(Path(results_dir)/Path(parameter_dict['filename']))
 model_path = Path(Path(model_storage_dir)/Path(parameter_dict['filename']))
