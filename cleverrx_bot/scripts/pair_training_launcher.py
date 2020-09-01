@@ -21,7 +21,7 @@ get_type = 'sample1_first'
 
 
 if new_dataset:
-    raw_data_path = '../data/pairs_v1.json'
+    raw_data_path = '../data/pairs_v2.pkl'
     sample1_field = 'fb_post'
     sample2_field = 'tweet'
     json = False
