@@ -21,11 +21,11 @@ get_type = 'sample1_first'
 
 
 if new_dataset:
-    raw_data_path = '../data/pairs_v2.pkl'
+    raw_data_path = '../data/pairs_v3.pkl'
     sample1_field = 'fb_post'
     sample2_field = 'tweet'
-    json = False
-    if json:
+    json_ = False
+    if json_:
         with open(raw_data_path, 'rb') as file:
             raw_data = json.load(file)
     else:
@@ -58,7 +58,7 @@ parameter_dict['learning_rate'] =5e-5
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8
 parameter_dict['warmup_steps'] =0
-parameter_dict['filename'] =  'pair_v2_encode_decode_090120'
+parameter_dict['filename'] =  'pair_v3_encode_decode_090720'
 
 results_path = Path(Path(results_dir)/Path(parameter_dict['filename']))
 model_path = Path(Path(model_storage_dir)/Path(parameter_dict['filename']))
