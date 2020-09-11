@@ -1,4 +1,4 @@
-# %%
+#%%
 import torch
 import pickle
 import numpy as np
@@ -14,6 +14,19 @@ import bot_models as models
 from topic_link_creation import TopicLinkCreation
 import xlrd
 import json
+#%%
+with open('../data/pairs_v2.pkl', 'rb') as file:
+    data = pickle.load(file)
+data = data[0:500]
+sample1_field = 'fb_post'
+sample2_field = 'tweet'
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+dataset = butils.Comment_pair_dataset(data, sample1_field, sample2_field, tokenizer)
+dataset.set_get_type('sample1_first')
+dataset.max_len = tokenizer.max_len
+
+
+
 #%%
 model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
 model.config.to_dict()
