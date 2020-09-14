@@ -37,7 +37,7 @@ if new_dataset:
 
     dataset = Comment_pair_dataset(raw_data, sample1_field, sample2_field, tokenizer)
     dataset.set_get_type(get_type)
-    dataset.max_len = tokenizer.max_len
+    dataset.max_len = 512 #tokenizer.max_len
 
 else:
     data_path = '' #needs to be readable by pandas
