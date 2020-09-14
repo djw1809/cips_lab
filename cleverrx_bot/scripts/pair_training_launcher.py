@@ -14,7 +14,7 @@ import bot_utils as butils
 from bot_utils import Comment_data_preprocessor, Comment_dataset, Comment_pair_dataset
 
 
-test = False
+test = True
 new_dataset = True
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 get_type = 'sample1_first'
@@ -58,7 +58,7 @@ parameter_dict['learning_rate'] =5e-5
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8
 parameter_dict['warmup_steps'] =0
-parameter_dict['filename'] =  'pair_v3_encode_decode_091120'
+parameter_dict['filename'] =  'pair_v3_encode_decode_091120_test'
 
 results_path = Path(Path(results_dir)/Path(parameter_dict['filename']))
 model_path = Path(Path(model_storage_dir)/Path(parameter_dict['filename']))
