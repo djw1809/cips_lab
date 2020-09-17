@@ -53,10 +53,10 @@ model_storage_dir = '../saved_models'
 
 
 parameter_dict = {}
-parameter_dict['epochs'] = 5
+parameter_dict['epochs'] =10 
 parameter_dict['num_worker'] = 2
 parameter_dict['batch_size'] = 2
-parameter_dict['learning_rate'] =5e-5
+parameter_dict['learning_rate'] =5e-6
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8
 parameter_dict['warmup_steps'] =0
