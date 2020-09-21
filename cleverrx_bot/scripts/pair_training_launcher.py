@@ -53,14 +53,14 @@ model_storage_dir = '../saved_models'
 
 
 parameter_dict = {}
-parameter_dict['epochs'] =10 
+parameter_dict['epochs'] =10
 parameter_dict['num_worker'] = 2
 parameter_dict['batch_size'] = 2
-parameter_dict['learning_rate'] =5e-6
+parameter_dict['learning_rate'] =1e-8
 parameter_dict['weight_decay'] = 0
 parameter_dict['eps'] =1e-8
 parameter_dict['warmup_steps'] =0
-parameter_dict['filename'] =  'pair_v3_encode_decode_091420'
+parameter_dict['filename'] =  'pair_v3_encode_decode_092120'
 
 results_path = Path(Path(results_dir)/Path(parameter_dict['filename']))
 model_path = Path(Path(model_storage_dir)/Path(parameter_dict['filename']))
