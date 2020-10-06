@@ -1,0 +1,13 @@
+#logging into AWS ECR
+registry_you_want_to_extend=763104351884.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 --profile dilawn
+docker login --username AWS --password password registry_you_want_to_extend
+
+#creating an IAM user, a user group, permissions for that group and then adding the user to the group
+aws iam create-user --user-name dilawn_sage --profile dilawn  #creates the user
+aws iam create-login-profile --user-name dilawn_sage --password Abcd354112 --profile dilawn #allows the user to log in to the console w the username and password
+aws iam create-access-key --user-name dilawn_sage --profile dilawn  #returns access key and secret access key
+aws configure --profile iam_dilawn_sage #calls a prompt to input access key and secret access key so that user can use CLI
+aws iam create-group --group-name Sages --profile dilawn #creates the group that we will add the user to to managae permissions
+aws iam attach-group-policy --group-name Sages --policy-arn arn:aws:iam::aws:policy/AmazonSageMakerFullAccess #attaches an AWS managed policy to the group - all users in the group will have this policy
+aws iam add-user-to-group --group-name Sages --user-name dilawn_sage --profile dilawn #adds the user dilawn_sage to the group Sages - user will now have all policies attached to group

@@ -3,7 +3,9 @@ cleverrx_bot/data
 cleverrx_data/data
 env/
 cleverrx_bot/scripts/__pycache__/
-cleverrx_bot/scripts/facebookCommenting-master/myUserDataDir/ 
+cleverrx_bot/scripts/facebookCommenting-master/myUserDataDir/
 cleverrx_bot/scripts/facebookCommenting-master/node_modules/*
 cleverrx_bot/scripts/twitterCommenting-master/node_modules/*
 cleverrx_bot/scripts/facebookUICommenting/node_modules/*
+cleverrx_bot/sagemaker/my_container/model
+cleverrx_bot/sagemaker/amazon-sagemaker-examples

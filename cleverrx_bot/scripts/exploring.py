@@ -25,8 +25,7 @@ dataset = butils.Comment_pair_dataset(data, sample1_field, sample2_field, tokeni
 dataset.set_get_type('sample1_first')
 dataset.max_len = tokenizer.max_len
 
-
-
+dataset.raw_data[320]
 #%%
 model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
 model.config.to_dict()
