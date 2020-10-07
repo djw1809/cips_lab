@@ -624,6 +624,7 @@ def train_hugging_encode_decode_keyword(training_dataset, epochs, num_workers, b
             model.zero_grad()
 
             running_loss += loss.item()
+            batch_counter+=1
             #running_corrects += torch.sum(preds == labels.data).item()
             #confusion_matrix_train_epoch += confusion_matrix(labels.cpu().numpy(), preds.cpu().numpy(), labels =range(num_labels))
 
@@ -638,7 +639,7 @@ def train_hugging_encode_decode_keyword(training_dataset, epochs, num_workers, b
         #val_accuracy_data[epoch] = epoch_val_accuracy
         #confusion_matricies_test[epoch] = confusion_matrix_test_epoch
         #confusion_matricies_train[epoch] = confusion_matrix_train_epoch
-
+        epoch_counter+=1
         print(' Loss: {:.4f} '.format(epoch_loss))
 
     return model, optimizer, scheduler, loss_data
