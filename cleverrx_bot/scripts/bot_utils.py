@@ -421,6 +421,7 @@ def train(training_dataset, epochs, num_workers, batch_size, learning_rate, weig
     '''generic training call for a pytorch model'''
 
 
+
     training_loader = DataLoader(training_dataset, shuffle = True, num_workers = num_workers, batch_size = batch_size, collate_fn = collate_fn)
 
 
@@ -570,7 +571,7 @@ def train_hugging_encode_decode_keyword(training_dataset, epochs, num_workers, b
 
 
     training_loader = DataLoader(training_dataset, shuffle = True, num_workers = num_workers, batch_size = batch_size, collate_fn = collate_fn)
-
+    number_of_batches = round(len(training_dataset) / batch_size)
 
 #### configure model to use cuda if it is available ####
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -605,7 +606,7 @@ def train_hugging_encode_decode_keyword(training_dataset, epochs, num_workers, b
 
         for batch  in training_loader:
             #forwards
-            print("Epoch: {} / Batch: {} \nLoss Data: {}".format(epoch_counter, batch_counter, loss_data))
+            print("Epoch: {}\nBatch: {}/{}\nLoss Data: {}".format(epoch_counter, batch_counter, number_of_batches, loss_data))
             texts, keywords = batch
             decoder_input_ids = texts
             input_ids = keywords
