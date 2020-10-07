@@ -17,7 +17,7 @@ from bot_utils import Comment_data_preprocessor, Comment_dataset, Comment_pair_d
 
 
 test = False
-new_dataset = True
+new_dataset = False 
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 get_type = 'sample1_first'
 
@@ -44,7 +44,7 @@ if new_dataset:
     dataset.max_len = 512 #tokenizer.max_len
 
 else:
-    data_path = '' #needs to be readable by pandas
+    data_path = 'training_data.csv' #needs to be readable by pandas
     tokenized_df = pd.read_csv(data_path)
     dataset = Comment_pair_dataset(tokenized_df,already_tokenized = True)
     dataset.max_len = 512
