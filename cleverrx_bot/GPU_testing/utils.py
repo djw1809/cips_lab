@@ -8,79 +8,77 @@ from transformers import GPT2Tokenizer, GPT2LMHeadModel, AdamW, get_linear_sched
 from ast import literal_eval
 
 
-class Comment_data_preprocessor(Dataset):
-    '''class to do different things quickly with raw_data
-        -properties: raw_data, input_df, train_df (the dataframe used for training), test_df(the dataframe used for testing), current_df(either test or train, the df that will be accessed by get_item), tokenizer, corpus
-        - always assume input has text field, id field
-        - TODO: assert that if a synonym dict has been provided then so should a keyword_field
-        '''
-    #PREPROCESSING
-    def __init__(self, raw_data, text_field, tokenizer, id_field = None, keyword_field = None, synonym_dict = None):
-        #sefl.tokenizer = tokenizer
+class Comment_pair_dataset(Dataset):
+
+    def __init__(self, raw_data, sample_column1, sample_column2, tokenizer, already_tokenized = False):
         self.tokenizer = tokenizer
-        self.synonym_dict = synonym_dict
+        self.sample_column1 = sample_column1
+        self.sample_column2 = sample_column2
         self.raw_data = raw_data
-        self.corpus = None
-        self.input_df = None
-        self.prepared_datasets = {}
-        self.active_dataset = None # This is the dataset that will be accessed by __getitem__ and __len__
-        self.get_type = 'keyword'  #keyword: return a tuple of (tokenized keywords, tokenized text), prepend: return tokenized keyword prepended text
-        self.collate_fn = self.collate_keyword
+        self.input_data = pd.DataFrame(raw_data)
+        self.get_type = 'sample1_first'
+        self.max_len = None
+        if already_tokenized:
+            self.active_data = self.input_data
+        else:
+            self.active_data = self.df_to_tokenized_df(self.input_data, self.sample_column1, self.sample_column2)
 
-        if type(raw_data) == str: #process input data if it is a corpus
-            self.corpus = raw_data
-            self.input_df = self.text_to_chunked_df(self.raw_text)
+    def df_to_tokenized_df(self, input_data, sample_column1, sample_column2):
+        tokenized_df = pd.DataFrame(columns = ['id', 'sample1', 'sample2', 'tokenized_text_sample1', 'tokenized_text_sample2', 'token_ids_sample1', 'token_ids_sample2'])
+        tokenized_df.loc[:, 'id'] = input_data.index
+        tokenized_df.loc[:, 'sample1'] = input_data.loc[:, sample_column1]
+        tokenized_df.loc[:, 'sample2'] = input_data.loc[:, sample_column2]
+        tokenized_df.loc[:, 'tokenized_text_sample1'] = input_data.loc[:, sample_column1].apply(self.tokenizer.tokenize)
+        tokenized_df.loc[:, 'tokenized_text_sample2'] = input_data.loc[:, sample_column2].apply(self.tokenizer.tokenize)
+        tokenized_df.loc[:, 'token_ids_sample1'] = input_data.loc[:, sample_column1].apply(self.tokenizer.encode)
+        tokenized_df.loc[:, 'token_ids_sample2'] = input_data.loc[:, sample_column2].apply(self.tokenizer.encode)
 
-        elif isinstance(raw_data, pd.DataFrame): #process input data if it is a dataframe
-            self.input_df = raw_data
-            if id_field is not None:
-                self.input_df = self.input_df.rename(columns = {text_field: 'text', id_field: 'id'})
+        return tokenized_df
 
-            else:
-                self.input_df = self.input_df.rename(columns = {text_field: 'text'})
-                self.input_df['id'] = range(len(self.input_df))
-            # intermediate_df = pd.DataFrame(columns = ['id', 'text'])
-            # intermediate_df.loc[:, 'id'] = raw_data.loc[:, id_field]
-            # intermediate_df.loc[:, 'text'] = raw_data.loc[:, text_field]
-            # if keyword_field != None:
-            #     intermediate_df.loc[:, 'keywords'] = raw_data.loc[:, keyword_field]
-            #     intermediate_df.loc[:, 'keywords'] = intermediate_df.loc[:, 'keywords'].apply(literal_eval) #make sure keywords are in a list
+    def set_get_type(self,type):
+        if type == 'sample1_first':
+            self.get_type = 'sample1_first'
 
-
-        elif isinstance(raw_data, list):  #process input data if it is json list of dicts, each dict representing a comment
-            self.input_df = pd.DataFrame(raw_data)
-
-            if id_field is not None:
-                self.input_df = self.input_df.rename(columns = {text_field: 'text', id_field: 'id'})
-
-            else:
-                self.input_df = self.input_df.rename(columns = {text_field: 'text'})
-                self.input_df['id'] = range(len(self.input_df))
-
-            # if keyword_field != None:
-            #     drop_columns = [column for column in intermediate_df.columns if column not in [id_field, text_field, keyword_field]]
-            # else:
-            #     drop_columns = [column for column in intermediate_df.columns if column not in [id_field, text_field]]
-            #
-            # intermediate_df = intermediate_df.drop(columns = drop_columns)
-            #
-            # if keyword_field != None:
-            #     intermediate_df = intermediate_df.rename(columns = {id_field: 'id', text_field: 'text', keyword_field: 'keywords'})
-            #     intermediate_df.loc[:, 'keywords'] = intermediate_df.loc[:, 'keywords'].apply(literal_eval) #make sure keywords are in a list
-            # else:
-            #     intermediate_df = intermediate_df.rename(columns = {id_field: 'id', text_field: 'text'})
-
-        elif isinstance(raw_data, dict): #process input data if it is json dict of dicts, each dict representing a comment with ids as keys
-            self.input_df = pd.DataFrame.from_dict(raw_data, orient = 'index')
-            self.input_df['id'] = self.input_df.index
-            self.input_df = self.input_df.rename(columns = {text_field: 'text'})
-
+        elif type == 'sample2_first':
+            self.get_type = 'sample2_first'
 
         else:
-            pass
+            print('not a valid get type')
 
-        self.input_df = self.input_df.dropna(subset = ['text']) #drop rows where there is no text
-        self.input_df.index = range(len(self.input_df))
+
+    def __getitem__(self, index):
+
+        if self.max_len is None:
+            sample1 = self.active_data.loc[index, 'token_ids_sample1']
+            sample2 = self.active_data.loc[index, 'token_ids_sample2']
+
+        else:
+            sample1 = self.active_data.loc[index, 'token_ids_sample1'][:self.max_len]
+            sample2 = self.active_data.loc[index, 'token_ids_sample2'][:self.max_len]
+
+
+        if self.get_type == 'sample1_first':
+            return (sample1, sample2)
+
+        elif self.get_type == 'sample2_first':
+            return (sample2, sample1)
+
+    def __len__(self):
+        return len(self.active_data)
+
+    def collate(self, batch):
+        tokenizer = self.tokenizer
+        sample1_ids = [torch.tensor(item[0]) for item in batch]
+        sample2_ids = [torch.tensor(item[1]) for item in batch]
+
+        if tokenizer._pad_token is None:
+             padded_sample1_ids = pad_sequence(sample1_ids, batch_first = True)
+             padded_sample2_ids = pad_sequence(sample2_ids, batch_first = True)
+        else:
+             padded_sample1_ids = pad_sequence(sample1_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
+             padded_sample2_ids = pad_sequence(sample2_ids, batch_first = True, padding_value = tokenizer.pad_token_id)
+
+        return padded_sample1_ids, padded_sample2_ids
 
 
 
