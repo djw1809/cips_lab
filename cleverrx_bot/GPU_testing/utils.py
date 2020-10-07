@@ -91,7 +91,7 @@ def train_hugging_encode_decode_keyword(training_dataset, epochs, num_workers, b
 
 
 #### configure model to use cuda if it is available ####
-    print("CUDA available is {}".format(torch.cuda.is_avilable()))
+    print("CUDA available is {}".format(torch.cuda.is_available()))
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     if torch.cuda.is_available():
         model.cuda()
