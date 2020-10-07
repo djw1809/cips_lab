@@ -21,7 +21,7 @@ new_dataset = True
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 get_type = 'sample1_first'
 
-
+print("Loading data")
 if new_dataset:
     raw_data_path = '../data/pairs_v3.pkl'
     sample1_field = 'fb_post'
@@ -67,7 +67,11 @@ model_path = Path(Path(model_storage_dir)/Path(parameter_dict['filename']))
 results_path.mkdir(parents = True, exist_ok = True)
 model_path.mkdir(parents = True, exist_ok = True)
 
+print("Loading Model")
+
 model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
+
+print("Starting Training")
 trained_model, optimizer, scheduler, loss_data = butils.train_hugging_encode_decode_keyword(dataset, parameter_dict['epochs'],
                                                                                              parameter_dict['num_worker'],
                                                                                              parameter_dict['batch_size'],
@@ -78,6 +82,7 @@ trained_model, optimizer, scheduler, loss_data = butils.train_hugging_encode_dec
                                                                                              model,
                                                                                              dataset.collate
                                                                                              )
+print("Saving results")
 
 dataset.active_data.to_csv(results_path/'training_data.csv')
 

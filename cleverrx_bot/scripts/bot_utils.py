@@ -596,14 +596,16 @@ def train_hugging_encode_decode_keyword(training_dataset, epochs, num_workers, b
     )
 
 ##### MAIN TRAINING LOOP ######
-
+    epoch_counter = 0
     for epoch in range(epochs):
+        batch_counter = 0
 
         running_loss = 0
         model.train()
 
         for batch  in training_loader:
             #forwards
+            print("Epoch: {} / Batch: {} \nLoss Data: {}".format(epoch_counter, batch_counter, loss_data))
             texts, keywords = batch
             decoder_input_ids = texts
             input_ids = keywords
