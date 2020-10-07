@@ -46,7 +46,7 @@ if new_dataset:
 else:
     data_path = 'training_data.csv' #needs to be readable by pandas
     tokenized_df = pd.read_csv(data_path)
-    dataset = Comment_pair_dataset(tokenized_df,already_tokenized = True)
+    dataset = Comment_pair_dataset(tokenized_df, tokenizer, already_tokenized = True)
     dataset.max_len = 512
 
 results_dir = '../results'

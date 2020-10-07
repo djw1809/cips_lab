@@ -10,16 +10,16 @@ from ast import literal_eval
 
 class Comment_pair_dataset(Dataset):
 
-    def __init__(self, raw_data, sample_column1 = None, sample_column2 = None, tokenizer= None, already_tokenized = False):
+    def __init__(self, raw_data, tokenizer, sample_column1 = None, sample_column2 = None, already_tokenized = False):
 
         self.raw_data = raw_data
         self.input_data = pd.DataFrame(raw_data)
         self.get_type = 'sample1_first'
         self.max_len = None
+        self.tokenizer = tokenizer
         if already_tokenized:
             self.active_data = self.input_data
         else:
-            self.tokenizer = tokenizer
             self.sample_column1 = sample_column1
             self.sample_column2 = sample_column2
             self.active_data = self.df_to_tokenized_df(self.input_data, self.sample_column1, self.sample_column2)
