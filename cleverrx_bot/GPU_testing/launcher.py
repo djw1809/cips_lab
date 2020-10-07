@@ -11,13 +11,13 @@ import json
 from transformers import GPT2Tokenizer, GPT2LMHeadModel, EncoderDecoderModel, BertTokenizer
 from pathlib import Path
 import torch.nn as nn
-import bot_models as models
+#import bot_models as models
 import utils as butils
-from bot_utils import Comment_data_preprocessor, Comment_dataset, Comment_pair_dataset
+from utils import Comment_data_preprocessor, Comment_dataset, Comment_pair_dataset
 
 
 test = False
-new_dataset = False 
+new_dataset = False
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 get_type = 'sample1_first'
 
