@@ -16,8 +16,8 @@ import utils as butils
 from utils import  Comment_pair_dataset
 
 
-test = False
-new_dataset = False
+test = True
+new_dataset = True
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 get_type = 'sample1_first'
 
@@ -37,7 +37,7 @@ if new_dataset:
             raw_data = pickle.load(file)
 
     if test:
-        raw_data = raw_data[0:5]
+        raw_data = raw_data[0:500]
 
     dataset = Comment_pair_dataset(raw_data, sample1_field, sample2_field, tokenizer)
     dataset.set_get_type(get_type)
