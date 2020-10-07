@@ -9,3 +9,4 @@ cleverrx_bot/scripts/twitterCommenting-master/node_modules/*
 cleverrx_bot/scripts/facebookUICommenting/node_modules/*
 cleverrx_bot/sagemaker/my_container/model
 cleverrx_bot/sagemaker/amazon-sagemaker-examples
+cleverrx_bot/GPU_testing/training_data.csv 
