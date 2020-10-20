@@ -14,6 +14,27 @@ import bot_models as models
 from topic_link_creation import TopicLinkCreation
 import xlrd
 import json
+from random import sample
+#%%
+with open('../data/pairs_v3.pkl', 'rb') as file:
+    data = pickle.load(file)
+
+test_data = sample(data, 2000)
+input_data = pd.DataFrame(test_data)
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+dataset = butils.Comment_pair_dataset(test_data, 'tweet', 'fb_post', tokenizer)
+dataset.max_len = 512
+dataset.active_data
+
+len(dataset[0][0])
+len(dataset[0][1])
+
+
+
+loader = DataLoader(dataset, batch_size = 2, collate_fn = dataset.collate)
+next(iter(loader))
+
+
 #%%
 with open('../data/pairs_v2.pkl', 'rb') as file:
     data = pickle.load(file)

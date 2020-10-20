@@ -1,0 +1,45 @@
+
+sudo nvidia-smi -pm 0
+sudo nvidia-smi -pm 1
+
+
+export CUDA_VISIBLE_DEVICES="1"
+/etc/resolv.conf
+ping, packages, timeout
+dns failed
+/etc/resolv.conf
+nameserver 8.8.8.8
+http://cips.dyndns.org:8080/webpages/login.html
+username: cusadmin
+password: @rizon@M@ryl@nd1860
+nameserver 4.2.2.4
+@rizon@M@ryl@nd1860
+auto enp1s0f0
+iface enp1s0f0 inet static
+address 192.168.0.21
+netmask 255.255.255.0
+gateway 192.168.0.1
+nameserver 4.2.2.4
+
+----------
+auto enp1s0f0
+iface enp1s0f0 inet static
+address 192.168.0.21
+netmask 255.255.255.0
+gateway 192.168.0.1
+nameserver 4.2.2.4
+
+--------------
+/etc/network/interfaces
+
+
+
+
+dynamic dns services --(send)-> all servers
+update /etc/resolv.conf with defaults
+DNS UDP
+broadcast
+nameserver 4.2.2.4
+pip install
+pypy pypi
+2-3 hrs 
