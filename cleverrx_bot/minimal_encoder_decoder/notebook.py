@@ -106,7 +106,7 @@ dataset = dataset.map(map_to_encoder_decoder_inputs, batched = True, batch_size 
 
 
 training_args = TrainingArguments(
-                    output_dir = '../saved_models/minimal_encoder_decoder'
+                    output_dir = '../saved_models/minimal_encoder_decoder',
                     per_device_train_batch_size = batch_size,
                     predict_from_generate=True,
                     evaluate_during_training = False,
