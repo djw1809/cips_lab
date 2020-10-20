@@ -62,6 +62,7 @@ import json
 with open('../data/pairs_v3.pkl', 'rb') as file:
     data = pickle.load(file)
 
+data = {"data": data}
 with open('../data/pairs_v3.json', 'w') as file:
     json.dump(data, file)
 
