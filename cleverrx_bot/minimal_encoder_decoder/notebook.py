@@ -1,5 +1,5 @@
 import pickle
-from transformers import BertTokenizer, EncoderDecoderModel, TrainingArguments, Trainer 
+from transformers import BertTokenizer, EncoderDecoderModel, TrainingArguments, Trainer
 import transformers
 #import nlp
 import datasets
@@ -102,9 +102,11 @@ def map_to_encoder_decoder_inputs(batch):
     return batch
 
 #prepare for training, Q: What does predict from generate do?
-batch_size =4 
+batch_size = 4 
 dataset = dataset.map(map_to_encoder_decoder_inputs, batched = True, batch_size = batch_size, remove_columns = ["fb_post", "distance", "tweet", "rank"])
-
+dataset.set_format(
+    type="torch", columns=["input_ids", "attention_mask", "decoder_input_ids", "decoder_attention_mask", "labels"],
+)
 
 training_args = TrainingArguments(
                     output_dir = '../saved_models/minimal_encoder_decoder',
