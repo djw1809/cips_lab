@@ -1,5 +1,5 @@
 import pickle
-from transformers import BertTokenizer, EncoderDecoderModel, TrainingArguments
+from transformers import BertTokenizer, EncoderDecoderModel, TrainingArguments, Trainer 
 import transformers
 #import nlp
 import datasets
@@ -61,13 +61,13 @@ import json
 #dataset = datasets.load_dataset('json', data_files = {'train':'pairs_v3_train.json', 'test':'pairs_v3_tesy.json'}, field = 'data') returns a dict of huggingface dataset objects where the keys are they keys in the datafiles object
 with open('../data/pairs_v3.pkl', 'rb') as file:
     data = pickle.load(file)
-
+data = data[0:500]
 data = {"data": data}
-with open('../data/pairs_v3.json', 'w') as file:
+with open('../data/pairs_v3_small.json', 'w') as file:
     json.dump(data, file)
 
 
-dataset = datasets.load_dataset('json', data_files = '../data/pairs_v3.json', field = 'data')['train']
+dataset = datasets.load_dataset('json', data_files = '../data/pairs_v3_small.json', field = 'data')['train']
 #%%
 
 #%% Load model and tokenizer
@@ -102,7 +102,7 @@ def map_to_encoder_decoder_inputs(batch):
     return batch
 
 #prepare for training, Q: What does predict from generate do?
-batch_size = 16
+batch_size =4 
 dataset = dataset.map(map_to_encoder_decoder_inputs, batched = True, batch_size = batch_size, remove_columns = ["fb_post", "distance", "tweet", "rank"])
 
 
