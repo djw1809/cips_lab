@@ -61,7 +61,11 @@ import json
 #dataset = datasets.load_dataset('json', data_files = {'train':'pairs_v3_train.json', 'test':'pairs_v3_tesy.json'}, field = 'data') returns a dict of huggingface dataset objects where the keys are they keys in the datafiles object
 with open('../data/pairs_v3.pkl', 'rb') as file:
     data = pickle.load(file)
-#data = data[0:500]
+
+
+data = [i for i in data if i['rank'] == 1]
+
+
 data = {"data": data}
 with open('../data/pairs_v3.json', 'w') as file:
     json.dump(data, file)
@@ -108,7 +112,7 @@ dataset = dataset.map(map_to_encoder_decoder_inputs, batched = True, batch_size 
 dataset.set_format(type="torch", columns=["input_ids", "attention_mask", "decoder_input_ids", "decoder_attention_mask", "labels"],)
 
 training_args = TrainingArguments(
-                    output_dir = '../saved_models/minimal_encoder_decoder',
+                    output_dir = '../saved_models/minimal_encoder_decoder_rank1',
                     per_device_train_batch_size = batch_size,
                     predict_from_generate=True,
                     evaluate_during_training = False,
