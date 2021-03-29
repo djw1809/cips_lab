@@ -752,7 +752,7 @@ def generate_(model, tokenizer, prompt, max_length, do_sample = True, num_beams 
     return output_sequences
 
 
-def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length,  top_k = None, top_p = None, num_return_sequences = 1, min_keep = 1, filter_value = -float("Inf")):
+def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length,  top_k = None, top_p = None, num_return_sequences = 1, min_keep = 1, filter_value = -float("Inf"), temperature = 1, repetition_penalty = 1):
     '''generation with bag of words ctrl.  prompt should be of the form (list of keywords, start of generated sentence)'''
     #setup device
     device = "cpu" #torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -785,11 +785,19 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length,  top_k = None
             #obtain logits
             input_ids = torch.tensor(sequence_tokens, dtype = torch.long).unsqueeze(0)
             logits = model((input_ids, keyword_tokens), device)[0][:, -1, :] #get logits of the predicted word
+            if temperature != 1:
+                logits = logits / temperature
+
+            if repetition_penalty != 1:
+                score = torch.gather(logits, 1, input_ids) #get the scores of the tokens that have already occured
+                score = torch.where(score <0, score * repetition_penalty, score / repetition_penalty) #reduce them by dividing (or multiplying in the case of a negative score)
+                logits.scatter_(1, input_ids, score) #replace the reduced scores in the full distribution
 
         #perform top_k sampling
             if top_k > 0:
                 indices_to_remove = logits < torch.topk(logits, top_k)[0][:,-1, None] #return the indicies
                 logits[indices_to_remove] = filter_value  #mask the bad ones
+                
         #perform "nucleus" sampling
             if top_p > 0:
                 sorted_logits, sorted_indices = torch.sort(logits, descending = True)
