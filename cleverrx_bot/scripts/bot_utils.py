@@ -797,7 +797,7 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length,  top_k = None
             if top_k > 0:
                 indices_to_remove = logits < torch.topk(logits, top_k)[0][:,-1, None] #return the indicies
                 logits[indices_to_remove] = filter_value  #mask the bad ones
-                
+
         #perform "nucleus" sampling
             if top_p > 0:
                 sorted_logits, sorted_indices = torch.sort(logits, descending = True)
@@ -835,15 +835,15 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length,  top_k = None
 
 #%% Post Processing/Analysis
 
-def parameter_sweep(model, tokenizer, length, k_list, p_list, prompt1, prompt2, model_name, num_return_sequences):
+def parameter_sweep(model, tokenizer, length, k_list, p_list, prompt1, prompt2, model_name, num_return_sequences, temperature = 1, repetition_penalty = 1):
     filepath = '../results/generation_results/generation_output_{}.txt'.format(model_name)
     write_file = open(filepath, 'w')
     write_file.write('prompt1: {}     prompt2: {} \n'.format(prompt1, prompt2))
     outputs = {}
     for k in k_list:
         for p in p_list:
-            first_sentences = generate_ctrl_bagofwords(model, tokenizer, prompt1, 50, top_k = k, top_p = p, num_return_sequences = num_return_sequences)
-            second_sentences = generate_ctrl_bagofwords(model, tokenizer, prompt2, 50, top_k = k, top_p = p, num_return_sequences = num_return_sequences)
+            first_sentences = generate_ctrl_bagofwords(model, tokenizer, prompt1, 50, top_k = k, top_p = p, num_return_sequences = num_return_sequences, temperature = temperature, repetition_penalty = repetition_penalty)
+            second_sentences = generate_ctrl_bagofwords(model, tokenizer, prompt2, 50, top_k = k, top_p = p, num_return_sequences = num_return_sequences, temperature = temperature, repetition_penalty = repetition_penalty)
             write_file.write("k = {}  p = {}: \n---------------\n".format(k,p))
             write_file.write("First sentences:\n")
             for sentence in first_sentences[0]:
