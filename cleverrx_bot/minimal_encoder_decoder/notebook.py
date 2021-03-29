@@ -114,7 +114,7 @@ dataset.set_format(type="torch", columns=["input_ids", "attention_mask", "decode
 training_args = TrainingArguments(
                     output_dir = '../saved_models/minimal_encoder_decoder_rank1',
                     per_device_train_batch_size = batch_size,
-                    predict_from_generate=True,
+                    #predict_from_generate=True,
                     evaluate_during_training = False,
                     do_train = True,
                     do_eval = False,

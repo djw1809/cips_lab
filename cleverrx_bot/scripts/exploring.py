@@ -15,6 +15,8 @@ from topic_link_creation import TopicLinkCreation
 import xlrd
 import json
 from random import sample
+import networkx as nx
+import pickle
 #%%
 with open('../data/pairs_v3.pkl', 'rb') as file:
     data = pickle.load(file)
@@ -465,3 +467,25 @@ old_example.keys()
 
 
 #%%
+import pandas as pd
+import json
+data = pd.read_csv('../data/campaign_data/campaign_2_posts.csv')
+data.loc[5, 'content']
+json.loads(data.loc[5, 'internal_meta'])['selected_sentence']
+
+new_dataframe = pd.DataFrame(columns = ['content', 'reply'])
+
+for i in data.index:
+    new_dataframe.loc[i, 'content'] = data.loc[i, 'content']
+    new_dataframe.loc[i, 'reply'] = json.loads(data.loc[i, 'internal_meta'])['selected_sentence']
+
+new_dataframe
+new_dataframe.to_csv('../data/campaign_data/campaign_2_posts_replies.csv')
+
+#%%
+model = models.GPT2Model_bagofctrl.load('../saved_models/batch_051220_keyword_types_sentiment_nocluster')
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+prompt = (['insurance-'], 'healthcare costs')
+output = butils.generate_ctrl_bagofwords(model, tokenizer, prompt, 50, top_k = 20, top_p = .9, num_return_sequences = 1, temperature = .9, repetition_penalty = 2.5)
+
+output[0]

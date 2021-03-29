@@ -6,6 +6,10 @@ def get_db_connection():
                            password='cvg0bf1DHC&Hvj%X%7!NmSt0WY0XlG')
    return conn
 
+
+conn = get_db_connection()
+curor = conn.cursor() 
+
 def executee(conn, query):
     cursor = conn.cursor()
     try:

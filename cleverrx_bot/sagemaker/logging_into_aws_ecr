@@ -3,6 +3,27 @@ registry_you_want_to_extend=763104351884.dkr.ecr.us-east-1.amazonaws.com
 aws ecr get-login-password --region us-east-1 --profile dilawn
 docker login --username AWS --password password registry_you_want_to_extend
 
+#pushing to AWS ECR
+have to build docker image with the name
+[arn/url of account registry you want to extend]/[name of repository]:[name you want the image to have]
+
+then do log in procedures above, then run:
+
+docker push [arn/url of account registry you want to extend]/[name of repository]:[name you want the image to have]
+
+Full example:
+password=$(aws ecr get-login-password --region -us-east-2 --profile cips_sage_iam)
+docker login --username AWS --password $password 048176997788.dkr.ecr.us-east-2.amazonaws.com/
+
+sudo docker build -t scraping-posting .
+sudo docker tag scraping-posting:latest 048176997788.dkr.ecr.us-east-2.amazonaws.com/scraping-posting:1.0
+sudo docker push 048176997788.dkr.ecr.us-east-2.amazonaws.com/scraping-posting:1.0
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
 #creating an IAM user, a user group, permissions for that group and then adding the user to the group
 aws iam create-user --user-name dilawn_sage --profile dilawn  #creates the user
 aws iam create-login-profile --user-name dilawn_sage --password Abcd354112 --profile dilawn #allows the user to log in to the console w the username and password

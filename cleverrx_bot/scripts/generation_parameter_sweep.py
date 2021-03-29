@@ -19,24 +19,26 @@ model_name3 = 'batch_051220_keyword_types_sentiment_nocluster'
 
 
 
-save_name_1 = '_081120_insurance'
-save_name_2 = '_081120_insurance'
-save_name_3 ='_081120_insurance'
+save_name_1 = '_032921'
+# save_name_2 = '_081120_insurance'
+# save_name_3 ='_081120_insurance'
 
 
 model1 = models.GPT2Model_bagofctrl.load(model_path + model_name1)
-model2 = models.GPT2Model_bagofctrl.load(model_path + model_name2)
-model3 = models.GPT2Model_bagofctrl.load(model_path + model_name3)
+# model2 = models.GPT2Model_bagofctrl.load(model_path + model_name2)
+# model3 = models.GPT2Model_bagofctrl.load(model_path + model_name3)
 
-model_dict = {model_name1 + save_name_1:model1, model_name2+save_name_2:model2, model_name3+save_name_3:model3}
+model_dict = {model_name1 + save_name_1:model1} #model_name2+save_name_2:model2, model_name3+save_name_3:model3}
 
 k_list = [60,80,100,120,140,160,180,200]
 p_list = [.3, .4, .5, .6, .7, .8, .9, 1]
 length = 50
 num_return_sequences = 20
+temperature = .9
+repetition_penalty = 2.5
 prompt1 = (['insurance-'], 'insurance is')
 prompt2 = (['card+'], 'i try to')
 
 
 for key in model_dict.keys():
-    output = butils.parameter_sweep(model_dict[key], tokenizer, length, k_list, p_list, prompt1, prompt2, key, num_return_sequences)
+    output = butils.parameter_sweep(model_dict[key], tokenizer, length, k_list, p_list, prompt1, prompt2, key, num_return_sequences, temperature = temperature, repetition_penalty = repetition_penalty)
