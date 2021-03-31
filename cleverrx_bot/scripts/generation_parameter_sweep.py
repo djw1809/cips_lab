@@ -37,7 +37,7 @@ num_return_sequences = 20
 temperature = 1.3
 repetition_penalty = 2.5
 prompts = [(['insurance-'], 'insurance is'),
-           (['card+'], 'try')
+           (['card+'], 'try'),
            (['card+'], 'purchase'),
            (['insurance-'], 'health costs'),
            (['card+'], 'prescription costs')]
