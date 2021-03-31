@@ -28,7 +28,7 @@ save_name_3 ='_031120_insurance'
 # model2 = models.GPT2Model_bagofctrl.load(model_path + model_name2)
 model3 = models.GPT2Model_bagofctrl.load(model_path + model_name3)
 
-model_dict = {model_name3 + save_name_1:model3} #model_name2+save_name_2:model2, model_name3+save_name_3:model3}
+model_dict = {model_name3 + save_name_3:model3} #model_name2+save_name_2:model2, model_name3+save_name_3:model3}
 
 k_list = [60,80,100,120,140,160,180,200]
 p_list = [.3, .4, .5, .6, .7, .8, .9, 1]
