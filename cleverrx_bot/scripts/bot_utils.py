@@ -7,6 +7,7 @@ from torch.nn.utils.rnn import pad_sequence
 import torch.nn.functional as F
 from transformers import GPT2Tokenizer, GPT2LMHeadModel, AdamW, get_linear_schedule_with_warmup
 from ast import literal_eval
+from tqdm import tqdm
 
 ##Data/Preprocessing
 
@@ -835,24 +836,26 @@ def generate_ctrl_bagofwords(model, tokenizer, prompt, max_length,  top_k = None
 
 #%% Post Processing/Analysis
 
-def parameter_sweep(model, tokenizer, length, k_list, p_list, prompt1, prompt2, model_name, num_return_sequences, temperature = 1, repetition_penalty = 1):
+def parameter_sweep(model, tokenizer, length, k_list, p_list, prompts, model_name, num_return_sequences, temperature = 1, repetition_penalty = 1):
     filepath = '../results/generation_results/generation_output_{}.txt'.format(model_name)
     write_file = open(filepath, 'w')
-    write_file.write('prompt1: {}     prompt2: {} \n'.format(prompt1, prompt2))
+    write_file.write("Prompts:\n")
+
+    for prompt in prompts:
+        write_file.write('{}\n'.format(prompt))
+
+
     outputs = {}
-    for k in k_list:
+    for k in tqdm(k_list):
         for p in p_list:
-            first_sentences = generate_ctrl_bagofwords(model, tokenizer, prompt1, 50, top_k = k, top_p = p, num_return_sequences = num_return_sequences, temperature = temperature, repetition_penalty = repetition_penalty)
-            second_sentences = generate_ctrl_bagofwords(model, tokenizer, prompt2, 50, top_k = k, top_p = p, num_return_sequences = num_return_sequences, temperature = temperature, repetition_penalty = repetition_penalty)
             write_file.write("k = {}  p = {}: \n---------------\n".format(k,p))
-            write_file.write("First sentences:\n")
-            for sentence in first_sentences[0]:
-                write_file.write(sentence + '\n')
+            outputs[(k,p)] = []
+            for prompt in prompts:
+                sentences = generate_ctrl_bagofwords(model, tokenizer, prompt, 50, top_k = k, top_p = p, num_return_sequences = num_return_sequences, temperature = temperature, repetition_penalty = repetition_penalty)
 
-            for sentence in second_sentences[0]:
-                write_file.write(sentence + '\n')
-
-            outputs[(k,p)] = [first_sentences, second_sentences]
+                for sentence in sentences[0]:
+                    write_file.write(sentence+'\n')
+                    outputs[k,p].append(sentence)
 
     write_file.close()
     return outputs
