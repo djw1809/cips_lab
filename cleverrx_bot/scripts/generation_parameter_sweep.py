@@ -12,7 +12,7 @@ import bot_models as models
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
 model_path = '../saved_models/'
-# 
+#
 # model_name1 = 'batch_051220_keyword_types_sentiment_cluster'
 # model_name2 = 'batch_051220_keyword_types_nosentiment_cluster'
 model_name3 = 'batch_051220_keyword_types_sentiment_nocluster'
@@ -21,7 +21,7 @@ model_name3 = 'batch_051220_keyword_types_sentiment_nocluster'
 
 #save_name_1 = 'test'
 # save_name_2 = '_081120_insurance'
-save_name_3 ='_040121_clever'
+save_name_3 ='_040621_clever'
 
 
 #model1 = models.GPT2Model_bagofctrl.load(model_path + model_name1)
@@ -37,11 +37,11 @@ num_return_sequences = 30
 temperature = 1.3
 repetition_penalty = 2.5
 prompts = [(['insurance-'], 'insurance is'),
-           (['card+'], 'people need'),
-           (['card+'], 'this could help'),
-           (['insurance-'], 'health costs'),
+           (['card+'], 'i use'),
+           (['card+'], 'im trying'),
+           (['insurance-'], 'pharma companies'),
            (['insurance-'], 'prescription costs'),
-            (['insurance-'], 'the insurance industry')]
+            (['insurance-'], 'the drug industry')]
 
 
 for key in model_dict.keys():
