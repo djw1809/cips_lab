@@ -19,7 +19,7 @@
     "test": "mocha --exit test/*.test.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "hashmap": "^2.4.0",
     "jsdom": "^15.2.1",
     "mysql": "^2.18.1",
